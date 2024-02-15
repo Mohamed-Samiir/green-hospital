@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <table mat-table *ngIf="!isLoading" [dataSource]="tableData" class="full-width-table" matSort aria-label="Elements">
+    <!-- Transaction Type Column -->
+    <ng-container matColumnDef="transactionType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction type</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionType}}</td>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+      <td mat-cell *matCellDef="let row">{{row.transactionAmount + " " + 'EGP'}}</td>
+    </ng-container>
+
+    <!-- Transaction Date Column -->
+    <ng-container matColumnDef="createdOn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transaction date</th>
+      <td mat-cell *matCellDef="let row">{{row.cretionDate | date: 'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataLength" [pageIndex]="pageIndex" [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]" aria-label="Select page" class="mat-paginator-sticky" (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

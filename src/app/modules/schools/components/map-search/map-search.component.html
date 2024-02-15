@@ -1,0 +1,19 @@
+<div class="map-search-container">
+    <div class="input-group">
+        <label for="searchMap"></label>
+        <input type="text" [(ngModel)]="address" name="searchMap" #searchMap="ngModel" id="searchMap"
+            class="form-control" placeholder="Enter school location" (keyup.enter)="loadLocations()">
+        <div class="input-group-append">
+            <button mat-button (click)="loadLocations()" type="button">
+                <span>Search</span>
+                <mat-icon>location_searching</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <ul class="search-result-list" *ngIf="searchList.length > 0 && isResultMenuOpen">
+        <li *ngFor="let place of searchList" (click)="setSelectedLocation(place)">
+            {{place.display_name}}
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div col-12>
+            <h3 class="section-title">User Wallet</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <!-- Handle shown profile image -->
+            <div class="user-img" *ngIf="this.userType == 'c'"
+                [ngStyle]="{'background-image': 'url('+client.prflImg+')'}">
+            </div>
+            <div class="user-img" *ngIf="this.userType == 'd'"
+                [ngStyle]="{'background-image': 'url('+driver.prflImg+')'}">
+            </div>
+            <!-- Handle shown profile image -->
+            <div class="user-info">
+                <span class="user-name">{{this.userType === 'c' ? client.frstNm + " " + client.lstNm : driver.frstNm + "
+                    " + driver.lstNm}}</span>
+                <span class="user-data">
+                    <mat-icon>alternate_email</mat-icon>
+                    <span>{{this.userType === 'c' ? client.clntMl : driver.drntMl}}</span>
+                </span>
+                <span class="user-data">
+                    <mat-icon>settings_phone</mat-icon>
+                    <span>{{this.userType === 'c' ? client.clntPhnNum : driver.PhnNum}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row  justify-content-md-center current-balance">
+        <div class="col-sm-12 col-md-8">
+            <div class="row" *ngIf="userType == 'c'">
+                <div class="col-12">
+                    <div class="wallet-balance">
+                        <label for="userBalance">Current Balance</label>
+                        <div class="input-group">
+                            <input type="text" [value]="userBalance" name="userBalance" id="userBalance"
+                                class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text">EGP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-6" *ngIf="userType==='d'">
+                    <div class="wallet-balance">
+                        <label for="totalCompanyIncome">Total company income</label>
+                        <div class="input-group">
+                            <input type="text" [value]="totalCompanyIncome" name="totalCompanyIncome"
+                                id="totalCompanyIncome" class="form-control readOnly">
+                            <div class="input-group-append">
+                                <span class="input-group-text">EGP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" *ngIf="userType==='d'">
+                    <div class="wallet-balance">
+                        <label for="totalDriverIncome">Total driver income</label>
+                        <div class="input-group">
+                            <input type="text" [value]="totalDriverIncome" name="totalDriverIncome"
+                                id="totalDriverIncome" class="form-control readOnly">
+                            <div class="input-group-append">
+                                <span class="input-group-text">EGP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wallet-actions">
+                    <button mat-raised-button color="primary" class="approve-color"
+                        (click)="openUpdateBalanceModal(false)">
+                        <mat-icon>add_circle</mat-icon>
+                        Add To Balance
+                    </button>
+                    <button mat-raised-button color="warn" (click)="openUpdateBalanceModal(true)">
+                        <mat-icon>remove_circle</mat-icon>
+                        Deduct From Balance
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div col-12>
+            <h3 class="section-title">User Wallet Transactions</h3>
+        </div>
+    </div>
+    <div class="row mat-table-container">
+        <div class="col-12">
+            <app-transactions-table (pageChange)="onPageChange($event)" [tableData]="tableData" [pageIndex]="pageIndex"
+                [pageSize]="pageSize" [dataLength]="dataLength" [isLoading]="isLoading"></app-transactions-table>
+        </div>
+    </div>
+</div>

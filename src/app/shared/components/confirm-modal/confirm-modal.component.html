@@ -1,0 +1,21 @@
+<div class="modal_create">
+  <div class="modal_header">
+    <h3 mat-dialog-title>{{title}}</h3>
+    <a (click)="onDismiss()"><i class="fa-solid fa-xmark"></i></a>
+  </div>
+  <div class="modal_content">
+    {{message}}
+  </div>
+  <div class="modal_footer">
+    <div mat-dialog-actions align="center">
+      <button mat-raised-button class="approve-color" (click)="onConfirm()">
+        <span><i class="fa-solid fa-floppy-disk"></i></span>
+        <span class="px-3">Confirm</span>
+      </button>
+      <button mat-stroked-button class="mx-1 cancel_btn_dailog" (click)="onDismiss()">
+        <span><i class="fa-solid fa-xmark"></i></span>
+        <span class="px-3" color="primary">Cancel</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info col-12">
+            <div class="user">
+                <div class="user-img" [ngStyle]="{'background-image': 'url('+driver.prflImg+')'}"></div>
+                <div class="user-info">
+                  <span class="user-name">{{driver.frstNm}} {{driver.lstNm}}</span>
+                </div>
+            </div>
+            <div class="page-actions">
+                <button mat-raised-button class="approve-color" (click)="openConfirmAcceptModal(driver.id)" >
+                    <mat-icon>check_circle</mat-icon>
+                    Approve
+                </button>
+                <button mat-raised-button color="warn" (click)="openConfirmRejectionModal(driver.id)">
+                    <mat-icon>highlight_off</mat-icon>
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div col-12>
+            <h3 class="section-title">Personal Information</h3>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>contact_phone</mat-icon>
+                    <span>Phone Number</span>
+                </div>
+                <div class="entry-value">
+                  {{driver.PhnNum}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>perm_contact_calendar</mat-icon>
+                    <span>Birthday</span>
+                </div>
+                <div class="entry-value">
+                  {{driver.drvAg| date: 'dd/MM/yyyy'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>email</mat-icon>
+                    <span>Email</span>
+                </div>
+                <div class="entry-value">
+
+                  {{driver.drntMl}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>location_on</mat-icon>
+                    <span>Address</span>
+                </div>
+                <div class="entry-value">
+                  {{driver.drvAddrs}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div col-12>
+            <h3 class="section-title">Car Details</h3>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>directions_car</mat-icon>
+                    <span>Car Color</span>
+                </div>
+                <div class="entry-value">
+                  {{driver.CarClr}}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="info-flex-container">
+                <div class="info-entry">
+                    <mat-icon>format_list_numbered</mat-icon>
+                    <span>Car Number</span>
+                </div>
+                <div class="entry-value">
+                  {{driver.carNum}}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <div class="info-flex-container">
+            <div class="info-entry">
+              <span>Car License Copy</span>
+            </div>
+            <!--{{driver.drvCarLicenUrl}}-->
+
+            <div class="entry-value-img" [ngStyle]="{'background-image': 'url('+driver.drvCarLicenUrl+')'}"></div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="info-flex-container">
+            <div class="info-entry">
+              <span>Driver License Copy</span>
+            </div>
+            <!--{{driver.drvLicenUrl}}-->
+
+            <div class="entry-value-img" [ngStyle]="{'background-image': 'url('+driver.drvLicenUrl+')'}"></div>
+          </div>
+        </div>
+    </div>
+</div>

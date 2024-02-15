@@ -1,0 +1,120 @@
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="page-info">
+                <h1 class="page-title">Group details</h1>
+                <div class="page-actions">
+                    <button mat-raised-button color="primary" (click)="ApproveGroup()">
+                        <!-- *ngIf="group && group['avaliableSeats']! > 0" -->
+                        <mat-icon>check_circle</mat-icon>
+                        {{group && group['avaliableSeats']! > 0? "Approve Group" : "Save Group" }}
+                    </button>
+                    <button mat-raised-button color="warn" (click)="backToGroupsList()">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                        Back to groups
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="trip-info">
+                    Group name: {{group?.groupName}}
+                    <!--{{group.id}}-->
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="trip-info">
+                    Trip Type: {{group?.tripType}}
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="trip-info">
+                    Driver Name: {{group?.driverFirstName}} {{group?.driverLastName}}
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="trip-info">
+                    Destination: {{group?.destination}}
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="trip-info">
+                    Available Seats: {{group?.avaliableSeats}} seats
+                </div>
+            </div>
+        </div>
+        <div class="row user" *ngFor="let client of Clients ;let i = index">
+            <div class="col-3">
+                <h4 class="userName">{{client.clientFirstName}} {{client.clientLastName}}</h4>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="cost"></label>
+                    <input type="number" [id]="'cost'+ i" [name]="'cost'+ i" min="1" class="form-control"
+                        placeholder="Cost" [ngModel]="Clients[i].cost" (change)="ChangeCost(client.id,i,$event)"
+                        required>
+                </div>
+            </div>
+
+            <!--<div class="col-3">
+                <div class="form-group">
+                    <label for="arName"></label>
+                    <input type="number" id="arName" class="form-control" placeholder="Total"   [value]="client.cost"disabled>
+                </div>
+            </div>-->
+            <div class="col-3 d-flex flex-row-reverse">
+                <div class="align-center">
+                    <button mat-raised-button color="accent" (click)="openReplaceGroupModal(false, client.id)">
+                        <mat-icon>find_replace</mat-icon>
+                        Replace Group
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6" *ngFor="let member of client.members ;let j = index">
+                <div class="member-card">
+                    <span class="card-label">Member({{j+1}})</span>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="trip-info">
+                                Name: {{member.name}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                From: {{member.fromAddress}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                To: {{member.toAdress}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                Grade: {{member.grade}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                Duration:{{member.tripDuration}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                Leave Time: {{member.tripStartTime | Time12Format}}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="trip-info">
+                                Return Time: {{member.tripEndTime | Time12Format}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

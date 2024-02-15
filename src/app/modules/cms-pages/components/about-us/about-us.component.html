@@ -1,0 +1,23 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #aboutUs="ngForm">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h1 class="page-title">About Us (Arabic)</h1>
+                <div class="form-group">
+                    <textarea id="aboutUsAr" [(ngModel)]="aboutUsValueAr" name="aboutUsAr" #aboutUsAr="ngModel"
+                        class="form-control" placeholder="Enter about us Aabic text"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <h1 class="page-title">About Us(English)</h1>
+                <div class="form-group">
+                    <textarea id="aboutUsEn" [(ngModel)]="aboutUsValueEn" name="aboutUsEn" #aboutUsEn="ngModel"
+                        class="form-control" placeholder="Enter about us English text"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="submit-btn">
+            <button class="btn btn-light" type="submit" [disabled]="aboutUs.form.invalid">Save</button>
+        </div>
+    </form>
+</div>

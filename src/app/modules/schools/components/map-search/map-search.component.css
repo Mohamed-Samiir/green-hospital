@@ -1,0 +1,32 @@
+.input-group-append {
+    border: 1px solid #ccc;
+    border-radius: 0 8px 8px 0;
+}
+
+.map-search-container {
+    position: relative;
+}
+
+.search-result-list {
+    position: absolute;
+    z-index: 10000;
+    background-color: #fff;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.search-result-list>li {
+    height: 55px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid gainsboro;
+    padding-left: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.search-result-list>li:hover {
+    background-color: #ccc;
+}

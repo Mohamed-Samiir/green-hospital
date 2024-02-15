@@ -1,0 +1,42 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6" *ngFor="let group of groups">
+      <div class="group-card">
+        <div class="card-header">
+          <div class="group-name">
+            {{group.groupName}}
+          </div>
+          <div class="trip-info">
+            <span>Client Name:</span> {{group.clientFirstName + " "}} {{group.clientLastName}}
+          </div>
+          <button mat-raised-button color="primary" (click)="GoToDetails(group.id)">
+            <mat-icon>autorenew</mat-icon>
+            Renew Trip
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="trip-info">
+            <span>Trip Type:</span> {{group.tripType}}
+          </div>
+          <div class="trip-info">
+            <span>Driver Name:</span> {{group.driverFirstName}} {{group.driverLastName}}
+          </div>
+          <div class="trip-info">
+            <span>Destination:</span> {{group.destination}}
+          </div>
+         
+          <div class="trip-info">
+            <span>From Address:</span> {{group.fromAddress}}
+          </div>
+          <div class="trip-info">
+            <span>To Address:</span> {{group.toAdress}}
+          </div>
+          <div class="trip-info">
+            <span>School Name:</span> {{group.schoolName}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

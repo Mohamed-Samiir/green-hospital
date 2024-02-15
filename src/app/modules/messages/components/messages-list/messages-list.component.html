@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <h1 class="page-title">Messages</h1>
+    </div>
+    <div class="row" *ngIf="isLoading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="row" *ngIf="!dataList || dataList?.length===0">
+        <app-empty-placeholder [displayedText]="isLoading? 'Loading...': 'NO MESSAGES FOUND'"></app-empty-placeholder>
+    </div>
+    <div class="row requests-container">
+        <div class="request col-12" *ngFor="let message of dataList">
+            <div class="driver-info">
+                <div class="driver-img" [ngStyle]="{'background-image': 'url('+message.rqstrImg+')'}"></div>
+                <div class="contain-flex">
+                    <div class="driver-name">{{message.rqstrNam}}</div>
+                    <span class="request-type">{{message.ttle}}</span>
+                </div>
+            </div>
+            <div class="request-actions">
+                <span (click)="GoToDetails(message.id)" class="request-action"> View
+                    messages</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <mat-paginator #paginator [length]="dataLength" [pageIndex]="pageIndex" [pageSize]="pageSize"
+            [pageSizeOptions]="[3, 5, 10, 20]" aria-label="Select page" class="mat-paginator-sticky"
+            (page)="onPageChange($event)">
+        </mat-paginator>
+    </div>
+</div>

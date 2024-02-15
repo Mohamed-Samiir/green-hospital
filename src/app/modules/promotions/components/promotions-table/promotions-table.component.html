@@ -1,0 +1,57 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="tableData" class="full-width-table" matSort aria-label="Elements">
+    <!-- Promo Code Column -->
+    <ng-container matColumnDef="promoCode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Promo code</th>
+      <td mat-cell *matCellDef="let row">{{row.promoCode}}</td>
+    </ng-container>
+
+    <!-- Expiry Date Column -->
+    <ng-container matColumnDef="expDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
+      <td mat-cell *matCellDef="let row">{{row.expDate}}</td>
+    </ng-container>
+
+    <!-- classification Column -->
+    <ng-container matColumnDef="classification">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Classification</th>
+      <td mat-cell *matCellDef="let row">{{row.classification}}</td>
+    </ng-container>
+
+    <!-- Allowed no. users Column -->
+    <ng-container matColumnDef="noUsers">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Allowed no. users</th>
+      <td mat-cell *matCellDef="let row">{{row.noUsers}}</td>
+    </ng-container>
+
+    <!-- used Column -->
+    <ng-container matColumnDef="used">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Used</th>
+      <td mat-cell *matCellDef="let row">{{row.used}}</td>
+    </ng-container>
+
+    <!-- discount Column -->
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount</th>
+      <td mat-cell *matCellDef="let row">{{row.discount}}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="row-actions">
+          <mat-icon>delete</mat-icon>
+          <mat-icon routerLink="/main/promotions/add-edit/{{row['id']}}">edit</mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="tableData?.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"
+    aria-label="Select page" class="mat-paginator-sticky">
+  </mat-paginator>
+</div>

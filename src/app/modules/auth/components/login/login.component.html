@@ -1,0 +1,39 @@
+<div class="container-fluid login-container align-items-center">
+  <div class="row h-100 d-flex align-items-center justify-content-center">
+    <div class="col-sm-8 col-md-4 col-lg-3">
+      <div class="tripta-logo">
+        <img src="../../../../../assets/images/tripta color w 1.svg" alt="Tripta logo">
+        <p>TRIPTA</p>
+      </div>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="email"></label>
+          <input type="email" [(ngModel)]="user.email" name="email" #email="ngModel" id="email" class="form-control"
+            placeholder="Enter email or phone number" required>
+          <div class="validation">
+            <div class="validation-messages" [hidden]="email.valid || (!email.touched && !email.dirty)">
+              <span class="invalid-input" *ngIf="email.errors?.['required']">Email or phone number is required.</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password"></label>
+          <input type="password" [(ngModel)]="user.pss" name="password" #password="ngModel" id="password"
+            class="form-control" placeholder="Enter your password" required>
+          <div class="validation">
+            <div class="validation-messages" [hidden]="password.valid || (!password.touched && !password.dirty)">
+              <span class="invalid-input" *ngIf="password.errors?.['required']">Password is required.</span>
+            </div>
+          </div>
+        </div>
+        <p class="forget-password-text" routerLink="/auth/forgotpassword">Forgot your password?</p>
+        <div class="submit-btn">
+          <button class="btn btn-light" [disabled]="loginForm.form.invalid">Sign in</button>
+        </div>
+      </form>
+
+    </div>
+
+    <p class="company-name">Wayana</p>
+  </div>
+</div>

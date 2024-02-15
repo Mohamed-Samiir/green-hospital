@@ -1,0 +1,6 @@
+<app-map-search (onSelectLocation)="getAddress($event)" [address]="currentLocation.name"></app-map-search>
+<div class="map-container">
+    <div class="map-frame">
+        <div id="map" leaflet></div>
+    </div>
+</div>

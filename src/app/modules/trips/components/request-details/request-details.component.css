@@ -1,0 +1,145 @@
+.page-actions {
+    display: flex;
+    align-items: center;
+}
+
+.page-actions .saveBtn {
+    width: 120px;
+    margin: 0 15px;
+    background-color: #198754;
+}
+
+
+.page-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.user {
+    display: flex;
+    margin: 20px 0;
+}
+
+.user-img {
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    background-size: cover;
+    border: 1px solid #330534;
+    margin-right: 20px;
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 9px 0;
+}
+
+.user-data {
+    color: #87898E;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.trip-details {
+    /* margin */
+}
+
+.trip-detail {
+    /* display: flex; */
+    margin-top: 25px;
+}
+
+.trip-detail .entry {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-right: 20px;
+}
+
+.trip-detail .entry-value {
+    font-weight: bold;
+    color: #87898E;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 35px 0 20px 0;
+}
+
+.group-card {
+    border: 1px solid gray;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.group-card:last-child {
+    margin-bottom: 10px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+    padding: 15px 15px 0 15px;
+}
+
+.group-name {
+    padding: .5rem;
+    background-color: #330534;
+    color: #fff;
+    font-weight: 400;
+    border-radius: 20px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.trip-info {
+    font-weight: 600;
+    margin-top: .75rem;
+    padding: 5px 15px;
+}
+
+.card-body {
+    padding-bottom: 15px;
+}
+
+.request-passangers-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.request-passangers-table td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.request-passangers-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.request-passangers-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    text-align: left;
+    background-color: #330534;
+    color: white;
+    border-right: 1px solid white;
+}

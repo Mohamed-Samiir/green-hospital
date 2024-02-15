@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="request col-12" *ngFor="let request of dataList">
+            <div class="driver-info">
+                <div class="driver-img" [ngStyle]="{'background-image': 'url('+request.clientImageURL+')'}"></div>
+                <div class="contain-flex">
+                    <div class="driver-name">{{request.clientFirstName}} {{request.clientLastName}}</div>
+                    <span class="request-type">request a trip</span>
+                  <br />
+                    <span class="request-type">{{request.creationTime|date}} </span>
+                </div>
+            </div>
+            <div class="request-actions">
+                <span (click)="GoToDetails(request.id)"  class="request-action"> View
+                    more</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <mat-paginator #paginator [length]="dataLength" [pageIndex]="pageIndex" [pageSize]="pageSize"
+            [pageSizeOptions]="[3, 5, 10, 20]" aria-label="Select page" class="mat-paginator-sticky"
+            (page)="onPageChange($event)">
+        </mat-paginator>
+    </div>
+</div>

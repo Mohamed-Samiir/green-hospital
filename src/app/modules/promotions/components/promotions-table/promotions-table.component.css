@@ -1,0 +1,19 @@
+.full-width-table {
+  width: 100%;
+}
+
+.mat-paginator-sticky {
+  bottom: 0px;
+  position: sticky;
+  z-index: 10;
+}
+
+.linkableName {
+  text-decoration: none;
+  color: #000;
+}
+
+.row-actions {
+  display: flex;
+  justify-content: space-evenly;
+}

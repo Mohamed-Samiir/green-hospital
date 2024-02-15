@@ -1,0 +1,42 @@
+.modal_create {
+    /* padding: 5px; */
+}
+
+
+.modal_header {
+    border-bottom: 1px solid gray;
+    background-color: #330534;
+    min-height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_header h3 {
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0;
+    color: #fff;
+}
+
+.modal_content {
+    min-height: 5rem;
+    padding-top: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 15px;
+}
+
+.approve-color {
+    background-color: #098d56;
+    color: #fff;
+}
+
+.modal_footer{
+    min-height: 3rem;
+    padding: 20px 0;
+}
+
+.modal_footer button{
+    margin: 0 10px;
+}

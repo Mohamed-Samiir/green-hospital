@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info">
+            <h1 class="page-title">Schools</h1>
+            <div class="page-actions">
+                <button mat-raised-button color="primary" routerLink="/main/schools/add-edit/">
+                    <mat-icon>add_circle</mat-icon>
+                    Add School
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mat-table-container">
+        <div class="col-12">
+            <app-schools-table (onDeleteSchool)="openDeleteModal($event)" (pageChange)="onPageChange($event)" [tableData]="tableData" [pageIndex]="pageIndex" [pageSize]="pageSize" [dataLength]="dataLength" [isLoading]="isLoading"></app-schools-table>
+        </div>
+    </div>
+</div>

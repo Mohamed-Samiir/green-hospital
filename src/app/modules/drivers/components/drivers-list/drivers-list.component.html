@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info">
+            <h1 class="page-title">Drivers</h1>
+            <div class="inline-block">
+                <div class="passangers-chip">
+                    <mat-icon>supervisor_account</mat-icon>
+                    <span class="bold">{{dataLength}} </span>
+                    <span> Drivers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-filters">
+            <div class="filter">
+                <!--<button mat-button [matMenuTriggerFor]="filterMenu">
+                    <span>All</span>
+                    <mat-icon>filter_list</mat-icon>
+                </button>-->
+
+            </div>
+            <div class="search">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
+                        aria-describedby="basic-addon2" [(ngModel)]="filterText">
+                    <div class="input-group-append">
+                        <button mat-button (click)="loadData()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mat-table-container">
+        <div class="col-12">
+            <app-drivers-table (pageChange)="onPageChange($event)" [tableData]="tableData" [pageIndex]="pageIndex"
+                [pageSize]="pageSize" [dataLength]="dataLength" [isLoading]="isLoading"></app-drivers-table>
+        </div>
+    </div>
+</div>

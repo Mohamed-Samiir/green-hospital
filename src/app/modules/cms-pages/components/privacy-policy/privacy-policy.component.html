@@ -1,0 +1,53 @@
+<div class="container">
+
+    <div class="row">
+        <form (ngSubmit)="onSubmit()" #privacyForm="ngForm">
+            <!--  Client Policy  -->
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h1 class="page-title">Arabic Client Policy</h1>
+                    <div class="form-group">
+                        <textarea id="clientPrivacyAr" [(ngModel)]="clientPrivacyValueAr" name="clientPrivacyAr"
+                            #clientPrivacyAr="ngModel" class="form-control"
+                            placeholder="Enter clients' privacy Arabic text"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h1 class="page-title">English Client Policy</h1>
+                    <div class="form-group">
+                        <textarea id="clientPrivacyEn" [(ngModel)]="clientPrivacyValueEn" name="clientPrivacyEn"
+                            #clientPrivacyEn="ngModel" class="form-control"
+                            placeholder="Enter clients' privacy engish text"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <!-- Driver Policy -->
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h1 class="page-title">Arabic Driver Policy</h1>
+                    <div class="form-group">
+                        <textarea id="driverPrivacyValueAr" [(ngModel)]="driverPrivacyValueAr"
+                            name="driverPrivacyValueAr" #driverPrivacyAr="ngModel" class="form-control"
+                            placeholder="Enter driver privacy Arbic text"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <h1 class="page-title">English Driver Policy</h1>
+                    <div class="form-group">
+                        <textarea id="driverPrivacyValueEn" [(ngModel)]="driverPrivacyValueEn"
+                            name="driverPrivacyValueEn" #driverPrivacyEn="ngModel" class="form-control"
+                            placeholder="Enter driver privacy English text"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-btn">
+                <button class="btn btn-light" type="submit" [disabled]="privacyForm.form.invalid">Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>

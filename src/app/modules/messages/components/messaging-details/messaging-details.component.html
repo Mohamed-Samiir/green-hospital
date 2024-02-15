@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info col-12">
+            <div class="user">
+                <div class="user-img" [ngStyle]="{'background-image': 'url('+message.rqstrImg+')'}"></div>
+                <div class="user-info">
+                  <span class="user-name">{{message.rqstrNam}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="message">
+              <p class="message-text">{{message.msg}}</p>
+              <p class="message-date">{{message.cretDate| date: 'dd/MM/yyyy'}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.passangers-chip {
+    min-width: 160px;
+    height: 70px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: .25rem;
+    background-color: #330534;
+    margin: 30px 0;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.passangers-chip .bold {
+    font-weight: 500;
+}

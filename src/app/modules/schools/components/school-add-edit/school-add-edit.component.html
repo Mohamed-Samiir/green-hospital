@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div col-12>
+            <h3 class="section-title">{{isEdit? "Edit school" : "Add school"}}</h3>
+        </div>
+    </div>
+    <form (ngSubmit)="onSubmit()" #schoolAddEditForm="ngForm">
+        <div class="form-group">
+            <label for="arName"></label>
+            <input type="text" [(ngModel)]="school.scolNamAr" name="arName" #arName="ngModel" id="arName"
+                class="form-control" placeholder="Enter school Arabic name" required>
+            <div class="validation">
+                <div class="validation-messages" [hidden]="arName.valid || (!arName.touched && !arName.dirty)">
+                    <span class="invalid-input" *ngIf="arName.errors?.['required']">School Arabic name is
+                        required.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="enName"></label>
+            <input type="text" [(ngModel)]="school.scolNamEn" name="enName" #enName="ngModel" id="enName"
+                class="form-control" placeholder="Enter school English name" required>
+            <div class="validation">
+                <div class="validation-messages" [hidden]="enName.valid || (!enName.touched && !enName.dirty)">
+                    <span class="invalid-input" *ngIf="enName.errors?.['required']">School English name is
+                        required.</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="map">
+            <app-map [isEdit]="isEdit" (onChangeLocation)="changeLocation($event)"
+                [editCurrentLocation]="currentSchoolLocation"></app-map>
+        </div>
+
+
+        <div class="submit-btn">
+            <button class="btn btn-default" [disabled]="schoolAddEditForm.form.invalid">Save</button>
+        </div>
+    </form>
+</div>

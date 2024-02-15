@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info">
+            <h1 class="page-title">Today Trips</h1>
+            <div class="inline-block">
+                <div class="passangers-chip">
+                    <mat-icon> local_taxi</mat-icon>
+                    <span class="bold">{{dataLength}} </span>
+                    <span>Trips</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-filters">
+            <div class="search">
+                <!--<div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
+                        aria-describedby="basic-addon2" [(ngModel)]="search">
+                    <div class="input-group-append">
+                        <button mat-button>
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row mat-table-container">
+        <div class="col-12">
+            <app-today-trips-table (pageChange)="onPageChange($event)" (openViewDetails)="ViewDetailsModal($event)"
+                [tableData]="tableData" [pageIndex]="pageIndex" [pageSize]="pageSize" [dataLength]="dataLength"
+                [isLoading]="isLoading" [search]="search">
+            </app-today-trips-table>
+        </div>
+    </div>
+</div>

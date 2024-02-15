@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="page-info">
+            <h1 class="page-title">Promotions</h1>
+            <div class="page-actions">
+                <button mat-raised-button color="primary" routerLink="/main/promotions/add-edit/">
+                    <mat-icon>add_circle</mat-icon>
+                    Add Promotion
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mat-table-container">
+        <div class="col-12">
+            <app-promotions-table [tableData]="tableData"></app-promotions-table>
+        </div>
+    </div>
+</div>
