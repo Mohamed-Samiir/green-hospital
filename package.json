@@ -1,5 +1,5 @@
 {
-  "name": "tripta-fe",
+  "name": "shifa-customer-support",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,6 +23,8 @@
     "@angular/router": "~13.1.0",
     "@asymmetrik/ngx-leaflet": "^14.0.1",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "@popperjs/core": "^2.10.2",
     "alertifyjs": "^1.13.1",
     "angular-file-uploader": "^7.1.1",

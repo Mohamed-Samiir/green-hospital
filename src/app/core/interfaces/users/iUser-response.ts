@@ -5,6 +5,6 @@ export interface IUserResponse {
   usrMl: string;
   usrphon?: string;
   usrImg?: string;
-  tkon: string;
+  token: string;
 
 }

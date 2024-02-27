@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../passangers/passangers.module').then(m => m.PassangersModule)
       }
     ]
@@ -32,7 +32,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../drivers/drivers.module').then(m => m.DriversModule)
       }
     ]
@@ -43,7 +43,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../schools/schools.module').then(m => m.SchoolsModule)
       }
     ]
@@ -54,7 +54,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../trips/trips.module').then(m => m.TripsModule)
       }
     ]
@@ -65,7 +65,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../cms-pages/cms-pages.module').then(m => m.CmsPagesModule)
       }
     ]
@@ -76,7 +76,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../messages/messages.module').then(m => m.MessagesModule)
       }
     ]
@@ -98,7 +98,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../wallet/wallet.module').then(m => m.WalletModule)
       }
     ]
@@ -116,10 +116,10 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        canActivate: [AuthenticationGuard],
+        // canActivate: [AuthenticationGuard],
         loadChildren: () => import('../Renew/renew.module').then(m => m.RenewModule)
       }
-    ]  
+    ]
   },
 
 ];

@@ -1,3 +1,13 @@
 {
-
+    "NAVICATION": {
+        "DASHBOARD": "الرئيسية",
+        "DOCTORS": "الأطباء",
+        "CLINICKS": "العيادات"
+    },
+    "LOGIN": {
+        "LOGO_TEXT": "بنك معلومات خدمة العملاء"
+    },
+    "DASHBOARD": {
+        "SHORTCUT": "اختصار"
+    }
 }

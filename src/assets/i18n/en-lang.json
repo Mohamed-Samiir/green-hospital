@@ -1,3 +1,13 @@
 {
-
+    "NAVICATION": {
+        "DASHBOARD": "Dashboard",
+        "DOCTORS": "Doctors",
+        "CLINICKS": "CLINICKS"
+    },
+    "LOGIN": {
+        "LOGO_TEXT": "Customer Service Knwoledge Bank"
+    },
+    "DASHBOARD": {
+        "SHORTCUT": "Shortcut"
+    }
 }

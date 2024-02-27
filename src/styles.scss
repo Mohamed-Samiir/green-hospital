@@ -1,0 +1,212 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~alertifyjs/build/css/alertify.min.css";
+@import "~alertifyjs/build/css/themes/bootstrap.rtl.min.css";
+
+:root {
+    // Colors
+    --color-primary: #fff;
+    --color-secondary: #349F51;
+    --color-surface-light: #349F51;
+    // Directional
+    --left: left;
+    --right: right;
+    --dir: "rtl";
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.custom-dialog-container .mat-dialog-container {
+    padding: 0;
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+}
+
+.relace-group-dialog-container .mat-dialog-container {
+    padding: 0;
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    /* overflow-y: scroll; */
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+    display: none;
+}
+
+.custom-tabs .mat-tab-body-content {
+    overflow-x: hidden;
+}
+
+.mat-drawer-container {
+    background-color: #fff;
+}
+
+.sidenav-container {
+    height: 100%;
+}
+
+.sidenav {
+    transition: 150ms ease-in-out;
+    background-color: var(--color-primary);
+}
+
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.mat-drawer-inner-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 12px;
+}
+
+/* Handle */
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 12px;
+}
+
+mat-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.sidenav .mat-toolbar {
+    background: inherit;
+    position: relative;
+}
+
+.mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-secondary);
+    z-index: 10000;
+}
+
+.nav-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list-item h3 {
+    margin: 4px 10px 0 10px;
+    font-weight: 500;
+    color: var(--color-secondary);
+}
+
+.active-link .nav-list-item h3 {
+    color: #fff;
+}
+
+.toggle_icon {
+    color: var(--color-secondary);
+}
+
+mat-list-item {
+    position: relative;
+}
+
+.mat-toolbar-single-row {
+    height: 78px;
+}
+
+.toggle-expand-btn {
+    transition: 350ms ease-in-out;
+    transform: rotate(0deg);
+    position: absolute;
+    right: -5px;
+}
+
+.rotated {
+    transition: 350ms ease-in-out;
+    transform: rotate(180deg);
+    position: absolute;
+    right: 10px;
+}
+
+.side-nav-icon {
+    color: var(--color-secondary);
+}
+
+.active-link .side-nav-icon {
+    color: #fff;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-text {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    margin: 6px 0 0 8px;
+    font-size: 1.3rem;
+}
+
+.list-custom .list-item-custom {
+    height: 40px;
+    margin-top: 10px;
+}
+
+.active-link {
+    background-color: var(--color-secondary);
+    border: 1px solid #fff;
+    border-radius: 12px;
+    color: #fff
+}
+
+.user-image {
+    background-color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 14px;
+    background-size: cover;
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    justify-content: center;
+}
+
+.active-flag {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #17E933;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #fff;
+}
+
+.user-role {
+    color: #fff;
+    font-size: 0.8rem;
+}

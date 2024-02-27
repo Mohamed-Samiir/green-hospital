@@ -12,38 +12,25 @@ import { BaseResponseModel } from '../ng-model/base-response-model';
 })
 export class AuthService {
 
-  LoginURL = environment.baseURL + 'Users/user-login';
-  constructor(private http: HttpClient, private router: Router) { }
+  LoginURL = environment.baseURL + 'auth';
+  constructor(private http: HttpClient) { }
 
   login(loginModel: ILoginUser) {
     return this.http.post<BaseResponseModel>(this.LoginURL, loginModel);
-    //  .subscribe(res => {
-    //  console.log(res)
-    //  this.setSession(res)
-    //  this.router.navigate(["/main"])
-    //});
   }
-  //login(email: string, pass: string) {
-  //  return this.http.post<ILoginUser>(`${environment.baseURL}Users/user-login`, { email, pass })
-  //    .subscribe(res => {
-  //      console.log(res)
-  //      this.setSession(res)
-  //      this.router.navigate(["/main"])
-  //    });
-  //}
 
   logOut() {
     localStorage.removeItem("id_token")
   }
 
   forgotPassword(email: string) {
-    return this.http.post<BaseResponseModel>(`${environment.baseURL}Users/user-forget-password/${email}`,[]);
-     
+    return this.http.post<BaseResponseModel>(`${environment.baseURL}Users/user-forget-password/${email}`, []);
+
   }
 
   resetPassword(pss: string, cnfPss: string, confirmationCode: number, header: HttpHeaders): Observable<BaseResponseModel> {
     return this.http.post<BaseResponseModel>(`${environment.baseURL}Users/user-reset-password`, { pss, cnfPss, confirmationCode }, { headers: header })
-     
+
   }
 
   setSession(authRes: any) {

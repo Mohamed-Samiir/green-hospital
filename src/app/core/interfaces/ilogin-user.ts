@@ -1,4 +1,4 @@
 export interface ILoginUser {
     email: string;
-    pss: string;
+    password: string;
 }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //baseURL: 'http://20.14.84.249:8080/wapi/',
-   baseURL: 'https://localhost:5001/wapi/',
+  baseURL: 'http://localhost:3900/api/',
 };
 
 /*

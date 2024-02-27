@@ -1,4 +1,4 @@
-.passangers-chip {
+.dashboard-shortcut {
     min-width: 160px;
     height: 70px;
     border-radius: 25px;
@@ -6,13 +6,13 @@
     align-items: center;
     justify-content: space-evenly;
     padding: .25rem;
-    background-color: #330534;
+    background-color: #349F51;
     margin: 30px 0;
     color: #fff;
     border: 1px solid #fff;
     cursor: pointer;
 }
 
-.passangers-chip .bold {
+.dashboard-shortcut .bold {
     font-weight: 500;
 }

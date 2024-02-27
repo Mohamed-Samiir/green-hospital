@@ -15,8 +15,8 @@ export class DashboardComponent implements OnInit {
     private _tripsService: TripService) { }
   tripsCount: number = 0;
   ngOnInit(): void {
-    if (!this.userService.isLoggedIn())
-      this._router.navigate([`/auth/login`]);
+    // if (!this.userService.isLoggedIn())
+    //   this._router.navigate([`/auth/login`]);
     this.GetTripsCount()
   }
   GetTripsCount() {
