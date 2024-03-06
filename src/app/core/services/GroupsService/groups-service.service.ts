@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
-import { IpaginationModelRequest } from '../../interfaces/schools/ischool-filter-request';
 import { IReassignGroupToDriverModel } from '../../interfaces/trips/iReassign-group-to-driver-model';
 import { BaseResponseModel } from '../../ng-model/base-response-model';
 

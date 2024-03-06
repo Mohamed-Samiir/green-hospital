@@ -121,7 +121,17 @@ const routes: Routes = [
       }
     ]
   },
-
+  {
+    path: 'doctors',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        // canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../doctors/doctors.module').then(m => m.DoctorsModule)
+      }
+    ]
+  }
 ];
 
 @NgModule({

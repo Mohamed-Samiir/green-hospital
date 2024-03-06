@@ -30,8 +30,11 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/leaflet/dist/leaflet.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeng/resources/themes/nova/theme.css",
+              "./node_modules/leaflet/dist/leaflet.css",
               "src/custom-theme.scss",
               "src/styles.scss",
               "node_modules/alertifyjs/build/css/alertify.min.css",
