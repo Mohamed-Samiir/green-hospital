@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { SideNavService } from 'src/app/core/services/side-nav.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.css']
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit {
 
   isExpanded: boolean = false
   userimgSrc: string = "../../../../../assets/images/driver-image.jpg"
@@ -23,11 +24,15 @@ export class MainNavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService,
-    private router: Router
+    private router: Router, public sideNavService: SideNavService
   ) { }
 
+  ngOnInit(): void {
+    this.isExpanded = this.sideNavService.getIsExpanded()
+  }
+
   toggleExpandNav() {
-    this.isExpanded = !this.isExpanded
+    this.isExpanded = this.sideNavService.toggleSideNav()
   }
   Logout() {
     this.authService.logOut();
