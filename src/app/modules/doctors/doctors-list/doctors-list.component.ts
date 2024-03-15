@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
+import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 export class DoctorsListComponent implements OnInit {
 
   doctorsList: any[] = []
+  filteredDoctorsList: any[] = []
+  filterTypes = FilterTypes
   gridColumns: DataGridColumn[] = [
     {
       header: "اسم الطبيب",
@@ -33,6 +37,14 @@ export class DoctorsListComponent implements OnInit {
     }
   ]
 
+  gridFilters: DataGridFilter[] = [
+    {
+      controlName: "name",
+      label: "اسم الطبيب",
+      type: this.filterTypes.text
+    }
+  ]
+
   constructor(private doctorsService: DoctorsService) { }
 
   ngOnInit() {
@@ -46,6 +58,10 @@ export class DoctorsListComponent implements OnInit {
         this.doctorsList = res.data
       }
     })
+  }
+
+  setFilteredData(filteredData: any[]) {
+    this.filteredDoctorsList = filteredData
   }
 
 }

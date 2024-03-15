@@ -29,6 +29,10 @@ body {
     font-family: "Cairo", sans-serif !important;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .custom-dialog-container .mat-dialog-container {
     padding: 0;
     border-radius: 12px;

@@ -1,15 +1,27 @@
 <div class="filter_container">
   <div class="row">
-    <div class="col-12 filter_content">
-      <div class="filters_count">
+    <div class="col-12 filter_content" [ngClass]="{'justify_items_end': isExpanded}">
+      <div class="filters_count" *ngIf="!isExpanded">
         <div class="values_count">
           3
         </div>
         <span>محددات بحث</span>
       </div>
       <div class="toggler" (click)="toggleFilters()">
-        <fa-icon [icon]="isExpanded ? faChevronDown : faChevronUp"></fa-icon>
+        <fa-icon [icon]="faChevronDown" *ngIf="isExpanded"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="!isExpanded"></fa-icon>
       </div>
     </div>
+  </div>
+  <div class="row" *ngIf="isExpanded">
+    <form (submit)="saveFilters()" [formGroup]="filtersForm">
+      <ng-container *ngFor="let filter of filters">
+        <div class="col-3" *ngIf="filter.type == filterTypes.text">
+          <label [for]="filter.controlName">{{filter.label}}</label>
+          <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
+            [id]="filter.controlName" class="form-control" [placeholder]="filter.label">
+        </div>
+      </ng-container>
+    </form>
   </div>
 </div>

@@ -2,14 +2,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    border: 1px solid #c8c8c8;
-    border-radius: 12px;
-    background-color: #fff;
+    min-height: 50px;
 }
 
 .filter_container {
     margin: 20px 12px;
+    padding: 10px 20px;
+    border: 1px solid #c8c8c8;
+    border-radius: 12px;
+    background-color: #fff;
 }
 
 .filters_count {
@@ -44,4 +45,8 @@
     align-items: center;
     border-radius: 50%;
     border: 1px solid #c8c8c8;
+}
+
+.justify_items_end {
+    justify-content: flex-end !important;
 }
