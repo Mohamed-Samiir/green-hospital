@@ -10,7 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DataGridComponent } from './components/data-grid/data-grid.component';
 import { DataTableFilterComponent } from './components/data-table-filter/data-table-filter.component';
 import { LoaderComponent } from './components/loader/loader.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -19,7 +19,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     MatCheckboxModule,
     TranslateModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    FontAwesomeModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -27,7 +28,13 @@ import { LoaderComponent } from './components/loader/loader.component';
     DataGridComponent,
     DataTableFilterComponent
   ],
-  exports: [EmptyPlaceholderComponent, TranslateModule, DataGridComponent, DataTableFilterComponent],
+  exports: [
+    EmptyPlaceholderComponent,
+    TranslateModule,
+    DataGridComponent,
+    DataTableFilterComponent,
+    FontAwesomeModule
+  ],
   providers: [TranslateService]
 })
 export class SharedModule { }

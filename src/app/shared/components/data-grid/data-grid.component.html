@@ -1,6 +1,6 @@
 <p-table [value]="data" responsiveLayout="stack" [breakpoint]="'960px'" [paginator]="true" [rows]="10"
-  [showCurrentPageReport]="true" styleClass="p-datatable-striped"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 20, 50]">
+  [showCurrentPageReport]="true" styleClass="p-datatable-striped" paginatorPosition="top"
+  currentPageReportTemplate="إظهار {first} إلى {last} من اصل {totalRecords} نتائج" [rowsPerPageOptions]="[10, 20, 50]">
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let col of columns">
@@ -14,5 +14,8 @@
         {{ rowData[col.field] }}
       </td>
     </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorleft">
+    <p-button type="button" icon="pi pi-plus" label="إضافة" iconPos="right" styleClass="grid_add_btn"></p-button>
   </ng-template>
 </p-table>

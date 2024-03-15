@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { SideNavService } from 'src/app/core/services/side-nav.service';
+import { faUserDoctor, faHouseUser, faStethoscope } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -16,6 +17,9 @@ export class MainNavComponent implements OnInit {
 
   isExpanded: boolean = false
   userimgSrc: string = "../../../../../assets/images/driver-image.jpg"
+  faUserDoctor = faUserDoctor
+  faHouseUser = faHouseUser
+  faStethoscope = faStethoscope
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

@@ -1,3 +1,15 @@
-<p>
-  data-table-filter works!
-</p>
+<div class="filter_container">
+  <div class="row">
+    <div class="col-12 filter_content">
+      <div class="filters_count">
+        <div class="values_count">
+          3
+        </div>
+        <span>محددات بحث</span>
+      </div>
+      <div class="toggler" (click)="toggleFilters()">
+        <fa-icon [icon]="isExpanded ? faChevronDown : faChevronUp"></fa-icon>
+      </div>
+    </div>
+  </div>
+</div>

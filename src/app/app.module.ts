@@ -24,6 +24,7 @@ import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { TableModule } from 'primeng/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    FontAwesomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

@@ -9,13 +9,14 @@
 :root {
     // Colors
     --color-primary: #fff;
-    --color-secondary: #349F51;
+    --color-secondary: #086821;
     --color-surface-light: #349F51;
     // Directional
     --left: left;
     --right: right;
     --dir: "rtl";
 }
+
 
 html,
 body {
@@ -24,7 +25,8 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Cairo", sans-serif !important;
 }
 
 .custom-dialog-container .mat-dialog-container {
@@ -52,6 +54,10 @@ body {
 
 .mat-drawer-container {
     background-color: #fff;
+}
+
+.mat-drawer-content {
+    background-color: #fcfbfb;
 }
 
 .sidenav-container {
@@ -96,7 +102,7 @@ mat-list-item {
     position: sticky;
     top: 0;
     background-color: var(--color-primary);
-    border-bottom: 1px solid var(--color-secondary);
+    border-bottom: 1px solid #efefef;
     z-index: 10000;
 }
 
@@ -107,11 +113,20 @@ mat-list-item {
 
 .nav-list-item h3 {
     margin: 4px 10px 0 10px;
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--color-secondary);
+    font-family: "Cairo", sans-serif !important;
+
+}
+
+.nav-list-item .ng-fa-icon {
+    font-size: 16px;
     color: var(--color-secondary);
 }
 
-.active-link .nav-list-item h3 {
+.active-link .nav-list-item h3,
+.active-link .nav-list-item .ng-fa-icon {
     color: #fff;
 }
 
@@ -219,6 +234,8 @@ mat-list-item {
     text-align: center;
     background-color: #349F51;
     color: #fff;
+    font-family: "Cairo", sans-serif !important;
+
 }
 
 .p-datatable.p-datatable-striped .p-datatable-tbody>tr:nth-child(even) {
@@ -227,8 +244,41 @@ mat-list-item {
 
 .p-datatable .p-datatable-tbody>tr {
     background: #ffffff;
+    font-family: "Cairo", sans-serif !important;
+
 }
 
 .p-datatable .p-datatable-tbody>tr>td {
     text-align: right;
+}
+
+.p-datatable .p-paginator {
+    justify-content: flex-end;
+    padding: 7px;
+    font-family: "Cairo", sans-serif !important;
+
+}
+
+.p-datatable .p-paginator-top {
+    border-radius: 12px 12px 0 0;
+    background: #fff;
+    direction: ltr;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: #349F51;
+    border-radius: 50%;
+}
+
+.grid_add_btn {
+    border-radius: 12px;
+    background: #349F51;
+    border-color: #c8c8c8;
+    font-weight: bold;
+    font-family: "Cairo", sans-serif !important;
+}
+
+.grid_add_btn:hover {
+    background: #2d8a46 !important;
+    border-color: #c8c8c8 !important;
 }
