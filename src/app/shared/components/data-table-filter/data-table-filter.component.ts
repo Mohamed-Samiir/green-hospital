@@ -20,13 +20,20 @@ export class DataTableFilterComponent implements OnInit {
   filtersDDLs: Map<string, any[]> = new Map<string, any[]>()
   isExpanded: boolean = false
   filterTypes = FilterTypes
+  filtersCount: number = 0
   faChevronUp = faChevronUp
   faChevronDown = faChevronDown
   constructor() { }
 
   ngOnInit() {
     this.createFiltersForm()
-    this.filtersForm.valueChanges.subscribe(value => {
+    this.filtersForm.valueChanges.subscribe(filters => {
+      this.filtersCount = 0
+      let filterEnteries = Object.keys(filters)
+      for (let entry of filterEnteries) {
+        if (filters[entry])
+          this.filtersCount++
+      }
       this.filterData()
     });
   }
@@ -43,8 +50,15 @@ export class DataTableFilterComponent implements OnInit {
   }
 
   filterData() {
-    console.log('name has changed:', this.filtersForm.get('name')?.value)
-
+    this.filteredData = this.data
+    for (let filter of this.filters) {
+      if (this.filtersForm.get(filter.controlName)?.value) {
+        if (filter.type == this.filterTypes.text || filter.type == this.filterTypes.number) {
+          this.filteredData = this.filteredData.filter(row => row[filter.controlName].includes(this.filtersForm.get(filter.controlName)?.value))
+        }
+      }
+    }
+    this.getFilteredData.emit(this.filteredData)
   }
 
   clearFilters() {

@@ -6,8 +6,8 @@
 }
 
 .filter_container {
-    margin: 20px 12px;
-    padding: 10px 20px;
+    margin: 16px 0;
+    padding: 10px 20px 20px 20px;
     border: 1px solid #c8c8c8;
     border-radius: 12px;
     background-color: #fff;
@@ -49,4 +49,19 @@
 
 .justify_items_end {
     justify-content: flex-end !important;
+}
+
+.form_group {
+    position: relative;
+}
+
+.filter_label {
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    background-color: #fff;
+    padding: 0 5px;
+    color: #349F51;
 }

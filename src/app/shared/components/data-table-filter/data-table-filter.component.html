@@ -3,7 +3,7 @@
     <div class="col-12 filter_content" [ngClass]="{'justify_items_end': isExpanded}">
       <div class="filters_count" *ngIf="!isExpanded">
         <div class="values_count">
-          3
+          {{filtersCount}}
         </div>
         <span>محددات بحث</span>
       </div>
@@ -14,14 +14,18 @@
     </div>
   </div>
   <div class="row" *ngIf="isExpanded">
-    <form (submit)="saveFilters()" [formGroup]="filtersForm">
-      <ng-container *ngFor="let filter of filters">
-        <div class="col-3" *ngIf="filter.type == filterTypes.text">
-          <label [for]="filter.controlName">{{filter.label}}</label>
-          <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
-            [id]="filter.controlName" class="form-control" [placeholder]="filter.label">
+    <div class="col-12">
+      <form (submit)="saveFilters()" [formGroup]="filtersForm">
+        <div class="row">
+          <ng-container *ngFor="let filter of filters">
+            <div class="col-3 form_group" *ngIf="filter.type == filterTypes.text">
+              <label class="filter_label" [for]="filter.controlName">{{filter.label}}</label>
+              <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
+                [id]="filter.controlName" class="form-control">
+            </div>
+          </ng-container>
         </div>
-      </ng-container>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

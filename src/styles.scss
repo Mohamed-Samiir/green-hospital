@@ -286,3 +286,16 @@ mat-list-item {
     background: #2d8a46 !important;
     border-color: #c8c8c8 !important;
 }
+
+.form-control {
+    font-size: 15px;
+    padding: 0.5rem 0.75rem;
+}
+
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.09rem #349F51;
+}

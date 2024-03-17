@@ -24,16 +24,12 @@ export class DoctorsListComponent implements OnInit {
       field: "degree"
     },
     {
-      header: "الدرجة العلمية",
-      field: "degree"
-    },
-    {
       header: "التخصص",
       field: "specialization"
     },
     {
       header: "التخصصات الفرعية",
-      field: "subSpecializations"
+      field: "subSpecializations",
     }
   ]
 
@@ -41,6 +37,11 @@ export class DoctorsListComponent implements OnInit {
     {
       controlName: "name",
       label: "اسم الطبيب",
+      type: this.filterTypes.text
+    },
+    {
+      controlName: "degree",
+      label: "الدرجة العلمية",
       type: this.filterTypes.text
     }
   ]
@@ -54,8 +55,11 @@ export class DoctorsListComponent implements OnInit {
   getDoctorsList() {
     this.doctorsService.getDoctors().subscribe(res => {
       if (res.isSuccess) {
-        console.log(res);
-        this.doctorsList = res.data
+        this.doctorsList = res.data.map((doc: any) => {
+          let modifiedDoctor = { ...doc, specialization: doc.specialization.name }
+          return modifiedDoctor
+        })
+        this.filteredDoctorsList = this.doctorsList
       }
     })
   }
