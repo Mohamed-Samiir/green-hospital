@@ -1,4 +1,10 @@
 {
+    "GENERIC": {
+        "SAVE": "حفظ",
+        "IGNORE": "إلغاء",
+        "VALIDATION_ARABIC": "يمكن إدخال الحروف العربية فقط",
+        "VALIDATION_REQUIRED": "الحقل إلزامي"
+    },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
         "DOCTORS": "الأطباء",
@@ -9,5 +15,13 @@
     },
     "DASHBOARD": {
         "SHORTCUT": "اختصار"
+    },
+    "DOCTORS": {
+        "ADD_DOCTOR_TITLE": "إضافة طبيب",
+        "DOCTOR_NAME": "اسم الطبيب",
+        "DOCTOR_DEGREE": "الدرجة العملية",
+        "DOCTOR_SPECIALIZATION": "التخصص",
+        "DOCTOR_SUBSPECIALIZATIONS": "التخصصات الفرعية",
+        "DOCTOR_ACTIVE": "مفعل"
     }
 }

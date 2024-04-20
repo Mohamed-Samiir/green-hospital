@@ -10,6 +10,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DataGridComponent } from './components/data-grid/data-grid.component';
 import { DataTableFilterComponent } from './components/data-table-filter/data-table-filter.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   imports: [
@@ -20,7 +23,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TranslateModule,
     TableModule,
     ButtonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DialogModule,
+    DropdownModule,
+    CheckboxModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -33,7 +39,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TranslateModule,
     DataGridComponent,
     DataTableFilterComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    CheckboxModule,
+    ButtonModule
   ],
   providers: [TranslateService]
 })

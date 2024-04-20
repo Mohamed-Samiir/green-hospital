@@ -12,6 +12,7 @@ import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 export class DoctorsListComponent implements OnInit {
 
   doctorsList: any[] = []
+  isShowAddDialog: boolean = false
   filteredDoctorsList: any[] = []
   filterTypes = FilterTypes
   gridColumns: DataGridColumn[] = [
@@ -66,6 +67,14 @@ export class DoctorsListComponent implements OnInit {
 
   setFilteredData(filteredData: any[]) {
     this.filteredDoctorsList = filteredData
+  }
+
+  showAddDialog() {
+    this.isShowAddDialog = true
+  }
+
+  hideAddDialog() {
+    this.isShowAddDialog = false
   }
 
 }

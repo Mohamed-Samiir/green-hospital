@@ -7,10 +7,14 @@
 
 .filter_container {
     margin: 16px 0;
-    padding: 10px 20px 20px 20px;
+    padding: 0px 20px 0px 20px;
     border: 1px solid #c8c8c8;
     border-radius: 12px;
     background-color: #fff;
+}
+
+.filter_container_expanded{
+    padding: 10px 20px 20px 20px;
 }
 
 .filters_count {
@@ -19,6 +23,7 @@
     font-size: 16px;
     justify-content: center;
     align-items: center;
+    min-height: 50px;
 }
 
 .values_count {
@@ -55,7 +60,7 @@
     position: relative;
 }
 
-.filter_label {
+.control_label {
     font-size: 14px;
     font-weight: bold;
     position: absolute;

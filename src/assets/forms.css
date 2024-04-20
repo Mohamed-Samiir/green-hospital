@@ -1,4 +1,4 @@
-input.ng-dirty.ng-invalid:not(form),
+/* input.ng-dirty.ng-invalid:not(form),
 input.ng-touched.ng-invalid:not(form) {
     border: 2px solid red;
-}
+} */

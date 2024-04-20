@@ -16,6 +16,8 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft">
-    <p-button type="button" icon="pi pi-plus" label="إضافة" iconPos="right" styleClass="grid_add_btn"></p-button>
+    <p-button type="button" icon="pi pi-plus" label="إضافة" iconPos="right" styleClass="grid_add_btn"
+      (click)="emitShowAddDialog()">
+    </p-button>
   </ng-template>
 </p-table>

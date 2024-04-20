@@ -1,8 +1,8 @@
-<div class="filter_container">
+<div class="filter_container" [ngClass]="{'filter_container_expanded': isExpanded}">
   <div class="row">
-    <div class="col-12 filter_content" [ngClass]="{'justify_items_end': isExpanded}">
-      <div class="filters_count" *ngIf="!isExpanded">
-        <div class="values_count">
+    <div class="col-12 filter_content">
+      <div class="filters_count" [ngStyle]="{'padding-bottom': isExpanded ? '21px' : '0'}">
+        <div class="values_count" *ngIf="!isExpanded && filtersCount">
           {{filtersCount}}
         </div>
         <span>محددات بحث</span>
@@ -19,7 +19,7 @@
         <div class="row">
           <ng-container *ngFor="let filter of filters">
             <div class="col-3 form_group" *ngIf="filter.type == filterTypes.text">
-              <label class="filter_label" [for]="filter.controlName">{{filter.label}}</label>
+              <label class="control_label" [for]="filter.controlName">{{filter.label}}</label>
               <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
                 [id]="filter.controlName" class="form-control">
             </div>

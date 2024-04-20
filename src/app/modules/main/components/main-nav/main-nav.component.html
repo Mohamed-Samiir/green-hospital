@@ -32,73 +32,11 @@
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="/main/passangers" class="list-item-custom" routerLinkActive="active-link"
+      <mat-list-item routerLink="" class="list-item-custom" routerLinkActive="active-link"
         [routerLinkActiveOptions]="{ exact: true }">
         <div class="nav-list-item">
           <fa-icon [icon]="faStethoscope" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.CLINICKS' | translate}}</h3>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item routerLink="/main/trips/recursive" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">group_add</mat-icon>
-          <h3 *ngIf="isExpanded">Recursive Groups</h3>
-        </div>
-      </mat-list-item>
-      <mat-list-item class="list-item-custom" routerLinkActive="active-link" routerLink="/main/Renew"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">autorenew </mat-icon>
-          <h3 *ngIf="isExpanded">Renew</h3>
-        </div>
-      </mat-list-item>
-      <mat-list-item routerLink="/main/drivers/requests" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">supervised_user_circle</mat-icon>
-          <h3 *ngIf="isExpanded">Drivers Requests</h3>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item routerLink="/main/drivers" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">drive_eta</mat-icon>
-          <h3 *ngIf="isExpanded">Drivers</h3>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item routerLink="/main/messages" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">message</mat-icon>
-          <h3 *ngIf="isExpanded">Messages</h3>
-        </div>
-      </mat-list-item>
-
-      <!--<mat-list-item routerLink="/main/promotions" class="list-item-custom" routerLinkActive="active-link"
-    [routerLinkActiveOptions]="{ exact: true }">
-    <div class="nav-list-item">
-      <mat-icon class="side-nav-icon">stars</mat-icon>
-      <h3 *ngIf="isExpanded">Promotions</h3>
-    </div>
-  </mat-list-item>-->
-
-      <mat-list-item routerLink="/main/cms/about-us" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">info</mat-icon>
-          <h3 *ngIf="isExpanded">About Us</h3>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item routerLink="/main/cms/privacy-policy" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item">
-          <mat-icon class="side-nav-icon">security </mat-icon>
-          <h3 *ngIf="isExpanded">Privacy policy</h3>
         </div>
       </mat-list-item>
 
@@ -109,8 +47,6 @@
           <h3 *ngIf="isExpanded">Logout</h3>
         </div>
       </mat-list-item>
-
-
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content [style.margin-right]="isExpanded? '215px' : '60px'">
