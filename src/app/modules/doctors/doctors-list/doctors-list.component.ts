@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
+import { DataGridAction } from 'src/app/core/interfaces/data-grid-action';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
 import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
@@ -47,6 +48,13 @@ export class DoctorsListComponent implements OnInit {
     }
   ]
 
+  gridActions: DataGridAction = {
+    showDetails: true,
+    showDelete: true,
+    showEdit: true,
+    showSuspend: true
+  }
+
   constructor(private doctorsService: DoctorsService) { }
 
   ngOnInit() {
@@ -57,7 +65,11 @@ export class DoctorsListComponent implements OnInit {
     this.doctorsService.getDoctors().subscribe(res => {
       if (res.isSuccess) {
         this.doctorsList = res.data.map((doc: any) => {
-          let modifiedDoctor = { ...doc, specialization: doc.specialization.name }
+          let modifiedDoctor = {
+            ...doc,
+            specialization: doc.specialization.name,
+            subSpecializations: doc.subSpecializations.map((subSpec: any) => subSpec.name)
+          }
           return modifiedDoctor
         })
         this.filteredDoctorsList = this.doctorsList
@@ -75,6 +87,11 @@ export class DoctorsListComponent implements OnInit {
 
   hideAddDialog() {
     this.isShowAddDialog = false
+  }
+
+  onAddDoctor(addedDoctor: any) {
+    this.hideAddDialog()
+    this.getDoctorsList()
   }
 
 }

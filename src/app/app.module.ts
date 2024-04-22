@@ -15,11 +15,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
-import { UpdateBalanceModalComponent } from './shared/components/update-balance-modal/update-balance-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ReplaceGroupModalComponent } from './shared/components/replace-group-modal/replace-group-modal.component';
 import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
@@ -34,8 +32,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   declarations: [
     AppComponent,
     ConfirmModalComponent,
-    UpdateBalanceModalComponent,
-    ReplaceGroupModalComponent,
     LoaderComponent
   ],
   imports: [

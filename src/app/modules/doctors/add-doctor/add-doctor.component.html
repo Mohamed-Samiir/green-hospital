@@ -43,9 +43,8 @@
       <div class="col-sm-12 col-md-4 form_group">
         <label class="control_label" for="subSpecializations">{{'DOCTORS.DOCTOR_SUBSPECIALIZATIONS' |
           translate}}</label>
-        <p-dropdown [options]="subSpecializationsList" formControlName="subSpecializations" name="subSpecializations"
-          class="form-control form-control-dropdown" optionLabel="name" optionValue="name"
-          [autoDisplayFirst]="false"></p-dropdown>
+        <p-multiSelect [options]="subSpecializationsList" formControlName="subSpecializations" name="subSpecializations"
+          class="form-control form-control-dropdown" optionLabel="name" optionValue="_id"></p-multiSelect>
         <div *ngIf="f['subSpecializations'].errors && f['subSpecializations'].touched" class="validation_msg">
           <div *ngIf="f['subSpecializations'].errors['required']">
             {{"GENERIC.VALIDATION_REQUIRED" | translate}}
@@ -60,8 +59,8 @@
     </div>
     <div class="row form_btns">
       <div class="col-3">
-        <button pButton type="button" [label]="'GENERIC.IGNORE' | translate"
-          class="p-button-danger p-button-outlined"></button>
+        <button pButton type="button" [label]="'GENERIC.IGNORE' | translate" class="p-button-danger p-button-outlined"
+          (click)="emitIgnore()"></button>
       </div>
       <div class="col-3">
         <button pButton type="submit" [label]="'GENERIC.SAVE' | translate" class="p-button-success"></button>

@@ -13,6 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     FontAwesomeModule,
     DialogModule,
     DropdownModule,
-    CheckboxModule
+    CheckboxModule,
+    MultiSelectModule,
+    TooltipModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -45,7 +49,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     ReactiveFormsModule,
     DropdownModule,
     CheckboxModule,
-    ButtonModule
+    ButtonModule,
+    MultiSelectModule,
+    TooltipModule
   ],
   providers: [TranslateService]
 })

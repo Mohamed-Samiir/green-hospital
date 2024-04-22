@@ -11,16 +11,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
-import { TodayTripsSummaryComponent } from './components/today-trips-summary/today-trips-summary.component';
-import { TodayTripsTableComponent } from './components/today-trips-table/today-trips-table.component'
-import { TodayTripsDetailsModalComponent } from './components/today-trips-details-modal/today-trips-details-modal.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    TodayTripsSummaryComponent,
-    TodayTripsTableComponent,
-    TodayTripsDetailsModalComponent,
   ],
   imports: [
     CommonModule,

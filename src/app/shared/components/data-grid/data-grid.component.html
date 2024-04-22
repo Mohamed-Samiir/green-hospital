@@ -6,12 +6,32 @@
       <th *ngFor="let col of columns">
         {{ col.header }}
       </th>
+      <th *ngIf="actions">
+        {{ "GENERIC.GRID_ACTIONS" | translate}}
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr>
       <td *ngFor="let col of columns">
         {{ rowData[col.field] }}
+      </td>
+      <td *ngIf="actions">
+        <div class="actions">
+          <div class="action_icon" *ngIf="actions.showDetails">
+            <fa-icon [icon]="faEye" [pTooltip]="'GENERIC.DETAILS_ICON' | translate" tooltipPosition="top"></fa-icon>
+          </div>
+          <div class="action_icon" *ngIf="actions.showEdit">
+            <fa-icon [icon]="faPenToSquare" [pTooltip]="'GENERIC.EDIT_ICON' | translate"
+              tooltipPosition="top"></fa-icon>
+          </div>
+          <div class="action_icon" *ngIf="actions.showDelete">
+            <fa-icon [icon]="faTrashCan" [pTooltip]="'GENERIC.DELETE_ICON' | translate" tooltipPosition="top"></fa-icon>
+          </div>
+          <div class="action_icon" *ngIf="actions.showSuspend">
+            <fa-icon [icon]="faLock" [pTooltip]="'GENERIC.SUSPEND_ICON' | translate" tooltipPosition="top"></fa-icon>
+          </div>
+        </div>
       </td>
     </tr>
   </ng-template>

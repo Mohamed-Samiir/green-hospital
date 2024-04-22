@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
+import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 import { SpecializationsService } from 'src/app/core/services/specializations/specializations.service';
 
 @Component({
@@ -11,29 +13,16 @@ import { SpecializationsService } from 'src/app/core/services/specializations/sp
 export class AddDoctorComponent implements OnInit {
 
   addDoctorFormGroup: FormGroup = new FormGroup({})
-  specializationsList: any[] = [
-    {
-      name: "عظام",
-      id: 1
-    },
-    {
-      name: "باطنة",
-      id: 2
-    }
-  ]
+  specializationsList: any[] = []
+  subSpecializationsList: any[] = []
+  @Output() onAddDoctor: EventEmitter<any> = new EventEmitter<any>()
+  @Output() onIgnore: EventEmitter<any> = new EventEmitter<any>()
 
-  subSpecializationsList: any[] = [
-    {
-      name: "عظام",
-      id: 1
-    },
-    {
-      name: "باطنة",
-      id: 2
-    }
-  ]
-
-  constructor(private fb: FormBuilder, private specializationsService: SpecializationsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private specializationsService: SpecializationsService,
+    private doctorsService: DoctorsService
+  ) { }
 
   ngOnInit() {
     this.buildForm()
@@ -56,7 +45,9 @@ export class AddDoctorComponent implements OnInit {
 
   getSpecializations() {
     this.specializationsService.getSpecializations().subscribe(res => {
-      this.specializationsList = res.data
+      if (res.isSuccess) {
+        this.specializationsList = res.data
+      }
     })
   }
 
@@ -70,11 +61,21 @@ export class AddDoctorComponent implements OnInit {
   Submit() {
     debugger
     if (this.addDoctorFormGroup.valid) {
-
+      this.doctorsService.addDoctor(this.addDoctorFormGroup.value).subscribe(res => {
+        if (res.isSuccess) {
+          this.onAddDoctor.emit(res.data)
+          this.addDoctorFormGroup.reset({ isActive: true })
+        }
+      })
     } else {
       this.addDoctorFormGroup.markAllAsTouched()
     }
 
+  }
+
+  emitIgnore() {
+    this.addDoctorFormGroup.reset({ isActive: true })
+    this.onIgnore.emit()
   }
 
 }

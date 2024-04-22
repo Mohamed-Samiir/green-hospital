@@ -1,0 +1,13 @@
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.action_icon {
+    padding: 3px;
+}
+
+.action_icon fa-icon {
+    cursor: pointer;
+    color: #8b8b8b;
+}

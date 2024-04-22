@@ -62,6 +62,7 @@ body {
 
 .mat-drawer-content {
     background-color: #fcfbfb;
+    padding-bottom: 50px;
 }
 
 .sidenav-container {
@@ -379,6 +380,12 @@ mat-list-item {
 
 .p-paginator .p-dropdown {
     border: 1px solid #349F51;
+    margin: 0;
+}
+
+.p-multiselect {
+    width: 100%;
+    border: none;
 }
 
 .form-control-dropdown {

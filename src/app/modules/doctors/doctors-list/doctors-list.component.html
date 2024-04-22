@@ -4,12 +4,12 @@
       (getFilteredData)="setFilteredData($event)"></app-data-table-filter>
   </div>
   <div class="row">
-    <app-data-grid [columns]="gridColumns" [data]="filteredDoctorsList"
+    <app-data-grid [columns]="gridColumns" [data]="filteredDoctorsList" [actions]="gridActions"
       (onShowAddClick)="showAddDialog()"></app-data-grid>
   </div>
 </div>
 
 <p-dialog [(visible)]="isShowAddDialog" [style]="{width: '70vw'}" [modal]="true"
   [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [header]="'DOCTORS.ADD_DOCTOR_TITLE' | translate">
-  <app-add-doctor></app-add-doctor>
+  <app-add-doctor (onAddDoctor)="onAddDoctor($event)" (onIgnore)="hideAddDialog()"></app-add-doctor>
 </p-dialog>

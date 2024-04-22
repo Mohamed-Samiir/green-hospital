@@ -3,7 +3,12 @@
         "SAVE": "حفظ",
         "IGNORE": "إلغاء",
         "VALIDATION_ARABIC": "يمكن إدخال الحروف العربية فقط",
-        "VALIDATION_REQUIRED": "الحقل إلزامي"
+        "VALIDATION_REQUIRED": "الحقل إلزامي",
+        "GRID_ACTIONS": "الإجراءات",
+        "DETAILS_ICON": "تفاصيل",
+        "EDIT_ICON": "تعديل",
+        "DELETE_ICON": "حذف",
+        "SUSPEND_ICON": "إخفاء"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
