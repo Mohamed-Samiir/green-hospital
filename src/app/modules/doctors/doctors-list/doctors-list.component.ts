@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
 import { DataGridAction } from 'src/app/core/interfaces/data-grid-action';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
 import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
+import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
+import { AddDoctorComponent } from '../add-doctor/add-doctor.component';
+import { ConfirmationService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-doctors-list',
@@ -12,10 +16,15 @@ import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 })
 export class DoctorsListComponent implements OnInit {
 
-  doctorsList: any[] = []
+  doctorsList: DoctorModel[] = []
+  gridData: any[] = []
   isShowAddDialog: boolean = false
-  filteredDoctorsList: any[] = []
   filterTypes = FilterTypes
+  selectedDoctorForEdit: DoctorModel | undefined
+  isEdit: boolean = false
+  @ViewChild(AddDoctorComponent) addDoctorComponent!: AddDoctorComponent
+
+
   gridColumns: DataGridColumn[] = [
     {
       header: "اسم الطبيب",
@@ -52,10 +61,13 @@ export class DoctorsListComponent implements OnInit {
     showDetails: true,
     showDelete: true,
     showEdit: true,
-    showSuspend: true
   }
 
-  constructor(private doctorsService: DoctorsService) { }
+  constructor(
+    private doctorsService: DoctorsService,
+    private confirmationService: ConfirmationService,
+    private tranlslate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.getDoctorsList()
@@ -64,7 +76,8 @@ export class DoctorsListComponent implements OnInit {
   getDoctorsList() {
     this.doctorsService.getDoctors().subscribe(res => {
       if (res.isSuccess) {
-        this.doctorsList = res.data.map((doc: any) => {
+        this.doctorsList = res.data
+        this.gridData = res.data.map((doc: any) => {
           let modifiedDoctor = {
             ...doc,
             specialization: doc.specialization.name,
@@ -72,13 +85,12 @@ export class DoctorsListComponent implements OnInit {
           }
           return modifiedDoctor
         })
-        this.filteredDoctorsList = this.doctorsList
       }
     })
   }
 
   setFilteredData(filteredData: any[]) {
-    this.filteredDoctorsList = filteredData
+    this.gridData = filteredData
   }
 
   showAddDialog() {
@@ -87,11 +99,44 @@ export class DoctorsListComponent implements OnInit {
 
   hideAddDialog() {
     this.isShowAddDialog = false
+    this.selectedDoctorForEdit = undefined
+    this.isEdit = false
+    this.addDoctorComponent.resetAddForm()
   }
 
-  onAddDoctor(addedDoctor: any) {
+  onAddDoctor() {
     this.hideAddDialog()
     this.getDoctorsList()
   }
 
+  openEditPopup(doctorId: string) {
+    this.isEdit = true
+    let selectedDoctor = this.doctorsList.find(doc => doc._id == doctorId)
+    if (selectedDoctor) {
+      this.selectedDoctorForEdit = selectedDoctor
+      this.showAddDialog()
+    }
+
+  }
+
+  navigateToDetails(doctorId: string) {
+
+  }
+
+  openDeleteConfirmation(doctorId: string) {
+    let selectedDoctor = this.doctorsList.find(doc => doc._id == doctorId)
+    this.confirmationService.confirm({
+      key: "confirmDelete",
+      message: `${this.tranlslate.instant('GENERIC.DELETE_MSG')} ${selectedDoctor?.name}`,
+      acceptLabel: this.tranlslate.instant('GENERIC.CONFIRM'),
+      rejectLabel: this.tranlslate.instant('GENERIC.IGNORE'),
+      accept: () => {
+        this.doctorsService.deleteDoctor(doctorId).subscribe(res => {
+          if (res.isSuccess) {
+            this.getDoctorsList()
+          }
+        })
+      }
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
@@ -10,11 +10,14 @@ import { SpecializationsService } from 'src/app/core/services/specializations/sp
   styleUrls: ['./add-doctor.component.css'],
   exportAs: 'addDoctor'
 })
-export class AddDoctorComponent implements OnInit {
+export class AddDoctorComponent implements OnInit, OnChanges {
 
   addDoctorFormGroup: FormGroup = new FormGroup({})
   specializationsList: any[] = []
   subSpecializationsList: any[] = []
+
+  @Input() selectedDoctor: DoctorModel | undefined
+
   @Output() onAddDoctor: EventEmitter<any> = new EventEmitter<any>()
   @Output() onIgnore: EventEmitter<any> = new EventEmitter<any>()
 
@@ -27,6 +30,22 @@ export class AddDoctorComponent implements OnInit {
   ngOnInit() {
     this.buildForm()
     this.getSpecializations()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedDoctor'].currentValue) {
+      debugger
+      let doctorSpecialization = changes['selectedDoctor'].currentValue.specialization
+      if (doctorSpecialization) {
+        this.subSpecializationsList = doctorSpecialization.subSpecializations
+      }
+      let doctorObj = {
+        ...changes['selectedDoctor'].currentValue,
+        specialization: doctorSpecialization._id,
+        subSpecializations: changes['selectedDoctor'].currentValue.subSpecializations.map((subSpec: any) => subSpec._id)
+      }
+      this.addDoctorFormGroup.patchValue(doctorObj)
+    }
   }
 
   buildForm() {
@@ -59,23 +78,35 @@ export class AddDoctorComponent implements OnInit {
   }
 
   Submit() {
-    debugger
     if (this.addDoctorFormGroup.valid) {
-      this.doctorsService.addDoctor(this.addDoctorFormGroup.value).subscribe(res => {
-        if (res.isSuccess) {
-          this.onAddDoctor.emit(res.data)
-          this.addDoctorFormGroup.reset({ isActive: true })
-        }
-      })
+      if (this.selectedDoctor) {
+        this.doctorsService.editDoctor(this.selectedDoctor._id, this.addDoctorFormGroup.value).subscribe(res => {
+          if (res.isSuccess) {
+            this.onAddDoctor.emit(res.data)
+            this.addDoctorFormGroup.reset({ isActive: true })
+          }
+        })
+      } else {
+        this.doctorsService.addDoctor(this.addDoctorFormGroup.value).subscribe(res => {
+          if (res.isSuccess) {
+            this.onAddDoctor.emit(res.data)
+            this.addDoctorFormGroup.reset({ isActive: true })
+          }
+        })
+      }
     } else {
       this.addDoctorFormGroup.markAllAsTouched()
     }
 
   }
 
-  emitIgnore() {
-    this.addDoctorFormGroup.reset({ isActive: true })
+  popupIgnor() {
+    this.resetAddForm()
     this.onIgnore.emit()
+  }
+
+  resetAddForm() {
+    this.addDoctorFormGroup.reset({ isActive: true })
   }
 
 }

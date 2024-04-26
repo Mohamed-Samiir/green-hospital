@@ -436,3 +436,27 @@ mat-list-item {
     font-size: 14px;
     min-height: 20px;
 }
+
+.p-confirm-dialog .p-dialog-content {
+    border-radius: 0;
+}
+
+.p-dialog .p-dialog-footer {
+    border: none;
+    border-radius: 0 0 12px 12px;
+    justify-content: flex-end;
+    display: flex;
+
+    button {
+        border: none;
+        width: 100px;
+    }
+
+    .p-confirm-dialog-reject {
+        background-color: red;
+    }
+
+    .p-confirm-dialog-accept {
+        background-color: #349F51;
+    }
+}

@@ -15,6 +15,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { TooltipModule } from 'primeng/tooltip';
     DropdownModule,
     CheckboxModule,
     MultiSelectModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule,
+    // ConfirmationService
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -51,8 +55,10 @@ import { TooltipModule } from 'primeng/tooltip';
     CheckboxModule,
     ButtonModule,
     MultiSelectModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule,
+    // ConfirmationService
   ],
-  providers: [TranslateService]
+  providers: [TranslateService, ConfirmationService]
 })
 export class SharedModule { }

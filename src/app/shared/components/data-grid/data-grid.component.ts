@@ -14,6 +14,9 @@ export class DataGridComponent implements OnInit {
   @Input() columns: DataGridColumn[] = []
   @Input() actions: DataGridAction = {}
   @Output() onShowAddClick: EventEmitter<boolean> = new EventEmitter<boolean>()
+  @Output() onEditClick: EventEmitter<string> = new EventEmitter<string>()
+  @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>()
+  @Output() onDetailsClick: EventEmitter<string> = new EventEmitter<string>()
 
   faEye = faEye
   faPenToSquare = faPenToSquare
@@ -27,6 +30,19 @@ export class DataGridComponent implements OnInit {
 
   emitShowAddDialog() {
     this.onShowAddClick.emit(true)
+  }
+
+  emitEditAction(rowId: string) {
+    debugger
+    this.onEditClick.emit(rowId)
+  }
+
+  emitDetailsAction(rowId: string) {
+    this.onDetailsClick.emit(rowId)
+  }
+
+  emitDeleteAction(rowId: string) {
+    this.onDeleteClick.emit(rowId)
   }
 
 }

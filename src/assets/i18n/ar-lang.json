@@ -8,7 +8,10 @@
         "DETAILS_ICON": "تفاصيل",
         "EDIT_ICON": "تعديل",
         "DELETE_ICON": "حذف",
-        "SUSPEND_ICON": "إخفاء"
+        "SUSPEND_ICON": "إخفاء",
+        "CONFIRM": "تأكيد",
+        "DELETE_MSG": " هل أنت متأكد من حذف بيانات",
+        "CONFIRMATION": "تأكيد"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
@@ -23,6 +26,7 @@
     },
     "DOCTORS": {
         "ADD_DOCTOR_TITLE": "إضافة طبيب",
+        "EDIT_DOCTOR_TITLE": "تعديل طبيب",
         "DOCTOR_NAME": "اسم الطبيب",
         "DOCTOR_DEGREE": "الدرجة العملية",
         "DOCTOR_SPECIALIZATION": "التخصص",
