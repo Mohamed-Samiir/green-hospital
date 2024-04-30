@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <div class="row">
+    <app-data-table-filter [filters]="gridFilters" [data]="usersList"
+      (getFilteredData)="setFilteredData($event)"></app-data-table-filter>
+  </div>
+  <div class="row">
+    <app-data-grid [columns]="gridColumns" [data]="gridData" [actions]="gridActions" (onShowAddClick)="showAddDialog()"
+      (onEditClick)="openEditPopup($event)" (onDetailsClick)="onShowDetails($event)"
+      (onDeleteClick)="openDeleteConfirmation($event)">
+    </app-data-grid>
+  </div>
+</div>

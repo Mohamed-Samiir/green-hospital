@@ -30,6 +30,28 @@ const routes: Routes = [
         loadChildren: () => import('../doctors/doctors.module').then(m => m.DoctorsModule)
       }
     ]
+  },
+  {
+    path: 'specializations',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        // canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../specializations/specializations.module').then(m => m.SpecializationsModule)
+      }
+    ]
+  },
+  {
+    path: 'users',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        // canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
+      }
+    ]
   }
 ];
 

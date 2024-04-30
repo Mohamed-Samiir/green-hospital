@@ -24,6 +24,14 @@
         </div>
       </mat-list-item>
 
+      <mat-list-item routerLink="/main/users" class="list-item-custom" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faUsers" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.USERS' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
       <mat-list-item routerLink="/main/doctors" class="list-item-custom" routerLinkActive="active-link"
         [routerLinkActiveOptions]="{ exact: true }">
         <div class="nav-list-item">
@@ -37,6 +45,14 @@
         <div class="nav-list-item">
           <fa-icon [icon]="faStethoscope" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.CLINICKS' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/main/specializations" class="list-item-custom" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faSitemap" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.SPECIALIZATIONS' | translate}}</h3>
         </div>
       </mat-list-item>
 

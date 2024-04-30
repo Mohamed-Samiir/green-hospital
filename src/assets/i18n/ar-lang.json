@@ -11,12 +11,15 @@
         "SUSPEND_ICON": "إخفاء",
         "CONFIRM": "تأكيد",
         "DELETE_MSG": " هل أنت متأكد من حذف بيانات",
-        "CONFIRMATION": "تأكيد"
+        "CONFIRMATION": "تأكيد",
+        "CLOSE": "إغلاق"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
         "DOCTORS": "الأطباء",
-        "CLINICKS": "العيادات"
+        "CLINICKS": "العيادات",
+        "SPECIALIZATIONS": "التخصصات",
+        "USERS": "المستخدمين"
     },
     "LOGIN": {
         "LOGO_TEXT": "بنك معلومات خدمة العملاء"
@@ -31,6 +34,7 @@
         "DOCTOR_DEGREE": "الدرجة العملية",
         "DOCTOR_SPECIALIZATION": "التخصص",
         "DOCTOR_SUBSPECIALIZATIONS": "التخصصات الفرعية",
-        "DOCTOR_ACTIVE": "مفعل"
+        "DOCTOR_ACTIVE": "مفعل",
+        "VIEW_DOCTOR_DETAILS_TITLE": "تفاصيل الطبيب"
     }
 }

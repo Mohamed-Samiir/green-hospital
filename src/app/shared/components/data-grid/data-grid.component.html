@@ -14,7 +14,16 @@
   <ng-template pTemplate="body" let-rowData>
     <tr>
       <td *ngFor="let col of columns">
-        {{ rowData[col.field] }}
+        <div *ngIf="col.type == gridColumnTypes.text">
+          {{ rowData[col.field] }}
+        </div>
+        <div *ngIf="col.type == gridColumnTypes.array">
+          <ul>
+            <li *ngFor="let val of rowData[col.field]">
+              {{val}}
+            </li>
+          </ul>
+        </div>
       </td>
       <td *ngIf="actions">
         <div class="actions">

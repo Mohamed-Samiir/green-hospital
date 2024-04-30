@@ -17,6 +17,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { ConfirmationService } from 'primeng/api';
     MultiSelectModule,
     TooltipModule,
     ConfirmDialogModule,
-    // ConfirmationService
+    AccordionModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -57,7 +58,7 @@ import { ConfirmationService } from 'primeng/api';
     MultiSelectModule,
     TooltipModule,
     ConfirmDialogModule,
-    // ConfirmationService
+    AccordionModule
   ],
   providers: [TranslateService, ConfirmationService]
 })

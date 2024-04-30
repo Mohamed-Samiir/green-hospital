@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-4 form_group">
+      <label class="details_label" for="name">{{'DOCTORS.DOCTOR_NAME' | translate}}</label>
+      <div class="details_value">{{selectedDoctor?.name}}</div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 form_group">
+      <label class="details_label" for="degree">{{'DOCTORS.DOCTOR_DEGREE' | translate}}</label>
+      <div class="details_value">{{selectedDoctor?.degree}}</div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 form_group">
+      <label class="details_label" for="specialization">{{'DOCTORS.DOCTOR_SPECIALIZATION' | translate}}</label>
+      <div class="details_value">{{selectedDoctor?.specialization?.name}}</div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 form_group">
+      <label class="details_label" for="subSpecializations">{{'DOCTORS.DOCTOR_SUBSPECIALIZATIONS' |
+        translate}}</label>
+      <div class="details_value" *ngFor="let subSpec of selectedDoctor?.subSpecializations">
+        {{subSpec?.name}}
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 form_group" *ngIf="selectedDoctor">
+      <p-checkbox [(ngModel)]="selectedDoctor.isActive!" [binary]="true" [disabled]="true"
+        [label]="'DOCTORS.DOCTOR_ACTIVE' | translate"></p-checkbox>
+    </div>
+  </div>
+  <div class="row form_btns">
+    <div class="col-3">
+      <button pButton type="button" [label]="'GENERIC.CLOSE' | translate" class="p-button-danger p-button-outlined"
+        (click)="popupIgnor()"></button>
+    </div>
+  </div>
+</div>

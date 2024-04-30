@@ -19,8 +19,10 @@ export class DoctorsListComponent implements OnInit {
   doctorsList: DoctorModel[] = []
   gridData: any[] = []
   isShowAddDialog: boolean = false
+  isShowDetailsDialog: boolean = false
   filterTypes = FilterTypes
   selectedDoctorForEdit: DoctorModel | undefined
+  selectedDoctorForDetails: DoctorModel | undefined
   isEdit: boolean = false
   @ViewChild(AddDoctorComponent) addDoctorComponent!: AddDoctorComponent
 
@@ -28,19 +30,23 @@ export class DoctorsListComponent implements OnInit {
   gridColumns: DataGridColumn[] = [
     {
       header: "اسم الطبيب",
-      field: "name"
+      field: "name",
+      type: 1
     },
     {
       header: "الدرجة العلمية",
-      field: "degree"
+      field: "degree",
+      type: 1
     },
     {
       header: "التخصص",
-      field: "specialization"
+      field: "specialization",
+      type: 1
     },
     {
       header: "التخصصات الفرعية",
       field: "subSpecializations",
+      type: 2
     }
   ]
 
@@ -119,10 +125,6 @@ export class DoctorsListComponent implements OnInit {
 
   }
 
-  navigateToDetails(doctorId: string) {
-
-  }
-
   openDeleteConfirmation(doctorId: string) {
     let selectedDoctor = this.doctorsList.find(doc => doc._id == doctorId)
     this.confirmationService.confirm({
@@ -138,5 +140,22 @@ export class DoctorsListComponent implements OnInit {
         })
       }
     });
+  }
+
+  hideDetailsDialog() {
+    this.isShowDetailsDialog = false
+    this.selectedDoctorForDetails = undefined
+  }
+
+  showDetailsDialog() {
+    this.isShowDetailsDialog = true
+  }
+
+  onShowDetails(doctorId: string) {
+    let selectedDoctor = this.doctorsList.find(doc => doc._id == doctorId)
+    if (selectedDoctor) {
+      this.selectedDoctorForDetails = selectedDoctor
+      this.showDetailsDialog()
+    }
   }
 }

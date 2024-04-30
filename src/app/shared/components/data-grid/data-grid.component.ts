@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataGridAction } from 'src/app/core/interfaces/data-grid-action';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
 import { faEye, faPenToSquare, faTrashCan, faLock } from '@fortawesome/free-solid-svg-icons';
+import { GridColumnTypes } from 'src/app/core/enums/grid-column-types.enum';
 
 @Component({
   selector: 'app-data-grid',
@@ -18,6 +19,8 @@ export class DataGridComponent implements OnInit {
   @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>()
   @Output() onDetailsClick: EventEmitter<string> = new EventEmitter<string>()
 
+  gridColumnTypes = GridColumnTypes
+
   faEye = faEye
   faPenToSquare = faPenToSquare
   faTrashCan = faTrashCan
@@ -33,7 +36,6 @@ export class DataGridComponent implements OnInit {
   }
 
   emitEditAction(rowId: string) {
-    debugger
     this.onEditClick.emit(rowId)
   }
 

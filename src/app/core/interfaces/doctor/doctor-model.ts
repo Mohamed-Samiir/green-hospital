@@ -6,5 +6,6 @@ export interface DoctorModel {
     name: string,
     degree: string,
     specialization: Specialization,
-    subSpecializations: SubSpecialization[]
+    subSpecializations: SubSpecialization[],
+    isActive: boolean
 }

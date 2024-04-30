@@ -24,7 +24,8 @@
     ],
     "types": [
       "googlemaps"
-    ]
+    ],
+    "strictNullChecks": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

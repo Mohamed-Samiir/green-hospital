@@ -34,7 +34,6 @@ export class AddDoctorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDoctor'].currentValue) {
-      debugger
       let doctorSpecialization = changes['selectedDoctor'].currentValue.specialization
       if (doctorSpecialization) {
         this.subSpecializationsList = doctorSpecialization.subSpecializations

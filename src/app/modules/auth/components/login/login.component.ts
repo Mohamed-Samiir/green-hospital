@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user).subscribe((res: BaseResponseModel) => {
       if (res.isSuccess) {
         this.currentUser = res.data as IUserResponse
-        debugger
         localStorage.setItem('User', JSON.stringify(this.currentUser));
         localStorage.setItem('id_token', JSON.stringify(this.currentUser.token));
         this.router.navigateByUrl('/main');
