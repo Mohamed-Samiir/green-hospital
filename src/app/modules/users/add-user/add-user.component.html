@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <form class="form-group" (submit)="Submit()" [formGroup]="addUserFormGroup">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="name">{{'USERS.USER_NAME' | translate}}</label>
+        <input type="text" formControlName="name" name="name" class="form-control">
+        <div *ngIf="f['name'].errors && f['name'].touched" class="validation_msg">
+          <div *ngIf="f['name'].errors['required']">
+            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
+          </div>
+          <div *ngIf="f['name'].errors['pattern']">
+            {{ 'GENERIC.VALIDATION_ARABIC' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="email">{{'USERS.USER_EMAIL' | translate}}</label>
+        <input type="text" formControlName="email" name="email" class="form-control">
+        <div *ngIf="f['email'].errors && f['email'].touched" class="validation_msg">
+          <div *ngIf="f['email'].errors['required']">
+            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
+          </div>
+          <div *ngIf="f['email'].errors['email']">
+            {{ 'GENERIC.VALIDATION_EMAIL' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="password">{{'USERS.USER_PASSWORD' | translate}}</label>
+        <input type="text" formControlName="password" name="password" class="form-control">
+        <div *ngIf="f['password'].errors && f['password'].touched" class="validation_msg">
+          <div *ngIf="f['password'].errors['required']">
+            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
+        <p-checkbox formControlName="isAdmin" [binary]="true" [label]="'USERS.USER_ADMIN' | translate"></p-checkbox>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
+        <p-checkbox formControlName="isActive" [binary]="true" [label]="'USERS.USER_ACTIVE' | translate"></p-checkbox>
+      </div>
+    </div>
+    <div class="row form_btns">
+      <div class="col-3">
+        <button pButton type="button" [label]="'GENERIC.IGNORE' | translate" class="p-button-danger p-button-outlined"
+          (click)="popupIgnor()"></button>
+      </div>
+      <div class="col-3">
+        <button pButton type="submit" [label]="'GENERIC.SAVE' | translate" class="p-button-success"></button>
+      </div>
+    </div>
+  </form>
+</div>

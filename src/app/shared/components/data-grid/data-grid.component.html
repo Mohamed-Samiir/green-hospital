@@ -24,6 +24,9 @@
             </li>
           </ul>
         </div>
+        <div *ngIf="col.type == gridColumnTypes.boolean">
+          {{ (rowData[col.field] ? 'GENERIC.YES' : 'GENERIC.NO') | translate }}
+        </div>
       </td>
       <td *ngIf="actions">
         <div class="actions">

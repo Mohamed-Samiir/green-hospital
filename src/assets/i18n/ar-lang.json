@@ -3,6 +3,7 @@
         "SAVE": "حفظ",
         "IGNORE": "إلغاء",
         "VALIDATION_ARABIC": "يمكن إدخال الحروف العربية فقط",
+        "VALIDATION_EMAIL": "يجب ادخال بريد إلكتروني صحيح",
         "VALIDATION_REQUIRED": "الحقل إلزامي",
         "GRID_ACTIONS": "الإجراءات",
         "DETAILS_ICON": "تفاصيل",
@@ -12,7 +13,9 @@
         "CONFIRM": "تأكيد",
         "DELETE_MSG": " هل أنت متأكد من حذف بيانات",
         "CONFIRMATION": "تأكيد",
-        "CLOSE": "إغلاق"
+        "CLOSE": "إغلاق",
+        "NO": "لا",
+        "YES": "نعم"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
@@ -36,5 +39,14 @@
         "DOCTOR_SUBSPECIALIZATIONS": "التخصصات الفرعية",
         "DOCTOR_ACTIVE": "مفعل",
         "VIEW_DOCTOR_DETAILS_TITLE": "تفاصيل الطبيب"
+    },
+    "USERS": {
+        "USER_NAME": "اسم المستخدم",
+        "USER_EMAIL": "البريد الإلكتروني",
+        "USER_ACTIVE": "مفعل",
+        "USER_ADMIN": "مدير",
+        "USER_PASSWORD": "كلمة السر",
+        "EDIT_USER_TITLE": "تعديل مستخدم",
+        "ADD_USER_TITLE": "إضافة مستخدم"
     }
 }
