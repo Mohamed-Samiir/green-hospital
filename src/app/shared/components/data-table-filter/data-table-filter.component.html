@@ -15,13 +15,25 @@
   </div>
   <div class="row" *ngIf="isExpanded">
     <div class="col-12">
-      <form (submit)="saveFilters()" [formGroup]="filtersForm">
+      <form (submit)="saveFilters()" [formGroup]="filtersForm" class="form-group">
         <div class="row">
           <ng-container *ngFor="let filter of filters">
             <div class="col-3 form_group" *ngIf="filter.type == filterTypes.text">
               <label class="control_label" [for]="filter.controlName">{{filter.label}}</label>
               <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
                 [id]="filter.controlName" class="form-control">
+            </div>
+            <div class="col-3 form_group" *ngIf="filter.type == filterTypes.dropdown">
+              <label class="control_label" [for]="filter.controlName">{{filter.label}}</label>
+              <p-dropdown *ngIf="!filter.multiSelect" [options]="filtersDDLs.get(filter.controlName)"
+                [formControlName]="filter.controlName" [name]="filter.controlName"
+                class="form-control form-control-dropdown" [optionLabel]="filter.optionLabel"
+                [optionValue]="filter.optionValue" [autoDisplayFirst]="false" [showClear]="true"></p-dropdown>
+
+              <p-multiSelect *ngIf="filter.multiSelect" [options]="filtersDDLs.get(filter.controlName)"
+                [formControlName]="filter.controlName" [name]="filter.controlName"
+                class="form-control form-control-dropdown" [optionLabel]="filter.optionLabel"
+                [optionValue]="filter.optionValue"></p-multiSelect>
             </div>
           </ng-container>
         </div>

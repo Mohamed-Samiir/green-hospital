@@ -33,11 +33,11 @@
           <div class="action_icon" *ngIf="actions.showDetails" (click)="emitDetailsAction(rowData._id)">
             <fa-icon [icon]="faEye" [pTooltip]="'GENERIC.DETAILS_ICON' | translate" tooltipPosition="top"></fa-icon>
           </div>
-          <div class="action_icon" *ngIf="actions.showEdit">
+          <div class="action_icon" *ngIf="actions.showEdit && authService.isAdmin()">
             <fa-icon [icon]="faPenToSquare" [pTooltip]="'GENERIC.EDIT_ICON' | translate" tooltipPosition="top"
               (click)="emitEditAction(rowData._id)"></fa-icon>
           </div>
-          <div class="action_icon" *ngIf="actions.showDelete">
+          <div class="action_icon" *ngIf="actions.showDelete  && authService.isAdmin()">
             <fa-icon [icon]="faTrashCan" [pTooltip]="'GENERIC.DELETE_ICON' | translate" tooltipPosition="top"
               (click)="emitDeleteAction(rowData._id)"></fa-icon>
           </div>
@@ -47,7 +47,7 @@
   </ng-template>
   <ng-template pTemplate="paginatorleft">
     <p-button type="button" icon="pi pi-plus" label="إضافة" iconPos="right" styleClass="grid_add_btn"
-      (click)="emitShowAddDialog()">
+      (click)="emitShowAddDialog()" *ngIf="authService.isAdmin()">
     </p-button>
   </ng-template>
 </p-table>

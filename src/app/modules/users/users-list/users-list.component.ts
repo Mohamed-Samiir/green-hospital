@@ -68,7 +68,7 @@ export class UsersListComponent implements OnInit {
   ]
 
   gridActions: DataGridAction = {
-    showDetails: true,
+    showDetails: false,
     showDelete: true,
     showEdit: true,
   }
@@ -125,6 +125,7 @@ export class UsersListComponent implements OnInit {
       rejectLabel: this.tranlslate.instant('GENERIC.IGNORE'),
       accept: () => {
         this.usersService.deleteUser(userId).subscribe(res => {
+          debugger
           if (res.isSuccess) {
             this.getUsers()
           }

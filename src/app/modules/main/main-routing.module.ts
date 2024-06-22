@@ -52,6 +52,17 @@ const routes: Routes = [
         loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
       }
     ]
+  },
+  {
+    path: 'clinics',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        // canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../clinics/clinics.module').then(m => m.ClinicsModule)
+      }
+    ]
   }
 ];
 

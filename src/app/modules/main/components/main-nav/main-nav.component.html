@@ -25,7 +25,7 @@
       </mat-list-item>
 
       <mat-list-item routerLink="/main/users" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }">
+        [routerLinkActiveOptions]="{ exact: false }" *ngIf="authService.isAdmin()">
         <div class="nav-list-item">
           <fa-icon [icon]="faUsers" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.USERS' | translate}}</h3>
@@ -40,7 +40,7 @@
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="" class="list-item-custom" routerLinkActive="active-link"
+      <mat-list-item routerLink="/main/clinics" class="list-item-custom" routerLinkActive="active-link"
         [routerLinkActiveOptions]="{ exact: true }">
         <div class="nav-list-item">
           <fa-icon [icon]="faStethoscope" [size]="'lg'"></fa-icon>
@@ -49,18 +49,10 @@
       </mat-list-item>
 
       <mat-list-item routerLink="/main/specializations" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
+        [routerLinkActiveOptions]="{ exact: true }" *ngIf="authService.isAdmin()">
         <div class="nav-list-item">
           <fa-icon [icon]="faSitemap" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.SPECIALIZATIONS' | translate}}</h3>
-        </div>
-      </mat-list-item>
-
-      <mat-list-item class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        <div class="nav-list-item" (click)="Logout()">
-          <mat-icon class="side-nav-icon">lock</mat-icon>
-          <h3 *ngIf="isExpanded">Logout</h3>
         </div>
       </mat-list-item>
     </mat-nav-list>
@@ -77,6 +69,13 @@
           <div class="col-md-4">
             <div class="logo">
               <img src="../../../../../assets/images/logo.png" alt="">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="nav-list-item justify-content-center" (click)="Logout()">
+              <fa-icon [icon]="faUserTie" [size]="'lg'" class="avatar"></fa-icon>
+              <h3 *ngIf="isExpanded">{{authService.getUserName()}}</h3>
+              <fa-icon [icon]="faCaretDown" [size]="'lg'" class=""></fa-icon>
             </div>
           </div>
         </div>

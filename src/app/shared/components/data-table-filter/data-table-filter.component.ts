@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
+import { DataGridDdlsService } from 'src/app/core/services/dataGrid/data-grid-ddls.service';
 
 @Component({
   selector: 'app-data-table-filter',
@@ -23,7 +24,8 @@ export class DataTableFilterComponent implements OnInit {
   filtersCount: number = 0
   faChevronUp = faChevronUp
   faChevronDown = faChevronDown
-  constructor() { }
+
+  constructor(private dataGridDdlsService: DataGridDdlsService) { }
 
   ngOnInit() {
     this.createFiltersForm()
@@ -41,12 +43,19 @@ export class DataTableFilterComponent implements OnInit {
   createFiltersForm() {
     for (let i = 0; i < this.filters.length; i++) {
       this.filtersForm.addControl(this.filters[i].controlName, new FormControl())
+      if (this.filters[i].type == this.filterTypes.dropdown) {
+        this.getFilterDDL(this.filters[i])
+      }
     }
 
   }
 
-  getFilterDDL() {
-
+  getFilterDDL(filter: DataGridFilter) {
+    this.dataGridDdlsService.getDropdownData(filter.dataApi).subscribe(res => {
+      if (res.isSuccess) {
+        this.filtersDDLs.set(filter.controlName, res.data)
+      }
+    })
   }
 
   filterData() {
@@ -55,6 +64,30 @@ export class DataTableFilterComponent implements OnInit {
       if (this.filtersForm.get(filter.controlName)?.value) {
         if (filter.type == this.filterTypes.text || filter.type == this.filterTypes.number) {
           this.filteredData = this.filteredData.filter(row => row[filter.controlName].includes(this.filtersForm.get(filter.controlName)?.value))
+        } else if (filter.type == this.filterTypes.dropdown) {
+          debugger
+          //multi select & single value
+          if (filter.multiSelect && !filter.matchMulti) {
+            let filterValues = this.filtersForm.get(filter.controlName)?.value
+            this.filteredData = this.filteredData.filter(row => filterValues.includes(row[filter.matchWith]) || !filterValues.length)
+          }
+          //multi select & multiple values
+          if (filter.multiSelect && filter.matchMulti) {
+            let filterValues = this.filtersForm.get(filter.controlName)?.value
+            this.filteredData = this.filteredData.filter(row => {
+              return filterValues.filter((val: any) => row[filter.matchWith].includes(val)).length || !filterValues.length
+            })
+          }
+          //single select & single value
+          if (!filter.multiSelect && !filter.matchMulti) {
+            let filterValue = this.filtersForm.get(filter.controlName)?.value
+            this.filteredData = this.filteredData.filter(row => row[filter.matchWith] == filterValue)
+          }
+          //single select & multiple values
+          if (!filter.multiSelect && !filter.matchMulti) {
+            let filterValue = this.filtersForm.get(filter.controlName)?.value
+            this.filteredData = this.filteredData.filter(row => row[filter.matchWith].includes(filterValue))
+          }
         }
       }
     }

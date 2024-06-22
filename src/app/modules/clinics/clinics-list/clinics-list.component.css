@@ -1,0 +1,35 @@
+.clinics_table {
+    width: 100%;
+    border: 1px solid #c8c8c8;
+}
+
+.clinics_table tr:nth-child(even) {
+    background-color: #bcf8cc;
+}
+
+.clinics_table th {
+    background: #349F51;
+    border-bottom: 1px solid #c8c8c8;
+    border-left: 1px solid #c8c8c8;
+    color: #fff;
+    padding: 0.571rem 0.857rem;
+    font-family: "Cairo", sans-serif !important;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.clinics_table td {
+    border-bottom: 1px solid #c8c8c8;
+    border-left: 1px solid #c8c8c8;
+    padding: 0.571rem 0.857rem;
+}
+
+.clinics_table td:last-child {
+    border-left: none;
+}
+
+.accordion_header {
+    width: 100%;
+    align-items: center;
+    color: #fff;
+}

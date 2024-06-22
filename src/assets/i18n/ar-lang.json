@@ -15,7 +15,8 @@
         "CONFIRMATION": "تأكيد",
         "CLOSE": "إغلاق",
         "NO": "لا",
-        "YES": "نعم"
+        "YES": "نعم",
+        "REPEATED_NAME": "لا يمكن تكرار الاسم"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
@@ -48,5 +49,25 @@
         "USER_PASSWORD": "كلمة السر",
         "EDIT_USER_TITLE": "تعديل مستخدم",
         "ADD_USER_TITLE": "إضافة مستخدم"
+    },
+    "SPECIALIZATIONS": {
+        "SPEC_NAME": "اسم التخصص",
+        "SUB_SPEC_NAME": "اسم التخصص الفرعي",
+        "ADD_SPECIALIZATION_TITLE": "إضافة تخصص",
+        "EDIT_SPECIALIZATION_TITLE": "تعديل تخصص",
+        "ADDED_SUB_SPECS": "التخصصات الفرعية المضافة"
+    },
+    "CLINICS": {
+        "ADD_CLINIC_DOCTOR_BTN": "إضافة طبيب",
+        "VISIT_PRICE": "سعر الكشف",
+        "ACCEPT_INSURANCE": "يقبل التأمين",
+        "FREE_VISIT_FOLLOWUP": "استشارة مجانية",
+        "FREE_OPERATION_FOLLOWUP": "متابعة عملية مجانية",
+        "CLINIC": "اسم العيادة",
+        "AGE_FROM": "سن الكشف من",
+        "AGE_TO": "سن الكشف إلى",
+        "NOTES": "ملاحظات",
+        "ADD_CLINIC_TITLE": "إضافة عيادة",
+        "EDIT_CLINIC_TITLE": "تعديل عيادة"
     }
 }

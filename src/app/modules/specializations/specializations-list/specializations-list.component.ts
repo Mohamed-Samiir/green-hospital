@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
 import { DataGridAction } from 'src/app/core/interfaces/data-grid-action';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
 import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
 import { Specialization } from 'src/app/core/interfaces/specialization';
 import { SpecializationsService } from 'src/app/core/services/specializations/specializations.service';
+import { AddSpecializationComponent } from '../add-specialization/add-specialization.component';
+import { ConfirmationService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-specializations-list',
@@ -16,8 +19,15 @@ export class SpecializationsListComponent implements OnInit {
   specializationsList: Specialization[] = []
   gridData: any[] = []
   filterTypes = FilterTypes
+  isShowAddDialog: boolean = false
+  selectedSpecForEdit: Specialization | undefined
+  isEdit: boolean = false
 
-  constructor(private specializationsService: SpecializationsService) { }
+  @ViewChild(AddSpecializationComponent) addSpecComponent!: AddSpecializationComponent
+
+  constructor(private specializationsService: SpecializationsService,
+    private confirmationService: ConfirmationService,
+    private tranlslate: TranslateService) { }
 
   gridColumns: DataGridColumn[] = [
     {
@@ -46,7 +56,7 @@ export class SpecializationsListComponent implements OnInit {
   ]
 
   gridActions: DataGridAction = {
-    showDetails: true,
+    showDetails: false,
     showDelete: true,
     showEdit: true,
   }
@@ -72,23 +82,49 @@ export class SpecializationsListComponent implements OnInit {
   }
 
   setFilteredData(filteredData: any[]) {
-
+    this.gridData = filteredData
   }
 
   showAddDialog() {
-
+    this.isShowAddDialog = true
   }
 
-  onShowDetails(id: any) {
-
+  hideAddDialog() {
+    this.isShowAddDialog = false
+    this.selectedSpecForEdit = undefined
+    this.isEdit = false
+    this.addSpecComponent.resetAddForm()
   }
 
   openEditPopup(id: any) {
-
+    this.isEdit = true
+    let selectedSpecialization = this.specializationsList.find(spec => spec._id == id)
+    if (selectedSpecialization) {
+      this.selectedSpecForEdit = selectedSpecialization
+      this.showAddDialog()
+    }
   }
 
-  openDeleteConfirmation(id: any) {
+  openDeleteConfirmation(specId: string) {
+    let selectedSpec = this.specializationsList.find(spec => spec._id == specId)
+    this.confirmationService.confirm({
+      key: "confirmDelete",
+      message: `${this.tranlslate.instant('GENERIC.DELETE_MSG')} ${selectedSpec?.name}`,
+      acceptLabel: this.tranlslate.instant('GENERIC.CONFIRM'),
+      rejectLabel: this.tranlslate.instant('GENERIC.IGNORE'),
+      accept: () => {
+        this.specializationsService.deleteSpecialization(specId).subscribe(res => {
+          if (res.isSuccess) {
+            this.getSpecializations()
+          }
+        })
+      }
+    });
+  }
 
+  onAddSpecialization() {
+    this.hideAddDialog()
+    this.getSpecializations()
   }
 
 }

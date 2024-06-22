@@ -8,6 +8,7 @@ import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 import { AddDoctorComponent } from '../add-doctor/add-doctor.component';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-doctors-list',
@@ -18,6 +19,7 @@ export class DoctorsListComponent implements OnInit {
 
   doctorsList: DoctorModel[] = []
   gridData: any[] = []
+  filterData: any[] = []
   isShowAddDialog: boolean = false
   isShowDetailsDialog: boolean = false
   filterTypes = FilterTypes
@@ -60,6 +62,28 @@ export class DoctorsListComponent implements OnInit {
       controlName: "degree",
       label: "الدرجة العلمية",
       type: this.filterTypes.text
+    },
+    {
+      controlName: "specialization",
+      label: "التخصص الرئيسي",
+      type: this.filterTypes.dropdown,
+      dataApi: "specializations/getSpecializations",
+      optionValue: "_id",
+      optionLabel: "name",
+      multiSelect: true,
+      matchWith: "specializationId",
+      matchMulti: false
+    },
+    {
+      controlName: "subSpecializations",
+      label: "التخصصات الفرعية",
+      type: this.filterTypes.dropdown,
+      dataApi: "specializations/getSubSpecializations",
+      optionValue: "_id",
+      optionLabel: "name",
+      multiSelect: true,
+      matchWith: "subSpecializationsIds",
+      matchMulti: true
     }
   ]
 
@@ -72,7 +96,7 @@ export class DoctorsListComponent implements OnInit {
   constructor(
     private doctorsService: DoctorsService,
     private confirmationService: ConfirmationService,
-    private tranlslate: TranslateService
+    private tranlslate: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -87,10 +111,14 @@ export class DoctorsListComponent implements OnInit {
           let modifiedDoctor = {
             ...doc,
             specialization: doc.specialization.name,
-            subSpecializations: doc.subSpecializations.map((subSpec: any) => subSpec.name)
+            specializationId: doc.specialization._id,
+            subSpecializations: doc.subSpecializations.map((subSpec: any) => subSpec.name),
+            subSpecializationsIds: doc.subSpecializations.map((subSpec: any) => subSpec._id)
           }
           return modifiedDoctor
         })
+
+        this.filterData = [...this.gridData]
       }
     })
   }

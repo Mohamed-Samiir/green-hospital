@@ -3,5 +3,9 @@ export interface DataGridFilter {
     controlName: string,
     type: number,
     dataApi?: string,
-    multiSelect?: boolean
+    multiSelect?: boolean,
+    optionValue?: string,
+    optionLabel?: string,
+    matchMulti?: boolean,
+    matchWith?: string,
 }

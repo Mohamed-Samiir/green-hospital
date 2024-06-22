@@ -13,7 +13,7 @@
     background-color: #fff;
 }
 
-.filter_container_expanded{
+.filter_container_expanded {
     padding: 10px 20px 20px 20px;
 }
 
@@ -59,6 +59,7 @@
 .form_group {
     position: relative;
 }
+
 
 .control_label {
     font-size: 14px;

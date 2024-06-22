@@ -18,6 +18,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AccordionModule } from 'primeng/accordion';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { AccordionModule } from 'primeng/accordion';
     MultiSelectModule,
     TooltipModule,
     ConfirmDialogModule,
-    AccordionModule
+    AccordionModule,
+    InputTextareaModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
@@ -58,7 +60,8 @@ import { AccordionModule } from 'primeng/accordion';
     MultiSelectModule,
     TooltipModule,
     ConfirmDialogModule,
-    AccordionModule
+    AccordionModule,
+    InputTextareaModule
   ],
   providers: [TranslateService, ConfirmationService]
 })

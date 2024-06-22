@@ -7,8 +7,20 @@
     <div class="row">
       <app-data-grid [columns]="gridColumns" [data]="gridData" [actions]="gridActions"
         (onShowAddClick)="showAddDialog()" (onEditClick)="openEditPopup($event)"
-        (onDetailsClick)="onShowDetails($event)" (onDeleteClick)="openDeleteConfirmation($event)">
+        (onDeleteClick)="openDeleteConfirmation($event)">
       </app-data-grid>
     </div>
   </div>
 </div>
+
+<p-dialog [(visible)]="isShowAddDialog" [style]="{width: '70vw'}" [modal]="true"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" (onHide)="hideAddDialog()" #addSpec
+  [header]="(isEdit? 'SPECIALIZATIONS.EDIT_SPECIALIZATION_TITLE' : 'SPECIALIZATIONS.ADD_SPECIALIZATION_TITLE') | translate">
+  <app-add-specialization (onAddSpec)="onAddSpecialization()" (onIgnore)="hideAddDialog()"
+    [selectedSpec]="selectedSpecForEdit">
+  </app-add-specialization>
+</p-dialog>
+
+<p-confirmDialog key="confirmDelete" [header]="'GENERIC.CONFIRMATION' | translate"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+</p-confirmDialog>

@@ -4,4 +4,5 @@ export interface DataGridColumn {
     field: string;
     header: string;
     type: GridColumnTypes;
+    unitField?: string;
 }

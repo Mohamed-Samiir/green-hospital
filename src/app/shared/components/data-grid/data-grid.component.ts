@@ -3,6 +3,7 @@ import { DataGridAction } from 'src/app/core/interfaces/data-grid-action';
 import { DataGridColumn } from 'src/app/core/interfaces/data-grid-column';
 import { faEye, faPenToSquare, faTrashCan, faLock } from '@fortawesome/free-solid-svg-icons';
 import { GridColumnTypes } from 'src/app/core/enums/grid-column-types.enum';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-data-grid',
@@ -26,7 +27,9 @@ export class DataGridComponent implements OnInit {
   faTrashCan = faTrashCan
   faLock = faLock
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
   }

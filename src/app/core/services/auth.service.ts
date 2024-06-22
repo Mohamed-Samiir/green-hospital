@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ILoginUser } from '../interfaces/ilogin-user';
 import { IResetPassword } from '../interfaces/iResetPassword';
 import { BaseResponseModel } from '../ng-model/base-response-model';
+import { UserModel } from '../interfaces/users/userModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,15 @@ export class AuthService {
 
   public isLoggedIn() {
     return localStorage.getItem("id_token") === null ? false : true
+  }
+
+  isAdmin(): boolean {
+    let user = JSON.parse(localStorage.getItem("User")) as UserModel
+    return user.isAdmin
+  }
+
+  getUserName() {
+    let user = JSON.parse(localStorage.getItem("User")) as UserModel
+    return user.name
   }
 }
