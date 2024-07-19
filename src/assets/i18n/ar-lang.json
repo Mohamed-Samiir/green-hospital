@@ -16,14 +16,23 @@
         "CLOSE": "إغلاق",
         "NO": "لا",
         "YES": "نعم",
-        "REPEATED_NAME": "لا يمكن تكرار الاسم"
+        "REPEATED_NAME": "لا يمكن تكرار الاسم",
+        "RESET_FILTERS": "تفريغ المدخلات",
+        "SAVE_SHORTCUT": "حفظ الاختصار",
+        "NO_DATA": "لا توجد بيانات",
+        "ADD_SUCCESS": "تمت الإضافة بنجاح",
+        "EDIT_SUCCESS": "تم التعديل بنجاح",
+        "DELETE_SUCCESS": "تم الحذف بنجاح"
     },
     "NAVICATION": {
         "DASHBOARD": "الرئيسية",
         "DOCTORS": "الأطباء",
         "CLINICKS": "العيادات",
         "SPECIALIZATIONS": "التخصصات",
-        "USERS": "المستخدمين"
+        "USERS": "المستخدمين",
+        "DEPARTMENTS": "الأقسام",
+        "PROCEDURES": "الإجراءات",
+        "QUESTIONS": "اسألني؟"
     },
     "LOGIN": {
         "LOGO_TEXT": "بنك معلومات خدمة العملاء"
@@ -69,5 +78,33 @@
         "NOTES": "ملاحظات",
         "ADD_CLINIC_TITLE": "إضافة عيادة",
         "EDIT_CLINIC_TITLE": "تعديل عيادة"
+    },
+    "FILTER": {
+        "FILTER_NAME": "اسم الاختصار",
+        "ADD_SHORTCUT": "إضافة اختصار"
+    },
+    "DEPARTMENTS": {
+        "DEPARTMENT_NAME": "الاسم",
+        "CONTACT_PERIOD": "فترات العمل",
+        "ALLOW_CONTACT": "مسموح الاتصال",
+        "PHONE_NUMBER": "رقم التواصل",
+        "ADD_DEPARTMENT": "إضافة قسم",
+        "EDIT_DEPARTMENT": "تعديل قسم"
+    },
+    "PROCEDURES": {
+        "ADD_PROCEDURE": "إضافة إجراء",
+        "EDIT_PROCEDURE": "تعديل إجراء",
+        "PROCEDURE_NAME": "اسم الإجراء",
+        "PROCEDURE_PRICE": "سعر الإجراء",
+        "PROCEDURE_DOCTORS": "الأطباء",
+        "ACCEPT_INSURANCE": "يقبل التأمين",
+        "AGE_FROM": "سن الإجراء من",
+        "AGE_TO": "سن الإجراء إلى"
+    },
+    "QUESTIONS": {
+        "ADD_QUESTION": "إضافة سؤال",
+        "EDIT_QUESTION": "تعديل سؤال",
+        "QUESTION_TITLE": "السؤال",
+        "QUESTION_ANSWER": "الإجابة"
     }
 }

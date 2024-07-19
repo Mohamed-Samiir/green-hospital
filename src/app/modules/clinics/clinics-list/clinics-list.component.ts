@@ -13,6 +13,7 @@ import { ClinicDoctor } from 'src/app/core/interfaces/clinic-doctor';
 import { faEye, faPenToSquare, faTrashCan, faLock } from '@fortawesome/free-solid-svg-icons';
 import { ClinicDoctorService } from 'src/app/core/services/clinics/clinic-doctor.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 
 @Component({
   selector: 'app-clinics-list',
@@ -23,6 +24,7 @@ export class ClinicsListComponent implements OnInit {
 
   clinicsList: Clinic[] = []
   gridData: any[] = []
+  filterData: any[] = []
   isShowAddClinicDialog: boolean = false
   isShowDetailsDialog: boolean = false
   isShowAddDoctorDialog: boolean = false
@@ -45,8 +47,8 @@ export class ClinicsListComponent implements OnInit {
     public confirmationService: ConfirmationService,
     private tranlslate: TranslateService,
     private clinicDoctorService: ClinicDoctorService,
-    public authService: AuthService
-
+    public authService: AuthService,
+    private alertify: AlertifyService,
   ) { }
 
   gridColumns: DataGridColumn[] = [
@@ -68,11 +70,6 @@ export class ClinicsListComponent implements OnInit {
     {
       header: "استشارة مجانية",
       field: "freeVisitFollowup",
-      type: 3
-    },
-    {
-      header: "متابعة عملية مجانية",
-      field: "freeOperationFollowup",
       type: 3
     },
     {
@@ -101,14 +98,15 @@ export class ClinicsListComponent implements OnInit {
       type: this.filterTypes.text
     },
     {
-      controlName: "specialization",
-      label: "التخصص",
-      type: this.filterTypes.text
-    },
-    {
-      controlName: "doctor",
-      label: "التخصص",
-      type: this.filterTypes.text
+      controlName: "doctors",
+      label: "الأطباء",
+      type: this.filterTypes.dropdown,
+      dataApi: "doctors/getDoctors",
+      multiSelect: true,
+      matchMulti: true,
+      matchWith: "doctorIds",
+      optionLabel: "name",
+      optionValue: "_id"
     }
   ]
 
@@ -146,12 +144,13 @@ export class ClinicsListComponent implements OnInit {
             ...clinic,
             doctors: clinic.doctors.map((doc: any) => {
               return { ...doc, doctor: doc.doctor.name, doctorId: doc.doctor._id }
-            })
+            }),
+            doctorIds: clinic.doctors.map((doc: any) => doc.doctor._id)
           }
 
           return modifiedClinic
         })
-        console.log(this.gridData[0].doctors);
+        this.filterData = [...this.gridData]
       }
     })
   }
@@ -168,7 +167,7 @@ export class ClinicsListComponent implements OnInit {
     this.isShowAddClinicDialog = false
     this.selectedClinicForEdit = undefined
     this.isEdit = false
-    // this.addDoctorComponent.resetAddForm()
+    this.addDoctorComponent.resetAddForm()
   }
 
   onAddClinic(event: any) {
@@ -189,23 +188,6 @@ export class ClinicsListComponent implements OnInit {
       this.showAddClinicDialog()
     }
 
-  }
-
-  openDeleteConfirmation(clinicId: string) {
-    let selectedClinic = this.clinicsList.find(doc => doc._id == clinicId)
-    this.confirmationService.confirm({
-      key: "confirmDelete",
-      message: `${this.tranlslate.instant('GENERIC.DELETE_MSG')} ${selectedClinic?.name}`,
-      acceptLabel: this.tranlslate.instant('GENERIC.CONFIRM'),
-      rejectLabel: this.tranlslate.instant('GENERIC.IGNORE'),
-      accept: () => {
-        this.clinicsService.deleteClinic(clinicId).subscribe(res => {
-          if (res.isSuccess) {
-            this.getClinicsList()
-          }
-        })
-      }
-    });
   }
 
   hideDetailsDialog() {
@@ -252,7 +234,7 @@ export class ClinicsListComponent implements OnInit {
   }
 
   deleteClinicDoctor(clinicDoctor: ClinicDoctor) {
-    debugger
+
     this.confirmationService.confirm({
       key: "confirmDelete",
       message: `${this.tranlslate.instant('GENERIC.DELETE_MSG')} ${clinicDoctor?.doctor}`,
@@ -276,7 +258,7 @@ export class ClinicsListComponent implements OnInit {
 
   deleteClinic(e: any, clinic: any) {
     e.stopPropagation()
-    debugger
+
     this.confirmationService.confirm({
       key: "confirmDelete",
       message: `${this.tranlslate.instant('GENERIC.DELETE_MSG')} ${clinic?.name}`,
@@ -285,7 +267,10 @@ export class ClinicsListComponent implements OnInit {
       accept: () => {
         this.clinicsService.deleteClinic(clinic._id).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.tranlslate.instant('GENERIC.DELETE_SUCCESS'))
             this.getClinicsList()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

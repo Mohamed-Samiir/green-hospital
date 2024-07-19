@@ -20,8 +20,22 @@ export class DataGridComponent implements OnInit {
   @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>()
   @Output() onDetailsClick: EventEmitter<string> = new EventEmitter<string>()
 
-  gridColumnTypes = GridColumnTypes
+  ageUnits = [
+    {
+      id: 1,
+      name: "يوم"
+    },
+    {
+      id: 2,
+      name: "شهر"
+    },
+    {
+      id: 3,
+      name: "سنة"
+    }
+  ]
 
+  gridColumnTypes = GridColumnTypes
   faEye = faEye
   faPenToSquare = faPenToSquare
   faTrashCan = faTrashCan
@@ -48,6 +62,16 @@ export class DataGridComponent implements OnInit {
 
   emitDeleteAction(rowId: string) {
     this.onDeleteClick.emit(rowId)
+  }
+
+  getUnitName(unitId: number) {
+    if (unitId) {
+      let unitName = this.ageUnits.find(unit => unit.id == unitId)
+      if (unitName)
+        return unitName.name
+    }
+
+    return null
   }
 
 }

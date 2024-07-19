@@ -8,6 +8,7 @@ import { SpecializationsService } from 'src/app/core/services/specializations/sp
 import { AddSpecializationComponent } from '../add-specialization/add-specialization.component';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 
 @Component({
   selector: 'app-specializations-list',
@@ -27,7 +28,9 @@ export class SpecializationsListComponent implements OnInit {
 
   constructor(private specializationsService: SpecializationsService,
     private confirmationService: ConfirmationService,
-    private tranlslate: TranslateService) { }
+    private tranlslate: TranslateService,
+    private alertify: AlertifyService,
+  ) { }
 
   gridColumns: DataGridColumn[] = [
     {
@@ -115,7 +118,10 @@ export class SpecializationsListComponent implements OnInit {
       accept: () => {
         this.specializationsService.deleteSpecialization(specId).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.tranlslate.instant('GENERIC.DELETE_SUCCESS'))
             this.getSpecializations()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Clinic } from 'src/app/core/interfaces/clinic';
 import { ClinicDoctor } from 'src/app/core/interfaces/clinic-doctor';
 import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { ClinicDoctorService } from 'src/app/core/services/clinics/clinic-doctor.service';
 
 @Component({
@@ -37,7 +39,9 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private doctorsService: DoctorsService,
-    private clinicDoctorService: ClinicDoctorService
+    private clinicDoctorService: ClinicDoctorService,
+    private alertify: AlertifyService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -46,8 +50,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedDoctor'].currentValue) {
-      debugger
+    if (changes['selectedDoctor']?.currentValue) {
       this.addDoctorFormGroup.patchValue(changes['selectedDoctor'].currentValue)
       this.f['doctor'].setValue(changes['selectedDoctor'].currentValue.doctorId)
       this.f['doctor'].disable()
@@ -61,7 +64,6 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
       price: [null, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(0)]],
       acceptInsurance: [true],
       freeVisitFollowup: [true],
-      freeOperationFollowup: [true],
       ageFrom: [1, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(1), Validators.max(100)]],
       ageFromUnit: [3, [Validators.required]],
       ageTo: [1, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(1), Validators.max(100)]],
@@ -78,19 +80,23 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
     this.f['clinic'].setValue(this.clinic._id)
     if (this.addDoctorFormGroup.valid) {
       if (this.selectedDoctor) {
-        debugger
-
         this.clinicDoctorService.editClinicDoctor(this.selectedDoctor._id, this.addDoctorFormGroup.getRawValue()).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
             this.onAddClinicDoctor.emit(res.data)
             this.resetAddForm()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       } else {
         this.clinicDoctorService.addClinicDoctor(this.addDoctorFormGroup.getRawValue()).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
             this.onAddClinicDoctor.emit(res.data)
             this.resetAddForm()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <app-data-table-filter [filters]="gridFilters" [data]="clinicsList"
+    <app-data-table-filter [filters]="gridFilters" [data]="filterData"
       (getFilteredData)="setFilteredData($event)"></app-data-table-filter>
   </div>
   <div class="row">
-    <div class="col-3 pb-2" *ngIf="authService.isAdmin()">
+    <div class="col-12 d-flex justify-content-end pb-2" *ngIf="authService.isAdmin()">
       <p-button type="button" icon="pi pi-plus" label="إضافة عيادة" iconPos="right" styleClass="grid_add_btn"
         (click)="showAddClinicDialog()">
       </p-button>

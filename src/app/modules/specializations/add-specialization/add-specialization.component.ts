@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Specialization } from 'src/app/core/interfaces/specialization';
 import { SubSpecialization } from 'src/app/core/interfaces/sub-specialization';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { SpecializationsService } from 'src/app/core/services/specializations/specializations.service';
 
 @Component({
@@ -21,7 +23,12 @@ export class AddSpecializationComponent implements OnInit, OnChanges {
   @Output() onAddSpec: EventEmitter<any> = new EventEmitter<any>()
   @Output() onIgnore: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor(private fb: FormBuilder, private specializationsService: SpecializationsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private specializationsService: SpecializationsService,
+    private alertify: AlertifyService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.buildForm()
@@ -90,17 +97,23 @@ export class AddSpecializationComponent implements OnInit, OnChanges {
         if (this.selectedSpec) {
           this.specializationsService.editSpecialization(this.selectedSpec._id, model).subscribe(res => {
             if (res.isSuccess) {
+              this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
               this.onAddSpec.emit()
               this.addSpecFormGroup.reset()
               this.subSpecs = []
+            } else {
+              this.alertify.error(res.message)
             }
           })
         } else {
           this.specializationsService.addSpecialization(model).subscribe(res => {
             if (res.isSuccess) {
+              this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
               this.onAddSpec.emit()
               this.addSpecFormGroup.reset()
               this.subSpecs = []
+            } else {
+              this.alertify.error(res.message)
             }
           })
         }

@@ -17,7 +17,7 @@
 }
 
 .tripta-logo {
-    width: 100%;
+    width: 50%;
     text-align: center;
 }
 
@@ -25,11 +25,10 @@
     width: 60%;
 }
 
-.tripta-logo p {
+.slogan p {
     font-size: 22px;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    color: #349F51;
+    color: #fff;
     margin-top: 20px;
 }
 
@@ -42,8 +41,9 @@
 
 .submit-btn {
     margin-top: 30px;
-    color: #330534;
-    font-weight: 500;
+    /* color: #330534; */
+    color: #fff;
+    font-weight: 700;
     text-align: center;
 }
 
@@ -51,6 +51,8 @@
     border: 1px solid #349F51;
     width: 50%;
     background: none;
+    color: #fff;
+    font-weight: 700;
 }
 
 .company-name {
@@ -76,12 +78,25 @@
 .login_card {
     padding: 17px;
     border-radius: 12px;
-    background-color: #fff;
+    /* background-color: #fff; */
     width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_card form {
+    width: 100%;
+    direction: rtl;
 }
 
 .login_form_container {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    /* background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%); */
+    /* background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%); */
+    /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
 }

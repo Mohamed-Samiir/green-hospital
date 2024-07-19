@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard],
         loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
@@ -26,7 +26,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard],
         loadChildren: () => import('../doctors/doctors.module').then(m => m.DoctorsModule)
       }
     ]
@@ -37,7 +37,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard],
         loadChildren: () => import('../specializations/specializations.module').then(m => m.SpecializationsModule)
       }
     ]
@@ -48,7 +48,7 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard],
         loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
       }
     ]
@@ -59,8 +59,41 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard],
         loadChildren: () => import('../clinics/clinics.module').then(m => m.ClinicsModule)
+      }
+    ]
+  },
+  {
+    path: 'departments',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../departments/departments.module').then(m => m.DepartmentsModule)
+      }
+    ]
+  },
+  {
+    path: 'procedures',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../procedures/procedures.module').then(m => m.ProceduresModule)
+      }
+    ]
+  },
+  {
+    path: 'questions',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../questions/questions.module').then(m => m.QuestionsModule)
       }
     ]
   }

@@ -19,6 +19,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AccordionModule } from 'primeng/accordion';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MatMenuModule } from '@angular/material/menu';
+import { AddShortcutComponent } from './components/add-shortcut/add-shortcut.component';
 
 @NgModule({
   imports: [
@@ -37,13 +39,15 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     TooltipModule,
     ConfirmDialogModule,
     AccordionModule,
-    InputTextareaModule
+    InputTextareaModule,
+    MatMenuModule
   ],
   declarations: [
     EmptyPlaceholderComponent,
     MinValueValidatorDirective,
     DataGridComponent,
-    DataTableFilterComponent
+    DataTableFilterComponent,
+    AddShortcutComponent
   ],
   exports: [
     EmptyPlaceholderComponent,
@@ -61,7 +65,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     TooltipModule,
     ConfirmDialogModule,
     AccordionModule,
-    InputTextareaModule
+    InputTextareaModule,
+    MatMenuModule
   ],
   providers: [TranslateService, ConfirmationService]
 })

@@ -16,8 +16,7 @@
         </div>
       </mat-list-item> -->
 
-      <mat-list-item routerLink="/main/dashboard" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }">
+      <mat-list-item routerLink="/main/dashboard" class="list-item-custom" routerLinkActive="active-link">
         <div class="nav-list-item">
           <fa-icon [icon]="faHouseUser" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.DASHBOARD' | translate}}</h3>
@@ -25,23 +24,21 @@
       </mat-list-item>
 
       <mat-list-item routerLink="/main/users" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: false }" *ngIf="authService.isAdmin()">
+        *ngIf="authService.isAdmin()">
         <div class="nav-list-item">
           <fa-icon [icon]="faUsers" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.USERS' | translate}}</h3>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="/main/doctors" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
+      <mat-list-item routerLink="/main/doctors" class="list-item-custom" routerLinkActive="active-link">
         <div class="nav-list-item">
           <fa-icon [icon]="faUserDoctor" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.DOCTORS' | translate}}</h3>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="/main/clinics" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
+      <mat-list-item routerLink="/main/clinics" class="list-item-custom" routerLinkActive="active-link">
         <div class="nav-list-item">
           <fa-icon [icon]="faStethoscope" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.CLINICKS' | translate}}</h3>
@@ -49,10 +46,31 @@
       </mat-list-item>
 
       <mat-list-item routerLink="/main/specializations" class="list-item-custom" routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }" *ngIf="authService.isAdmin()">
+        *ngIf="authService.isAdmin()">
         <div class="nav-list-item">
           <fa-icon [icon]="faSitemap" [size]="'lg'"></fa-icon>
           <h3 *ngIf="isExpanded">{{'NAVICATION.SPECIALIZATIONS' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/main/departments" class="list-item-custom" routerLinkActive="active-link">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faPeopleRoof" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.DEPARTMENTS' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/main/procedures" class="list-item-custom" routerLinkActive="active-link">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faBedPulse" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.PROCEDURES' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/main/questions" class="list-item-custom" routerLinkActive="active-link">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faPersonCircleQuestion" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.QUESTIONS' | translate}}</h3>
         </div>
       </mat-list-item>
     </mat-nav-list>
@@ -63,7 +81,7 @@
         <div class="row">
           <div class="col-md-4">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleExpandNav()">
-              <mat-icon class="toggle_icon" aria-label="Side nav toggle icon">menu</mat-icon>
+              <fa-icon [icon]="faBars" [size]="'lg'" class="menu_btn"></fa-icon>
             </button>
           </div>
           <div class="col-md-4">
@@ -72,10 +90,18 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="nav-list-item justify-content-center" (click)="Logout()">
-              <fa-icon [icon]="faUserTie" [size]="'lg'" class="avatar"></fa-icon>
-              <h3 *ngIf="isExpanded">{{authService.getUserName()}}</h3>
-              <fa-icon [icon]="faCaretDown" [size]="'lg'" class=""></fa-icon>
+            <div class="nav-list-item justify-content-end">
+              <fa-icon [icon]="faUserTie" [size]="'lg'" class="avatar" [matMenuTriggerFor]="menu"></fa-icon>
+              <h3>{{authService.getUserName()}}</h3>
+              <button mat-icon-button [matMenuTriggerFor]="menu" class="menu_btn">
+                <fa-icon [icon]="faCaretDown" [size]="'lg'"></fa-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="Logout()" class="logout_btn">
+                  <fa-icon [icon]="faRightFromBracket" [size]="'lg'" class="menu_btn"></fa-icon>
+                  <span>تسجيل الخروج</span>
+                </button>
+              </mat-menu>
             </div>
           </div>
         </div>

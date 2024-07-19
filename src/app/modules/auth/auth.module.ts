@@ -12,16 +12,12 @@ import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
     AuthComponent,
     LoginComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

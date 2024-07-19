@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Clinic } from 'src/app/core/interfaces/clinic';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { ClinicService } from 'src/app/core/services/clinics/clinic.service';
 
 @Component({
@@ -18,7 +20,9 @@ export class AddClinicComponent implements OnInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private clinicService: ClinicService
+    private clinicService: ClinicService,
+    private alertify: AlertifyService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -49,15 +53,21 @@ export class AddClinicComponent implements OnInit, OnChanges {
         }
         this.clinicService.editClinic(this.clinic._id, editClinicObj).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
             this.onAddClinic.emit(res.data)
             this.resetAddForm()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       } else {
         this.clinicService.addClinic(this.addClinicFormGroup.value).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
             this.onAddClinic.emit(res.data)
             this.resetAddForm()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }
@@ -72,7 +82,7 @@ export class AddClinicComponent implements OnInit, OnChanges {
   }
 
   resetAddForm() {
-    this.addClinicFormGroup.reset({ acceptInsurance: true, freeVisitFollowup: true, freeOperationFollowup: true })
+    this.addClinicFormGroup.reset({ acceptInsurance: true, freeVisitFollowup: true })
   }
 
 }

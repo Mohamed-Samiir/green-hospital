@@ -8,8 +8,8 @@
         <span>محددات بحث</span>
       </div>
       <div class="toggler" (click)="toggleFilters()">
-        <fa-icon [icon]="faChevronDown" *ngIf="isExpanded"></fa-icon>
-        <fa-icon [icon]="faChevronUp" *ngIf="!isExpanded"></fa-icon>
+        <fa-icon [icon]="faChevronDown" *ngIf="!isExpanded"></fa-icon>
+        <fa-icon [icon]="faChevronUp" *ngIf="isExpanded"></fa-icon>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
       <form (submit)="saveFilters()" [formGroup]="filtersForm" class="form-group">
         <div class="row">
           <ng-container *ngFor="let filter of filters">
-            <div class="col-3 form_group" *ngIf="filter.type == filterTypes.text">
+            <div class="col-3 form_group" *ngIf="filter.type == filterTypes.text || filter.type == filterTypes.number">
               <label class="control_label" [for]="filter.controlName">{{filter.label}}</label>
               <input type="text" [formControlName]="filter.controlName" [name]="filter.controlName"
                 [id]="filter.controlName" class="form-control">
@@ -37,7 +37,25 @@
             </div>
           </ng-container>
         </div>
+        <div class="row form_btns">
+          <div class="col-3">
+            <button pButton type="button" [label]="'GENERIC.RESET_FILTERS' | translate"
+              class="p-button-danger p-button-outlined" (click)="clearFilters()"></button>
+          </div>
+          <div class="col-3">
+            <button pButton type="button" [label]="'GENERIC.SAVE_SHORTCUT' | translate" class="p-button-success"
+              (click)="showAddShortcutPopup()" [disabled]="!filtersCount"></button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
 </div>
+
+<p-dialog [(visible)]="isShowSaveFilterDialog" [style]="{width: '70vw'}" [modal]="true"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" (onHide)="hideSaveFilterDialog()" #addDoctor
+  [header]="'FILTER.ADD_SHORTCUT' | translate">
+  <app-add-shortcut (onAddShortsut)="onAddShortsut()" (onIgnore)="hideSaveFilterDialog()"
+    [currentFilters]="filtersToSave">
+  </app-add-shortcut>
+</p-dialog>

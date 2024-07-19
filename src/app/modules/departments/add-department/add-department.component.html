@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <form class="form-group" (submit)="Submit()" [formGroup]="addDepartmentFormGroup">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="name">{{'DEPARTMENTS.DEPARTMENT_NAME' | translate}}</label>
+        <input type="text" formControlName="name" name="name" class="form-control">
+        <div *ngIf="f['name'].errors && f['name'].touched" class="validation_msg">
+          <div *ngIf="f['name'].errors['required']">
+            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
+          </div>
+          <div *ngIf="f['name'].errors['pattern']">
+            {{ 'GENERIC.VALIDATION_ARABIC' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-8 form_group">
+        <label class="control_label" for="contactPeriods">{{'DEPARTMENTS.CONTACT_PERIOD' | translate}}</label>
+        <input type="text" formControlName="contactPeriods" name="contactPeriods" class="form-control">
+        <div *ngIf="f['contactPeriods'].errors && f['contactPeriods'].touched" class="validation_msg">
+          <div *ngIf="f['contactPeriods'].errors['required']">
+            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
+          </div>
+          <div *ngIf="f['contactPeriods'].errors['pattern']">
+            {{ 'GENERIC.VALIDATION_ARABIC' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
+        <p-checkbox formControlName="allowContact" [binary]="true"
+          [label]="'DEPARTMENTS.ALLOW_CONTACT' | translate"></p-checkbox>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-8 form_group with_btn mb-0">
+        <div class="input_container">
+          <label class="control_label" for="phoneNumber">{{'DEPARTMENTS.PHONE_NUMBER' | translate}}</label>
+          <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control"
+            (change)="changePhoneInput()">
+          <button type="button" pButton icon="pi pi-plus" iconPos="left" class="p-button-outlined p-button-success mr-1"
+            (click)="addPhoneNumber()"></button>
+        </div>
+        <div *ngIf="(f['phoneNumber'].errors || isRepeated) && f['phoneNumber'].touched" class="validation_msg">
+          <div *ngIf="f['phoneNumber']?.errors && f['phoneNumber']?.errors['pattern']!">
+            {{ 'GENERIC.VALIDATION_ARABIC' | translate }}
+          </div>
+          <div *ngIf="isRepeated">
+            {{ 'GENERIC.REPEATED_NAME' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-8">
+        <ul class="add_list">
+          <li class="added_item" *ngFor="let phone of phoneNumbers; let i = index">
+            <span class="item_name">
+              {{phone}}
+            </span>
+            <button pButton icon="pi pi-trash" iconPos="left" class="p-button-danger mr-1"
+              (click)="deletePhoneNumber(i)"></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row form_btns">
+      <div class="col-3">
+        <button pButton type="button" [label]="'GENERIC.IGNORE' | translate" class="p-button-danger p-button-outlined"
+          (click)="popupIgnor()"></button>
+      </div>
+      <div class="col-3">
+        <button pButton type="submit" [label]="'GENERIC.SAVE' | translate" class="p-button-success"></button>
+      </div>
+    </div>
+  </form>
+</div>

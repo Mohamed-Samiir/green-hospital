@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { UserModel } from 'src/app/core/interfaces/users/userModel';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
@@ -17,7 +19,12 @@ export class AddUserComponent implements OnInit, OnChanges {
   @Output() onAddUser: EventEmitter<any> = new EventEmitter<any>()
   @Output() onIgnore: EventEmitter<any> = new EventEmitter<any>()
 
-  constructor(private fb: FormBuilder, private usersService: UsersService) { }
+  constructor(
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private alertify: AlertifyService,
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
     this.buildForm()
@@ -59,15 +66,21 @@ export class AddUserComponent implements OnInit, OnChanges {
       if (this.selectedUser) {
         this.usersService.editUser(this.addUserFormGroup.value).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
             this.onAddUser.emit(res.data)
             this.addUserFormGroup.reset({ isActive: true })
+          } else {
+            this.alertify.error(res.message)
           }
         })
       } else {
         this.usersService.addUser(this.addUserFormGroup.value).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
             this.onAddUser.emit(res.data)
             this.addUserFormGroup.reset({ isActive: true })
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

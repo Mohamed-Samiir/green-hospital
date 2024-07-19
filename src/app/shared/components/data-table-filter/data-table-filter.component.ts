@@ -1,21 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DataGridFilter } from 'src/app/core/interfaces/data-grid-filter';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
 import { DataGridDdlsService } from 'src/app/core/services/dataGrid/data-grid-ddls.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-data-table-filter',
   templateUrl: './data-table-filter.component.html',
   styleUrls: ['./data-table-filter.component.css']
 })
-export class DataTableFilterComponent implements OnInit {
+export class DataTableFilterComponent implements OnInit, OnChanges {
 
   @Input() data: any[] = []
   @Input() filters: DataGridFilter[] = []
   @Output() getFilteredData: EventEmitter<any[]> = new EventEmitter<any[]>()
 
+  isShowSaveFilterDialog: boolean = false
+  filtersToSave: any[]
   filteredData: any[] = []
   filtersForm: FormGroup = new FormGroup({})
   filtersDDLs: Map<string, any[]> = new Map<string, any[]>()
@@ -25,7 +28,7 @@ export class DataTableFilterComponent implements OnInit {
   faChevronUp = faChevronUp
   faChevronDown = faChevronDown
 
-  constructor(private dataGridDdlsService: DataGridDdlsService) { }
+  constructor(private dataGridDdlsService: DataGridDdlsService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.createFiltersForm()
@@ -38,6 +41,13 @@ export class DataTableFilterComponent implements OnInit {
       }
       this.filterData()
     });
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'].currentValue) {
+      this.getFiltersFromUrl()
+    }
   }
 
   createFiltersForm() {
@@ -65,7 +75,6 @@ export class DataTableFilterComponent implements OnInit {
         if (filter.type == this.filterTypes.text || filter.type == this.filterTypes.number) {
           this.filteredData = this.filteredData.filter(row => row[filter.controlName].includes(this.filtersForm.get(filter.controlName)?.value))
         } else if (filter.type == this.filterTypes.dropdown) {
-          debugger
           //multi select & single value
           if (filter.multiSelect && !filter.matchMulti) {
             let filterValues = this.filtersForm.get(filter.controlName)?.value
@@ -73,6 +82,7 @@ export class DataTableFilterComponent implements OnInit {
           }
           //multi select & multiple values
           if (filter.multiSelect && filter.matchMulti) {
+
             let filterValues = this.filtersForm.get(filter.controlName)?.value
             this.filteredData = this.filteredData.filter(row => {
               return filterValues.filter((val: any) => row[filter.matchWith].includes(val)).length || !filterValues.length
@@ -95,7 +105,7 @@ export class DataTableFilterComponent implements OnInit {
   }
 
   clearFilters() {
-
+    this.filtersForm.reset()
   }
 
   saveFilters() {
@@ -108,6 +118,34 @@ export class DataTableFilterComponent implements OnInit {
 
   toggleFilters() {
     this.isExpanded = !this.isExpanded
+  }
+
+  showAddShortcutPopup() {
+    let filtersObjects: any[] = []
+
+    Object.keys(this.filtersForm.value).forEach(key => {
+      if (this.filtersForm.get(key).value) {
+        filtersObjects.push({ label: key, value: this.filtersForm.get(key).value })
+      }
+    })
+    this.filtersToSave = filtersObjects
+    this.isShowSaveFilterDialog = true
+  }
+
+  hideSaveFilterDialog() {
+    this.isShowSaveFilterDialog = false
+  }
+
+  onAddShortsut() {
+
+  }
+
+  getFiltersFromUrl() {
+    this.router.queryParams.subscribe(params => {
+      Object.keys(params).forEach(filter => {
+        this.filtersForm.get(filter).setValue(params[filter])
+      })
+    })
   }
 
 }

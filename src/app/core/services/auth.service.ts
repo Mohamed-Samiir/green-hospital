@@ -22,6 +22,7 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem("id_token")
+    localStorage.removeItem("User")
   }
 
   forgotPassword(email: string) {

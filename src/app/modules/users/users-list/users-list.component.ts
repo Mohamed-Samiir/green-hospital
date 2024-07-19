@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/core/services/users/users.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 
 @Component({
   selector: 'app-users-list',
@@ -28,7 +29,8 @@ export class UsersListComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private confirmationService: ConfirmationService,
-    public tranlslate: TranslateService
+    public tranlslate: TranslateService,
+    private alertify: AlertifyService,
   ) { }
 
   gridColumns: DataGridColumn[] = [
@@ -102,7 +104,7 @@ export class UsersListComponent implements OnInit {
   }
 
   openEditPopup(userId: string) {
-    debugger
+
     this.isEdit = true
     let selectedUser = this.usersList.find(user => user._id == userId)
     if (selectedUser) {
@@ -125,9 +127,11 @@ export class UsersListComponent implements OnInit {
       rejectLabel: this.tranlslate.instant('GENERIC.IGNORE'),
       accept: () => {
         this.usersService.deleteUser(userId).subscribe(res => {
-          debugger
           if (res.isSuccess) {
+            this.alertify.success(this.tranlslate.instant('GENERIC.DELETE_SUCCESS'))
             this.getUsers()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }
@@ -135,7 +139,7 @@ export class UsersListComponent implements OnInit {
   }
 
   onAddUser() {
-    debugger
+
     this.hideAddDialog()
     this.getUsers()
   }

@@ -314,7 +314,7 @@ mat-list-item {
 }
 
 .mat-toolbar.mat-primary {
-    z-index: 100 !important;
+    z-index: 1000 !important;
 }
 
 .mat-drawer.mat-drawer-side {
@@ -399,6 +399,11 @@ mat-list-item {
     }
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
 .p-dropdown .p-dropdown-clear-icon {
     right: 195px !important;
 }
@@ -427,6 +432,7 @@ mat-list-item {
 .p-button {
     width: 100%;
     border-radius: 12px;
+    direction: ltr;
 
     &:focus {
         box-shadow: none;
@@ -434,7 +440,15 @@ mat-list-item {
 }
 
 .p-button-label {
-    font-weight: bold;
+    font-weight: 500;
+}
+
+.pi-chevron-right:before {
+    color: #fff;
+}
+
+.p-accordion .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
+    background: #086821;
 }
 
 .form_btns {

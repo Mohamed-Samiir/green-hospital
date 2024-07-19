@@ -6,4 +6,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fcfbfb;
+}
+
+.menu_btn {
+    color: var(--color-secondary);
+}
+
+.logout_btn span {
+    margin-right: 5px;
 }

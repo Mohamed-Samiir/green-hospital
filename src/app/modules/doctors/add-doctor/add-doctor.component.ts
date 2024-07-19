@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 import { SpecializationsService } from 'src/app/core/services/specializations/specializations.service';
 
@@ -24,7 +26,9 @@ export class AddDoctorComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private specializationsService: SpecializationsService,
-    private doctorsService: DoctorsService
+    private doctorsService: DoctorsService,
+    private alertify: AlertifyService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -81,15 +85,21 @@ export class AddDoctorComponent implements OnInit, OnChanges {
       if (this.selectedDoctor) {
         this.doctorsService.editDoctor(this.selectedDoctor._id, this.addDoctorFormGroup.value).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
             this.onAddDoctor.emit(res.data)
             this.addDoctorFormGroup.reset({ isActive: true })
+          } else {
+            this.alertify.error(res.message)
           }
         })
       } else {
         this.doctorsService.addDoctor(this.addDoctorFormGroup.value).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
             this.onAddDoctor.emit(res.data)
             this.addDoctorFormGroup.reset({ isActive: true })
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

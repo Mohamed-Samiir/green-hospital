@@ -9,6 +9,7 @@ import { AddDoctorComponent } from '../add-doctor/add-doctor.component';
 import { ConfirmationService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 
 @Component({
   selector: 'app-doctors-list',
@@ -97,6 +98,7 @@ export class DoctorsListComponent implements OnInit {
     private doctorsService: DoctorsService,
     private confirmationService: ConfirmationService,
     private tranlslate: TranslateService,
+    private alertify: AlertifyService,
   ) { }
 
   ngOnInit() {
@@ -163,7 +165,10 @@ export class DoctorsListComponent implements OnInit {
       accept: () => {
         this.doctorsService.deleteDoctor(doctorId).subscribe(res => {
           if (res.isSuccess) {
+            this.alertify.success(this.tranlslate.instant('GENERIC.DELETE_SUCCESS'))
             this.getDoctorsList()
+          } else {
+            this.alertify.error(res.message)
           }
         })
       }

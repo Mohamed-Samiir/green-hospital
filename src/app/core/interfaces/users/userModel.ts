@@ -3,5 +3,6 @@ export interface UserModel {
     email: string,
     password: string,
     isAdmin: boolean,
-    isActive: boolean
+    isActive: boolean,
+    token: string,
 }
