@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: 'https://triptaya.com/wapi/'
+  baseURL: 'https://green-hospital-api.onrender.com/api/'
 };
