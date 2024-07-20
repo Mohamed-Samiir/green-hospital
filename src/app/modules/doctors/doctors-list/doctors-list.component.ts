@@ -110,12 +110,13 @@ export class DoctorsListComponent implements OnInit {
       if (res.isSuccess) {
         this.doctorsList = res.data
         this.gridData = res.data.map((doc: any) => {
+          debugger
           let modifiedDoctor = {
             ...doc,
-            specialization: doc.specialization.name,
-            specializationId: doc.specialization._id,
-            subSpecializations: doc.subSpecializations.map((subSpec: any) => subSpec.name),
-            subSpecializationsIds: doc.subSpecializations.map((subSpec: any) => subSpec._id)
+            specialization: doc?.specialization?.name,
+            specializationId: doc?.specialization?._id,
+            subSpecializations: doc?.subSpecializations?.map((subSpec: any) => subSpec.name),
+            subSpecializationsIds: doc?.subSpecializations?.map((subSpec: any) => subSpec._id)
           }
           return modifiedDoctor
         })
