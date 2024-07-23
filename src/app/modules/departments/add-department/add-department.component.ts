@@ -40,8 +40,8 @@ export class AddDepartmentComponent implements OnInit {
 
   buildForm() {
     this.addDepartmentFormGroup = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern("^[\u0621-\u064A ]+$"), Validators.minLength(3), Validators.maxLength(100)]],
-      contactPeriods: [null, [Validators.required, Validators.pattern("^[\u0621-\u064A0-9 ]+$"), Validators.minLength(3), Validators.maxLength(255)]],
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      contactPeriods: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       phoneNumber: [null],
       allowContact: [true]
     })

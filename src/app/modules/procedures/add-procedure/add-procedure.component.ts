@@ -59,7 +59,7 @@ export class AddProcedureComponent implements OnInit {
 
   buildForm() {
     this.addProcedureFormGroup = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern("^[\u0621-\u064A ]+$"), Validators.minLength(3), Validators.maxLength(100)]],
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       doctors: [null, [Validators.required]],
       price: [null, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(0)]],
       acceptInsurance: [true],

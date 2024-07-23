@@ -49,7 +49,7 @@ export class AddSpecializationComponent implements OnInit, OnChanges {
 
   buildForm() {
     this.addSpecFormGroup = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern("^[\u0621-\u064A ]+$"), Validators.minLength(3), Validators.maxLength(100)]],
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       subSpecName: [null, [Validators.minLength(3), Validators.maxLength(100)]],
     })
   }
