@@ -69,6 +69,11 @@
         <p-checkbox formControlName="acceptInsurance" [binary]="true"
           [label]="'PROCEDURES.ACCEPT_INSURANCE' | translate"></p-checkbox>
       </div>
+
+      <div class="col-12 form_group">
+        <label class="control_label" for="notes">{{'CLINICS.NOTES' | translate}}</label>
+        <textarea rows="5" cols="30" pInputTextarea formControlName="notes"></textarea>
+      </div>
     </div>
     <div class="row form_btns">
       <div class="col-3">

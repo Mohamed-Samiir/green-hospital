@@ -62,6 +62,11 @@ export class ProceduresListComponent implements OnInit {
       type: GridColumnTypes.withUnit,
       unitField: "ageToUnit"
     },
+    {
+      header: "ملاحظات",
+      field: "notes",
+      type: GridColumnTypes.text
+    }
   ]
 
   gridFilters: DataGridFilter[] = [

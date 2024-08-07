@@ -67,6 +67,7 @@ export class AddProcedureComponent implements OnInit {
       ageFromUnit: [3, [Validators.required]],
       ageTo: [1, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(1), Validators.max(100)]],
       ageToUnit: [3, [Validators.required]],
+      notes: [""]
     })
   }
 
