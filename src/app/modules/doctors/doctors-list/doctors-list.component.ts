@@ -110,7 +110,6 @@ export class DoctorsListComponent implements OnInit {
       if (res.isSuccess) {
         this.doctorsList = res.data
         this.gridData = res.data.map((doc: any) => {
-          debugger
           let modifiedDoctor = {
             ...doc,
             specialization: doc?.specialization?.name,
