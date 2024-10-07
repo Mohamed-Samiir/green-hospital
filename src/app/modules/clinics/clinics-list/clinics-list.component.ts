@@ -143,7 +143,7 @@ export class ClinicsListComponent implements OnInit {
           let modifiedClinic = {
             ...clinic,
             doctors: clinic?.clinicDoctors.map((doc: any) => {
-              return { ...doc, doctor: doc?.doctorName, doctorId: doc?.doctor }
+              return { ...doc, doctor: doc?.doctorName?.name, doctorId: doc?.doctor }
             }),
             doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)
           }
