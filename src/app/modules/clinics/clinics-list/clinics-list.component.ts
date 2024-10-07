@@ -142,10 +142,10 @@ export class ClinicsListComponent implements OnInit {
         this.gridData = res.data.map((clinic: any) => {
           let modifiedClinic = {
             ...clinic,
-            doctors: clinic?.doctors.map((doc: any) => {
-              return { ...doc, doctor: doc?.doctor?.name, doctorId: doc?.doctor?._id }
+            doctors: clinic?.clinicDoctors.map((doc: any) => {
+              return { ...doc, doctor: doc?.doctorName, doctorId: doc?.doctor }
             }),
-            doctorIds: clinic?.doctors.map((doc: any) => doc?.doctor?._id)
+            doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)
           }
 
           return modifiedClinic
