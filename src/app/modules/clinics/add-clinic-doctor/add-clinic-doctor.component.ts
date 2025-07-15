@@ -66,7 +66,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
     this.addDoctorFormGroup = this.fb.group({
       clinic: [{ value: null, disabled: true }],
       doctor: [null, [Validators.required]],
-      branch: [null], // Optional branch field
+      branches: [null], // Optional branches array field
       price: [null, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(0)]],
       acceptInsurance: [true],
       freeVisitFollowup: [true],

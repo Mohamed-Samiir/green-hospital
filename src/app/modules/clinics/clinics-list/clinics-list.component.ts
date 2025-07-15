@@ -58,8 +58,8 @@ export class ClinicsListComponent implements OnInit {
       type: 1
     },
     {
-      header: "الفرع",
-      field: "branch",
+      header: "الفروع",
+      field: "branches",
       type: 1
     },
     {
@@ -148,11 +148,20 @@ export class ClinicsListComponent implements OnInit {
           let modifiedClinic = {
             ...clinic,
             doctors: clinic?.clinicDoctors.map((doc: any) => {
+              // Handle multiple branch names
+              let branchesDisplay = 'غير محدد';
+              if (doc?.branchNames && doc.branchNames.length > 0) {
+                const validBranches = doc.branchNames.filter((branch: any) => branch && branch.name);
+                if (validBranches.length > 0) {
+                  branchesDisplay = validBranches.map((branch: any) => branch.name).join(', ');
+                }
+              }
+
               return {
                 ...doc,
                 doctor: doc?.doctorName?.name,
                 doctorId: doc?.doctor,
-                branch: doc?.branchName?.name || 'غير محدد' // Show branch name or 'Not specified'
+                branches: branchesDisplay
               }
             }),
             doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)

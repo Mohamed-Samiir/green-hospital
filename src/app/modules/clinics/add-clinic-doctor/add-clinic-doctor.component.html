@@ -21,10 +21,10 @@
       </div>
 
       <div class="col-sm-12 col-md-4 form_group">
-        <label class="control_label" for="branch">{{'BRANCHES.BRANCH' | translate}}</label>
-        <p-dropdown [options]="branchesList" formControlName="branch" name="branch"
-          class="form-control form-control-dropdown" optionLabel="name" optionValue="_id" [autoDisplayFirst]="false"
-          placeholder="اختر الفرع (اختياري)"></p-dropdown>
+        <label class="control_label" for="branches">{{'BRANCHES.BRANCHES' | translate}}</label>
+        <p-multiSelect [options]="branchesList" formControlName="branches" name="branches"
+          class="form-control form-control-dropdown" optionLabel="name" optionValue="_id"
+          placeholder="اختر الفروع (اختياري)" [showToggleAll]="false"></p-multiSelect>
       </div>
 
       <div class="col-sm-12 col-md-4 form_group">

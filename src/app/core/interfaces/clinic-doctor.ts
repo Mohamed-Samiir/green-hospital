@@ -3,7 +3,7 @@ export interface ClinicDoctor {
     _id?: string,
     clinic: string,
     doctor: string,
-    branch?: string,
+    branches?: string[],
     price: number,
     acceptInsurance?: boolean,
     freeVisitFollowup?: boolean,
