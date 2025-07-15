@@ -121,20 +121,17 @@ export class BranchesListComponent implements OnInit {
 
   deleteBranch(branch: any) {
     this.confirmationService.confirm({
-      message: 'هل أنت متأكد من حذف هذا الفرع؟',
-      header: 'تأكيد الحذف',
-      icon: 'pi pi-info-circle',
-      acceptButtonStyleClass: "p-button-danger p-button-text",
-      rejectButtonStyleClass: "p-button-text p-button-text",
-      acceptIcon: "none",
-      rejectIcon: "none",
+      key: "confirmDelete",
+      message: `${this.translate.instant('GENERIC.DELETE_MSG')} ${branch?.name}`,
+      acceptLabel: this.translate.instant('GENERIC.CONFIRM'),
+      rejectLabel: this.translate.instant('GENERIC.IGNORE'),
       accept: () => {
         this.branchesService.deleteBranch(branch._id!).subscribe(res => {
           if (res.isSuccess) {
-            this.alertifyService.success('تم حذف الفرع بنجاح')
+            this.alertifyService.success(this.translate.instant('GENERIC.DELETE_SUCCESS'))
             this.getBranchesList()
           } else {
-            this.alertifyService.error('حدث خطأ أثناء حذف الفرع')
+            this.alertifyService.error(res.message)
           }
         })
       }

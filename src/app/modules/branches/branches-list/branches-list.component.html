@@ -23,3 +23,8 @@
   [draggable]="false" [resizable]="false" (onHide)="hideDetailsDialog()">
   <app-view-branch-details [selectedBranch]="selectedBranchForDetails"></app-view-branch-details>
 </p-dialog>
+
+<!-- Delete Confirmation Dialog -->
+<p-confirmDialog key="confirmDelete" [header]="'GENERIC.CONFIRMATION' | translate"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+</p-confirmDialog>
