@@ -13,12 +13,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class DataGridComponent implements OnInit {
 
   @Input() data: any[] = []
+  @Input() isGetObject: boolean = false
   @Input() columns: DataGridColumn[] = []
   @Input() actions: DataGridAction = {}
   @Output() onShowAddClick: EventEmitter<boolean> = new EventEmitter<boolean>()
   @Output() onEditClick: EventEmitter<string> = new EventEmitter<string>()
+  @Output() onEditObjectClick: EventEmitter<any> = new EventEmitter<string>()
   @Output() onDeleteClick: EventEmitter<string> = new EventEmitter<string>()
+  @Output() onDeleteObjectClick: EventEmitter<any> = new EventEmitter<string>()
   @Output() onDetailsClick: EventEmitter<string> = new EventEmitter<string>()
+  @Output() onDetailsObjectClick: EventEmitter<any> = new EventEmitter<string>()
 
   ageUnits = [
     {
@@ -56,12 +60,25 @@ export class DataGridComponent implements OnInit {
     this.onEditClick.emit(rowId)
   }
 
+  emitEditObjectAction(element: any) {
+    debugger
+    this.onEditObjectClick.emit(element)
+  }
+
   emitDetailsAction(rowId: string) {
     this.onDetailsClick.emit(rowId)
   }
 
+  emitDetailsObjectAction(element: any) {
+    this.onDetailsObjectClick.emit(element)
+  }
+
   emitDeleteAction(rowId: string) {
     this.onDeleteClick.emit(rowId)
+  }
+
+  emitDeleteObjectAction(element: any) {
+    this.onDeleteObjectClick.emit(element)
   }
 
   getUnitName(unitId: number) {

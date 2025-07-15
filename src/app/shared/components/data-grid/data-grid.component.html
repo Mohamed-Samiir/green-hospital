@@ -31,7 +31,7 @@
           {{rowData[col.field]}} {{getUnitName(rowData[col.unitField])}}
         </span>
       </td>
-      <td *ngIf="actions">
+      <td *ngIf="actions && !isGetObject">
         <div class="actions">
           <div class="action_icon" *ngIf="actions.showDetails" (click)="emitDetailsAction(rowData._id)">
             <fa-icon [icon]="faEye" [pTooltip]="'GENERIC.DETAILS_ICON' | translate" tooltipPosition="top"></fa-icon>
@@ -43,6 +43,22 @@
           <div class="action_icon" *ngIf="actions.showDelete  && authService.isAdmin()">
             <fa-icon [icon]="faTrashCan" [pTooltip]="'GENERIC.DELETE_ICON' | translate" tooltipPosition="top"
               (click)="emitDeleteAction(rowData._id)"></fa-icon>
+          </div>
+        </div>
+      </td>
+
+      <td *ngIf="actions && isGetObject">
+        <div class="actions">
+          <div class="action_icon" *ngIf="actions.showDetails" (click)="emitDetailsObjectAction(rowData)">
+            <fa-icon [icon]="faEye" [pTooltip]="'GENERIC.DETAILS_ICON' | translate" tooltipPosition="top"></fa-icon>
+          </div>
+          <div class="action_icon" *ngIf="actions.showEdit && authService.isAdmin()">
+            <fa-icon [icon]="faPenToSquare" [pTooltip]="'GENERIC.EDIT_ICON' | translate" tooltipPosition="top"
+              (click)="emitEditObjectAction(rowData)"></fa-icon>
+          </div>
+          <div class="action_icon" *ngIf="actions.showDelete  && authService.isAdmin()">
+            <fa-icon [icon]="faTrashCan" [pTooltip]="'GENERIC.DELETE_ICON' | translate" tooltipPosition="top"
+              (click)="emitDeleteObjectAction(rowData)"></fa-icon>
           </div>
         </div>
       </td>
