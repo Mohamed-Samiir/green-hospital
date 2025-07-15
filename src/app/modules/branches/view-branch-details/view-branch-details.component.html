@@ -1,0 +1,32 @@
+<div class="branch-details" *ngIf="selectedBranch">
+  <div class="row">
+    <div class="col-12">
+      <div class="detail-item">
+        <label class="detail-label">اسم الفرع:</label>
+        <span class="detail-value">{{selectedBranch.name}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="detail-item">
+        <label class="detail-label">عنوان الفرع:</label>
+        <span class="detail-value">{{selectedBranch.address}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="detail-item">
+        <label class="detail-label">حالة الفرع:</label>
+        <span class="detail-value">
+          <span class="badge" [ngClass]="selectedBranch.isActive ? 'badge-success' : 'badge-danger'">
+            {{selectedBranch.isActive ? 'نشط' : 'غير نشط'}}
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

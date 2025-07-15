@@ -1,0 +1,40 @@
+.branch-details {
+  padding: 1rem;
+}
+
+.detail-item {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #333;
+  display: inline-block;
+  margin-left: 0.5rem;
+  min-width: 120px;
+}
+
+.detail-value {
+  color: #555;
+}
+
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}

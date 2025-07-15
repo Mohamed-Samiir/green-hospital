@@ -54,6 +54,17 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'branches',
+    component: MainComponent,
+    children: [
+      {
+        path: "",
+        canActivate: [AuthenticationGuard],
+        loadChildren: () => import('../branches/branches.module').then(m => m.BranchesModule)
+      }
+    ]
+  },
+  {
     path: 'clinics',
     component: MainComponent,
     children: [

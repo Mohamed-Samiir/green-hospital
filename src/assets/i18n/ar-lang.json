@@ -30,6 +30,7 @@
         "CLINICKS": "العيادات",
         "SPECIALIZATIONS": "التخصصات",
         "USERS": "المستخدمين",
+        "BRANCHES": "الفروع",
         "DEPARTMENTS": "الأقسام",
         "PROCEDURES": "الإجراءات",
         "QUESTIONS": "اسألني؟"
@@ -106,5 +107,15 @@
         "EDIT_QUESTION": "تعديل سؤال",
         "QUESTION_TITLE": "السؤال",
         "QUESTION_ANSWER": "الإجابة"
+    },
+    "BRANCHES": {
+        "ADD_BRANCH": "إضافة فرع",
+        "EDIT_BRANCH": "تعديل فرع",
+        "BRANCH_NAME": "اسم الفرع",
+        "BRANCH_ADDRESS": "عنوان الفرع",
+        "BRANCH_DETAILS": "تفاصيل الفرع",
+        "BRANCH_STATUS": "حالة الفرع",
+        "ACTIVE": "نشط",
+        "INACTIVE": "غير نشط"
     }
 }

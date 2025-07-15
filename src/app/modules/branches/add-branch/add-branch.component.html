@@ -1,0 +1,38 @@
+<form [formGroup]="addBranchFormGroup" (ngSubmit)="Submit()">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="name" class="form-label">اسم الفرع <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="أدخل اسم الفرع">
+        <div class="text-danger" *ngIf="f['name'].invalid && f['name'].touched">
+          <small *ngIf="f['name'].errors?.['required']">اسم الفرع مطلوب</small>
+          <small *ngIf="f['name'].errors?.['minlength']">اسم الفرع يجب أن يكون على الأقل 3 أحرف</small>
+          <small *ngIf="f['name'].errors?.['maxlength']">اسم الفرع يجب أن يكون أقل من 100 حرف</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="address" class="form-label">عنوان الفرع <span class="text-danger">*</span></label>
+        <textarea class="form-control" id="address" formControlName="address" rows="3" 
+                  placeholder="أدخل عنوان الفرع"></textarea>
+        <div class="text-danger" *ngIf="f['address'].invalid && f['address'].touched">
+          <small *ngIf="f['address'].errors?.['required']">عنوان الفرع مطلوب</small>
+          <small *ngIf="f['address'].errors?.['minlength']">عنوان الفرع يجب أن يكون على الأقل 5 أحرف</small>
+          <small *ngIf="f['address'].errors?.['maxlength']">عنوان الفرع يجب أن يكون أقل من 200 حرف</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12 d-flex justify-content-end">
+      <p-button type="submit" label="{{isEdit ? 'تعديل' : 'إضافة'}}" icon="pi pi-check" 
+                styleClass="p-button-success" [disabled]="addBranchFormGroup.invalid">
+      </p-button>
+    </div>
+  </div>
+</form>

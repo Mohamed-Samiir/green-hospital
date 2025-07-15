@@ -17,7 +17,8 @@ import {
   faBedPulse,
   faPersonCircleQuestion,
   faBars,
-  faRightFromBracket
+  faRightFromBracket,
+  faCodeBranch
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -42,6 +43,7 @@ export class MainNavComponent implements OnInit {
   faPersonCircleQuestion = faPersonCircleQuestion
   faBars = faBars
   faRightFromBracket = faRightFromBracket
+  faCodeBranch = faCodeBranch
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

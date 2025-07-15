@@ -31,6 +31,14 @@
         </div>
       </mat-list-item>
 
+      <mat-list-item routerLink="/main/branches" class="list-item-custom" routerLinkActive="active-link"
+        *ngIf="authService.isAdmin()">
+        <div class="nav-list-item">
+          <fa-icon [icon]="faCodeBranch" [size]="'lg'"></fa-icon>
+          <h3 *ngIf="isExpanded">{{'NAVICATION.BRANCHES' | translate}}</h3>
+        </div>
+      </mat-list-item>
+
       <mat-list-item routerLink="/main/doctors" class="list-item-custom" routerLinkActive="active-link">
         <div class="nav-list-item">
           <fa-icon [icon]="faUserDoctor" [size]="'lg'"></fa-icon>

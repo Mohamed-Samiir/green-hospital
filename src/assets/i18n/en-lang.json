@@ -2,12 +2,23 @@
     "NAVICATION": {
         "DASHBOARD": "Dashboard",
         "DOCTORS": "Doctors",
-        "CLINICKS": "CLINICKS"
+        "CLINICKS": "CLINICKS",
+        "BRANCHES": "Branches"
     },
     "LOGIN": {
         "LOGO_TEXT": "Customer Service Knwoledge Bank"
     },
     "DASHBOARD": {
         "SHORTCUT": "Shortcut"
+    },
+    "BRANCHES": {
+        "ADD_BRANCH": "Add Branch",
+        "EDIT_BRANCH": "Edit Branch",
+        "BRANCH_NAME": "Branch Name",
+        "BRANCH_ADDRESS": "Branch Address",
+        "BRANCH_DETAILS": "Branch Details",
+        "BRANCH_STATUS": "Branch Status",
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive"
     }
 }
