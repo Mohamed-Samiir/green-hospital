@@ -4,7 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Clinic } from 'src/app/core/interfaces/clinic';
 import { ClinicDoctor } from 'src/app/core/interfaces/clinic-doctor';
 import { DoctorModel } from 'src/app/core/interfaces/doctor/doctor-model';
+import { BranchModel } from 'src/app/core/interfaces/branch/branch-model';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
+import { BranchesService } from 'src/app/core/services/branches/branches.service';
 import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { ClinicDoctorService } from 'src/app/core/services/clinics/clinic-doctor.service';
 
@@ -20,6 +22,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
   @Output() onIgnore: EventEmitter<any> = new EventEmitter<any>()
   addDoctorFormGroup: FormGroup = new FormGroup({})
   doctorsList: DoctorModel[]
+  branchesList: BranchModel[]
   clinicsList: Clinic[]
   ageUnits = [
     {
@@ -39,6 +42,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private doctorsService: DoctorsService,
+    private branchesService: BranchesService,
     private clinicDoctorService: ClinicDoctorService,
     private alertify: AlertifyService,
     public translate: TranslateService
@@ -47,6 +51,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.buildForm()
     this.getDoctorsList()
+    this.getBranchesList()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -61,6 +66,7 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
     this.addDoctorFormGroup = this.fb.group({
       clinic: [{ value: null, disabled: true }],
       doctor: [null, [Validators.required]],
+      branch: [null], // Optional branch field
       price: [null, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(0)]],
       acceptInsurance: [true],
       freeVisitFollowup: [true],
@@ -118,6 +124,15 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
     this.doctorsService.getDoctors().subscribe(res => {
       if (res.isSuccess) {
         this.doctorsList = res.data
+      }
+    })
+  }
+
+  getBranchesList() {
+    this.branchesService.getBranches().subscribe(res => {
+      if (res.isSuccess) {
+        // Filter only active branches
+        this.branchesList = res.data.filter((branch: BranchModel) => branch.isActive)
       }
     })
   }

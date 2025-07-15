@@ -21,6 +21,13 @@
       </div>
 
       <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="branch">{{'BRANCHES.BRANCH' | translate}}</label>
+        <p-dropdown [options]="branchesList" formControlName="branch" name="branch"
+          class="form-control form-control-dropdown" optionLabel="name" optionValue="_id" [autoDisplayFirst]="false"
+          placeholder="اختر الفرع (اختياري)"></p-dropdown>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
         <label class="control_label" for="price">{{'CLINICS.VISIT_PRICE' | translate}}</label>
         <input type="number" formControlName="price" name="price" class="form-control">
         <div *ngIf="f['price'].errors && f['price'].touched" class="validation_msg">

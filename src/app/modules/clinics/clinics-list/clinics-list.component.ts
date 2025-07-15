@@ -58,6 +58,11 @@ export class ClinicsListComponent implements OnInit {
       type: 1
     },
     {
+      header: "الفرع",
+      field: "branch",
+      type: 1
+    },
+    {
       header: "سعر الكشف",
       field: "price",
       type: 1
@@ -143,7 +148,12 @@ export class ClinicsListComponent implements OnInit {
           let modifiedClinic = {
             ...clinic,
             doctors: clinic?.clinicDoctors.map((doc: any) => {
-              return { ...doc, doctor: doc?.doctorName?.name, doctorId: doc?.doctor }
+              return {
+                ...doc,
+                doctor: doc?.doctorName?.name,
+                doctorId: doc?.doctor,
+                branch: doc?.branchName?.name || 'غير محدد' // Show branch name or 'Not specified'
+              }
             }),
             doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)
           }

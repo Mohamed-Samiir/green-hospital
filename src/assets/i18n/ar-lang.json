@@ -111,6 +111,7 @@
     "BRANCHES": {
         "ADD_BRANCH": "إضافة فرع",
         "EDIT_BRANCH": "تعديل فرع",
+        "BRANCH": "الفرع",
         "BRANCH_NAME": "اسم الفرع",
         "BRANCH_ADDRESS": "عنوان الفرع",
         "BRANCH_DETAILS": "تفاصيل الفرع",
