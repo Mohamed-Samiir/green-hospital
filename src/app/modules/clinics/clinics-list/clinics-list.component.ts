@@ -59,7 +59,7 @@ export class ClinicsListComponent implements OnInit {
     },
     {
       header: "الفروع",
-      field: "branches",
+      field: "branchesDisplay",
       type: 1
     },
     {
@@ -161,7 +161,9 @@ export class ClinicsListComponent implements OnInit {
                 ...doc,
                 doctor: doc?.doctorName?.name,
                 doctorId: doc?.doctor,
-                branches: branchesDisplay
+                branchesDisplay: branchesDisplay, // For display in grid
+                // Keep original branches array for editing
+                branches: doc?.branches || []
               }
             }),
             doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)

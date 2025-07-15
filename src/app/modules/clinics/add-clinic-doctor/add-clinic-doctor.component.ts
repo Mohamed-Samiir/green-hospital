@@ -56,9 +56,21 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDoctor']?.currentValue) {
-      this.addDoctorFormGroup.patchValue(changes['selectedDoctor'].currentValue)
-      this.f['doctor'].setValue(changes['selectedDoctor'].currentValue.doctorId)
-      this.f['doctor'].disable()
+      const selectedDoctor = changes['selectedDoctor'].currentValue;
+
+      // Patch all form values
+      this.addDoctorFormGroup.patchValue(selectedDoctor);
+
+      // Set doctor field and disable it
+      this.f['doctor'].setValue(selectedDoctor.doctorId);
+      this.f['doctor'].disable();
+
+      // Handle branches array properly for editing
+      if (selectedDoctor.branches && Array.isArray(selectedDoctor.branches)) {
+        this.f['branches'].setValue(selectedDoctor.branches);
+      } else {
+        this.f['branches'].setValue([]);
+      }
     }
   }
 
