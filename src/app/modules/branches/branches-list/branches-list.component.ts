@@ -114,7 +114,6 @@ export class BranchesListComponent implements OnInit {
   }
 
   editBranch(branch: any) {
-    debugger
     this.selectedBranchForEdit = branch
     this.isEdit = true
     this.isShowAddDialog = true

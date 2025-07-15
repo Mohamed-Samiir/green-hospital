@@ -4,16 +4,9 @@
       (getFilteredData)="setFilteredData($event)"></app-data-table-filter>
   </div>
   <div class="row">
-    <div class="col-12 d-flex justify-content-end pb-2" *ngIf="authService.isAdmin()">
-      <p-button type="button" icon="pi pi-plus" label="إضافة فرع" iconPos="right" styleClass="grid_add_btn"
-        (click)="showAddDialog()">
-      </p-button>
-    </div>
-  </div>
-  <div class="row">
     <app-data-grid [columns]="gridColumns" [data]="gridData" [actions]="gridActions" [isGetObject]="true"
-      (onEditObjectClick)="editBranch($event)" (onDetailsObjectClick)="deleteBranch($event)"
-      (onDeleteObjectClick)="showDetailsDialog($event)">
+      (onShowAddClick)="showAddDialog()" (onEditObjectClick)="editBranch($event)"
+      (onDetailsObjectClick)="showDetailsDialog($event)" (onDeleteObjectClick)="deleteBranch($event)">
     </app-data-grid>
   </div>
 </div>
