@@ -24,6 +24,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { TableModule } from 'primeng/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
     FontAwesomeModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

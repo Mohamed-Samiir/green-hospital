@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BroadcastService } from 'src/app/core/services/broadcasts/broadcast.service';
+import { BroadcastWidgetService } from 'src/app/core/services/broadcast-widget.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -23,11 +24,18 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
   selectedMessageReaders: MessageReader[] = [];
   selectedMessageInfo: any = {};
 
+  // Widget state properties
+  isExpanded = false;
+  isVisible = true;
+  unreadCount = 0;
+
   private messagesSubscription: Subscription = new Subscription();
+  private widgetStateSubscription: Subscription = new Subscription();
 
   constructor(
     private fb: FormBuilder,
     private broadcastService: BroadcastService,
+    private widgetService: BroadcastWidgetService,
     public authService: AuthService,
     private alertify: AlertifyService,
     private translate: TranslateService,
@@ -39,10 +47,12 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadMessages();
     this.subscribeToMessages();
+    this.subscribeToWidgetState();
   }
 
   ngOnDestroy(): void {
     this.messagesSubscription.unsubscribe();
+    this.widgetStateSubscription.unsubscribe();
     this.broadcastService.disconnect();
   }
 
@@ -60,9 +70,38 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
     this.messagesSubscription = this.broadcastService.messages$.subscribe(
       (messages: BroadcastMessage[]) => {
         this.messages = messages;
+        this.updateUnreadCount();
         setTimeout(() => this.scrollToBottom(), 100);
       }
     );
+  }
+
+  subscribeToWidgetState() {
+    this.widgetStateSubscription.add(
+      this.widgetService.isExpanded$.subscribe(isExpanded => {
+        this.isExpanded = isExpanded;
+        if (isExpanded) {
+          setTimeout(() => this.scrollToBottom(), 100);
+        }
+      })
+    );
+
+    this.widgetStateSubscription.add(
+      this.widgetService.isVisible$.subscribe(isVisible => {
+        this.isVisible = isVisible;
+      })
+    );
+
+    this.widgetStateSubscription.add(
+      this.widgetService.unreadCount$.subscribe(count => {
+        this.unreadCount = count;
+      })
+    );
+  }
+
+  updateUnreadCount() {
+    const unreadCount = this.getUnreadCount();
+    this.widgetService.updateUnreadCount(unreadCount);
   }
 
   loadMessages() {
@@ -232,5 +271,27 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
 
   trackByMessageId(index: number, message: BroadcastMessage): string {
     return message._id || index.toString();
+  }
+
+  // Widget control methods
+  toggleWidget(): void {
+    this.widgetService.toggleExpanded();
+    if (this.widgetService.isExpanded) {
+      this.widgetService.clearUnreadCount();
+    }
+  }
+
+  openWidget(): void {
+    this.widgetService.openWidget();
+  }
+
+  closeWidget(): void {
+    this.widgetService.setExpanded(false);
+  }
+
+  onWidgetClick(): void {
+    if (!this.isExpanded) {
+      this.openWidget();
+    }
   }
 }
