@@ -198,13 +198,32 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
   }
 
   formatDate(date: Date): string {
-    return new Date(date).toLocaleString('ar-SA', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    // Use Arabic Egypt locale which provides Gregorian calendar with Arabic numerals
+    // This is better than ar-SA which defaults to Hijri calendar
+    const dateObj = new Date(date);
+
+    try {
+      // ar-EG uses Gregorian calendar with Arabic numerals - perfect for Arabic UI
+      return dateObj.toLocaleString('ar-EG', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false, // Use 24-hour format
+        calendar: 'gregory' // Explicitly specify Gregorian calendar
+      });
+    } catch (error) {
+      // Fallback to en-GB if ar-EG is not available
+      return dateObj.toLocaleString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+    }
   }
 
   getUnreadCount(): number {
