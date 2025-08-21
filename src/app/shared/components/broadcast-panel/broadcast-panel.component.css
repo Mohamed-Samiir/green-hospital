@@ -2,7 +2,7 @@
 .broadcast-widget {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   z-index: 9999;
   font-family: "Cairo", sans-serif;
   direction: rtl;
@@ -15,7 +15,12 @@
 
 .broadcast-widget.expanded {
   width: 400px;
-  height: 600px;
+  height: 350px;
+  max-height: 400px;
+}
+
+.send-message-form {
+  padding: 20px;
 }
 
 /* Widget Tab (Collapsed State) */

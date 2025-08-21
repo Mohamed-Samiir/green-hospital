@@ -3,7 +3,7 @@
     <!-- Collapsed State (Chat Tab) -->
     <div class="widget-tab" *ngIf="!isExpanded" (click)="toggleWidget()">
         <div class="tab-content">
-            <fa-icon [icon]="'bullhorn'" class="tab-icon"></fa-icon>
+            <fa-icon [icon]="faBullhorn" class="tab-icon"></fa-icon>
             <span class="tab-text">الإشعارات</span>
             <span class="unread-badge" *ngIf="unreadCount > 0">{{unreadCount}}</span>
         </div>
@@ -14,7 +14,7 @@
         <!-- Panel Header -->
         <div class="panel-header">
             <h4 class="panel-title">
-                <fa-icon [icon]="'bullhorn'" class="me-2"></fa-icon>
+                <fa-icon [icon]="faBullhorn" class="me-2"></fa-icon>
                 الإشعارات
                 <span class="unread-badge" *ngIf="getUnreadCount() > 0">{{getUnreadCount()}}</span>
             </h4>
@@ -30,7 +30,7 @@
 
                 <!-- Close Button -->
                 <button class="close-btn" (click)="closeWidget()" title="إغلاق">
-                    <fa-icon [icon]="'times'"></fa-icon>
+                    <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
             </div>
         </div>
@@ -73,7 +73,7 @@
 
             <!-- Empty State -->
             <div *ngIf="!isLoading && messages.length === 0" class="empty-state">
-                <fa-icon [icon]="'comments'" size="3x" class="empty-icon"></fa-icon>
+                <fa-icon [icon]="faComments" size="3x" class="empty-icon"></fa-icon>
                 <p>لا توجد رسائل إشعارات حتى الآن</p>
             </div>
 
@@ -85,7 +85,7 @@
                     <!-- Message Header -->
                     <div class="message-header">
                         <div class="sender-info">
-                            <fa-icon [icon]="'user-shield'" class="admin-icon"></fa-icon>
+                            <fa-icon [icon]="faUserShield" class="admin-icon"></fa-icon>
                             <span class="sender-name">{{message.senderName}}</span>
                         </div>
                         <div class="message-time">
@@ -114,9 +114,9 @@
 
                         <!-- Read Status Indicator -->
                         <div class="read-status">
-                            <fa-icon *ngIf="message.isRead" [icon]="'check-circle'" class="read-icon" title="مقروءة">
+                            <fa-icon *ngIf="message.isRead" [icon]="faCheckCircle" class="read-icon" title="مقروءة">
                             </fa-icon>
-                            <fa-icon *ngIf="!message.isRead" [icon]="'circle'" class="unread-icon" title="غير مقروءة">
+                            <fa-icon *ngIf="!message.isRead" [icon]="faCircle" class="unread-icon" title="غير مقروءة">
                             </fa-icon>
                         </div>
                     </div>

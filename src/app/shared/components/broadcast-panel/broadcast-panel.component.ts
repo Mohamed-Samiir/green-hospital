@@ -8,6 +8,14 @@ import { AlertifyService } from 'src/app/core/services/alertify-services/alertif
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { BroadcastMessage, MessageReader } from 'src/app/core/interfaces/broadcast-message';
+import {
+  faBullhorn,
+  faComments,
+  faCheckCircle,
+  faCircle,
+  faTimes,
+  faUserShield
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-broadcast-panel',
@@ -28,6 +36,14 @@ export class BroadcastPanelComponent implements OnInit, OnDestroy {
   isExpanded = false;
   isVisible = true;
   unreadCount = 0;
+
+  // FontAwesome icons
+  faBullhorn = faBullhorn;
+  faComments = faComments;
+  faCheckCircle = faCheckCircle;
+  faCircle = faCircle;
+  faTimes = faTimes;
+  faUserShield = faUserShield;
 
   private messagesSubscription: Subscription = new Subscription();
   private widgetStateSubscription: Subscription = new Subscription();

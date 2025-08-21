@@ -31,8 +31,9 @@ export class BroadcastWidgetService {
   private initializeRouteListener(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        this.updateVisibilityBasedOnRoute(event.url);
+      .subscribe((event) => {
+        const navigationEndEvent = event as NavigationEnd;
+        this.updateVisibilityBasedOnRoute(navigationEndEvent.url);
       });
   }
 
@@ -40,7 +41,7 @@ export class BroadcastWidgetService {
    * Update widget visibility based on current route
    */
   private updateVisibilityBasedOnRoute(url: string): void {
-    const shouldHide = this.hiddenRoutes.some(route => 
+    const shouldHide = this.hiddenRoutes.some(route =>
       url.startsWith(route) || url === route
     );
     this.setVisibility(!shouldHide);
