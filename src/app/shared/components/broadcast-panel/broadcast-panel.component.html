@@ -5,7 +5,7 @@
         <div class="tab-content">
             <fa-icon [icon]="faBullhorn" class="tab-icon"></fa-icon>
             <span class="tab-text">الإشعارات</span>
-            <span class="unread-badge" *ngIf="unreadCount > 0">{{unreadCount}}</span>
+            <span class="unread-badge" *ngIf="getUnreadCount() > 0">{{getUnreadCount()}}</span>
         </div>
     </div>
 
@@ -42,10 +42,16 @@
                     <textarea formControlName="message" class="form-control" placeholder="اكتب رسالة الإشعار هنا..."
                         rows="3" maxlength="1000">
           </textarea>
-                    <div class="input-group-append">
-                        <p-button type="submit" icon="pi pi-send" [label]="'إرسال'"
-                            styleClass="p-button-sm p-button-success" [disabled]="!broadcastForm.valid">
-                        </p-button>
+                    <div class="d-flex flex-column">
+                        <div class="input-group-append">
+                            <p-button type="submit" icon="pi pi-send" [label]="'إرسال'"
+                                styleClass="p-button-sm p-button-success" [disabled]="!broadcastForm.valid">
+                            </p-button>
+                        </div>
+                        <!-- Character Counter -->
+                        <div class="char-counter">
+                            {{f['message'].value?.length || 0}} / 1000
+                        </div>
                     </div>
                 </div>
 
@@ -54,11 +60,6 @@
                     <div *ngIf="f['message'].errors?.['required']">يجب إدخال نص الرسالة</div>
                     <div *ngIf="f['message'].errors?.['minlength']">يجب أن تحتوي الرسالة على حرف واحد على الأقل</div>
                     <div *ngIf="f['message'].errors?.['maxlength']">يجب أن لا تتجاوز الرسالة 1000 حرف</div>
-                </div>
-
-                <!-- Character Counter -->
-                <div class="char-counter">
-                    {{f['message'].value?.length || 0}} / 1000
                 </div>
             </form>
         </div>

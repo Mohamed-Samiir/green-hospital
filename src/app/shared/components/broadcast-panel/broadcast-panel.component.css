@@ -1,7 +1,7 @@
 /* Widget Container - Sticky positioning */
 .broadcast-widget {
   position: fixed;
-  bottom: 20px;
+  bottom: 0px;
   left: 20px;
   z-index: 9999;
   font-family: "Cairo", sans-serif;
@@ -28,11 +28,11 @@
   background: linear-gradient(135deg, #349F51, #086821);
   color: white;
   padding: 12px 20px;
-  border-radius: 25px 25px 8px 8px;
+  border-radius: 12px 12px 3px 3px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  min-width: 120px;
+  min-width: 200px;
 }
 
 .widget-tab:hover {
