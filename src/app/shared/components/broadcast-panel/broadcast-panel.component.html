@@ -1,0 +1,197 @@
+<div class="broadcast-panel">
+  <!-- Panel Header -->
+  <div class="panel-header">
+    <h4 class="panel-title">
+      <fa-icon [icon]="'bullhorn'" class="me-2"></fa-icon>
+      رسائل البث
+      <span class="unread-badge" *ngIf="getUnreadCount() > 0">{{getUnreadCount()}}</span>
+    </h4>
+    
+    <!-- Admin Controls -->
+    <div class="admin-controls" *ngIf="authService.isAdmin()">
+      <p-button 
+        icon="pi pi-trash" 
+        [label]="'مسح السجل'" 
+        styleClass="p-button-sm p-button-danger p-button-outlined"
+        (onClick)="clearHistory()"
+        [disabled]="messages.length === 0">
+      </p-button>
+    </div>
+  </div>
+
+  <!-- Admin Broadcast Input -->
+  <div class="broadcast-input" *ngIf="authService.isAdmin()">
+    <form [formGroup]="broadcastForm" (ngSubmit)="sendBroadcast()">
+      <div class="input-group">
+        <textarea 
+          formControlName="message"
+          class="form-control broadcast-textarea"
+          placeholder="اكتب رسالة البث هنا..."
+          rows="3"
+          maxlength="1000">
+        </textarea>
+        <div class="input-group-append">
+          <p-button 
+            type="submit"
+            icon="pi pi-send" 
+            [label]="'إرسال'"
+            styleClass="p-button-sm p-button-success"
+            [disabled]="!broadcastForm.valid">
+          </p-button>
+        </div>
+      </div>
+      
+      <!-- Validation Messages -->
+      <div *ngIf="f['message'].errors && f['message'].touched" class="validation-msg">
+        <div *ngIf="f['message'].errors['required']">
+          يجب إدخال نص الرسالة
+        </div>
+        <div *ngIf="f['message'].errors['minlength']">
+          يجب أن تحتوي الرسالة على حرف واحد على الأقل
+        </div>
+        <div *ngIf="f['message'].errors['maxlength']">
+          يجب أن لا تتجاوز الرسالة 1000 حرف
+        </div>
+      </div>
+      
+      <!-- Character Counter -->
+      <div class="char-counter">
+        {{f['message'].value?.length || 0}} / 1000
+      </div>
+    </form>
+  </div>
+
+  <!-- Messages Container -->
+  <div class="messages-container" #messagesContainer>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <p-progressSpinner strokeWidth="4" animationDuration="1s"></p-progressSpinner>
+      <p>جاري تحميل الرسائل...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && messages.length === 0" class="empty-state">
+      <fa-icon [icon]="'comments'" size="3x" class="empty-icon"></fa-icon>
+      <p>لا توجد رسائل بث حتى الآن</p>
+    </div>
+
+    <!-- Messages List -->
+    <div *ngIf="!isLoading && messages.length > 0" class="messages-list">
+      <div 
+        *ngFor="let message of messages; trackBy: trackByMessageId" 
+        class="message-item"
+        [ngClass]="{'unread': !message.isRead, 'read': message.isRead}">
+        
+        <!-- Message Header -->
+        <div class="message-header">
+          <div class="sender-info">
+            <fa-icon [icon]="'user-shield'" class="admin-icon"></fa-icon>
+            <span class="sender-name">{{message.senderName}}</span>
+          </div>
+          <div class="message-time">
+            {{formatDate(message.createdAt)}}
+          </div>
+        </div>
+
+        <!-- Message Content -->
+        <div class="message-content">
+          {{message.message}}
+        </div>
+
+        <!-- Message Actions -->
+        <div class="message-actions">
+          <!-- Mark as Read Button (for non-admin users) -->
+          <p-button 
+            *ngIf="!authService.isAdmin() && !message.isRead"
+            icon="pi pi-check" 
+            [label]="'تحديد كمقروءة'"
+            styleClass="p-button-sm p-button-text p-button-success"
+            (onClick)="markAsRead(message)">
+          </p-button>
+
+          <!-- View Readers Button (for admin users) -->
+          <p-button 
+            *ngIf="authService.isAdmin()"
+            icon="pi pi-users" 
+            [label]="'عرض القراء (' + (message.readersCount || 0) + ')'"
+            styleClass="p-button-sm p-button-text p-button-info"
+            (onClick)="viewReaders(message)">
+          </p-button>
+
+          <!-- Read Status Indicator -->
+          <div class="read-status">
+            <fa-icon 
+              *ngIf="message.isRead" 
+              [icon]="'check-circle'" 
+              class="read-icon"
+              title="مقروءة">
+            </fa-icon>
+            <fa-icon 
+              *ngIf="!message.isRead" 
+              [icon]="'circle'" 
+              class="unread-icon"
+              title="غير مقروءة">
+            </fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Readers Dialog -->
+<p-dialog 
+  [(visible)]="isShowReadersDialog" 
+  [header]="'قائمة قراء الرسالة'" 
+  [modal]="true"
+  [style]="{width: '70vw'}"
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+  (onHide)="hideReadersDialog()">
+  
+  <div class="readers-dialog-content">
+    <!-- Message Info -->
+    <div class="message-info">
+      <h5>معلومات الرسالة</h5>
+      <p><strong>المرسل:</strong> {{selectedMessageInfo.senderName}}</p>
+      <p><strong>تاريخ الإرسال:</strong> {{formatDate(selectedMessageInfo.createdAt)}}</p>
+      <p><strong>نص الرسالة:</strong></p>
+      <div class="message-text">{{selectedMessageInfo.message}}</div>
+    </div>
+
+    <!-- Readers List -->
+    <div class="readers-list">
+      <h5>قائمة القراء ({{selectedMessageInfo.readersCount || 0}})</h5>
+      
+      <div *ngIf="selectedMessageReaders.length === 0" class="no-readers">
+        <p>لم يقرأ أحد هذه الرسالة بعد</p>
+      </div>
+
+      <div *ngIf="selectedMessageReaders.length > 0">
+        <p-table [value]="selectedMessageReaders" responsiveLayout="stack">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>اسم المستخدم</th>
+              <th>البريد الإلكتروني</th>
+              <th>تاريخ القراءة</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-reader>
+            <tr>
+              <td>{{reader.userName}}</td>
+              <td>{{reader.userEmail}}</td>
+              <td>{{formatDate(reader.readAt)}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+<!-- Confirmation Dialog -->
+<p-confirmDialog 
+  key="confirmClearHistory" 
+  [header]="'تأكيد الحذف'" 
+  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" 
+  [style]="{width: '50vw'}">
+</p-confirmDialog>

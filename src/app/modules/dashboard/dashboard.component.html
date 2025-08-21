@@ -1,18 +1,28 @@
-<div class="container">
-    <div class="row" *ngIf="shortcutsList?.length">
-        <div class="col-3" *ngFor="let shortcut of shortcutsList">
-            <div class="dashboard-shortcut" (click)="openShortcut(shortcut)">
-                <span>{{shortcut.name}}</span>
-                <div class="delete-shortcut" (click)="deleteShortcut($event, shortcut)">
-                    <fa-icon [icon]="faTrash" [size]="'xl'" [pTooltip]="'GENERIC.DELETE_ICON' | translate"
-                        tooltipPosition="top"></fa-icon>
+<div class="dashboard-container">
+    <!-- Broadcast Panel (Left Side) -->
+    <div class="broadcast-section">
+        <app-broadcast-panel></app-broadcast-panel>
+    </div>
+
+    <!-- Main Dashboard Content (Right Side) -->
+    <div class="main-content">
+        <div class="container">
+            <div class="row" *ngIf="shortcutsList?.length">
+                <div class="col-3" *ngFor="let shortcut of shortcutsList">
+                    <div class="dashboard-shortcut" (click)="openShortcut(shortcut)">
+                        <span>{{shortcut.name}}</span>
+                        <div class="delete-shortcut" (click)="deleteShortcut($event, shortcut)">
+                            <fa-icon [icon]="faTrash" [size]="'xl'" [pTooltip]="'GENERIC.DELETE_ICON' | translate"
+                                tooltipPosition="top"></fa-icon>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row" *ngIf="!shortcutsList?.length">
-        <div class="col-12 d-flex justify-content-center align-items-center empty_home">
-            <h3>لم يتم إضافة اختصارات</h3>
+            <div class="row" *ngIf="!shortcutsList?.length">
+                <div class="col-12 d-flex justify-content-center align-items-center empty_home">
+                    <h3>لم يتم إضافة اختصارات</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>

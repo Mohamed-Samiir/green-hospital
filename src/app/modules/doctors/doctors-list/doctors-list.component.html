@@ -1,30 +1,18 @@
 <div class="container-fluid">
-  <div class="row">
-    <app-data-table-filter [filters]="gridFilters" [data]="filterData"
-      (getFilteredData)="setFilteredData($event)"></app-data-table-filter>
-  </div>
-  <div class="row">
-    <app-data-grid [columns]="gridColumns" [data]="gridData" [actions]="gridActions" (onShowAddClick)="showAddDialog()"
-      (onEditClick)="openEditPopup($event)" (onDetailsClick)="onShowDetails($event)"
-      (onDeleteClick)="openDeleteConfirmation($event)">
-    </app-data-grid>
-  </div>
-</div>
-
-<p-dialog [(visible)]="isShowAddDialog" [style]="{width: '70vw'}" [modal]="true"
+  <div class="row"><app-data-table-filter [filters]="gridFilters" [data]="filterData"
+      (getFilteredData)="setFilteredData($event)"></app-data-table-filter></div>
+  <div class="row"><app-data-grid [columns]="gridColumns" [data]="gridData" [actions]="gridActions"
+      (onShowAddClick)="showAddDialog()" (onEditClick)="openEditPopup($event)" (onDetailsClick)="onShowDetails($event)"
+      (onDeleteClick)="openDeleteConfirmation($event)"></app-data-grid></div>
+</div><p-dialog [(visible)]="isShowAddDialog" [style]="{width: '70vw'}" [modal]="true"
   [breakpoints]="{'960px': '75vw', '640px': '100vw'}" (onHide)="hideAddDialog()" #addDoctor
-  [header]="(isEdit? 'DOCTORS.EDIT_DOCTOR_TITLE' : 'DOCTORS.ADD_DOCTOR_TITLE') | translate">
-  <app-add-doctor (onAddDoctor)="onAddDoctor()" (onIgnore)="hideAddDialog()" [selectedDoctor]="selectedDoctorForEdit">
-  </app-add-doctor>
-</p-dialog>
-
-<p-dialog [(visible)]="isShowDetailsDialog" [style]="{width: '70vw'}" [modal]="true"
-  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" (onHide)="hideDetailsDialog()" #addDoctor
-  [header]="'DOCTORS.VIEW_DOCTOR_DETAILS_TITLE' | translate">
-  <app-view-doctor-details [selectedDoctor]="selectedDoctorForDetails" (onIgnore)="hideDetailsDialog()">
-  </app-view-doctor-details>
-</p-dialog>
-
-<p-confirmDialog key="confirmDelete" [header]="'GENERIC.CONFIRMATION' | translate"
-  [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
-</p-confirmDialog>
+  [header]="(isEdit? 'DOCTORS.EDIT_DOCTOR_TITLE' : 'DOCTORS.ADD_DOCTOR_TITLE') | translate"><app-add-doctor
+    (onAddDoctor)="onAddDoctor()" (onIgnore)="hideAddDialog()"
+    [selectedDoctor]="selectedDoctorForEdit"></app-add-doctor></p-dialog><p-dialog [(visible)]="isShowDetailsDialog"
+  [style]="{width: '70vw'}" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+  (onHide)="hideDetailsDialog()" #addDoctor
+  [header]="'DOCTORS.VIEW_DOCTOR_DETAILS_TITLE' | translate"><app-view-doctor-details
+    [selectedDoctor]="selectedDoctorForDetails"
+    (onIgnore)="hideDetailsDialog()"></app-view-doctor-details></p-dialog><p-confirmDialog key="confirmDelete"
+  [header]="'GENERIC.CONFIRMATION' | translate" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+  [style]="{width: '50vw'}"></p-confirmDialog>

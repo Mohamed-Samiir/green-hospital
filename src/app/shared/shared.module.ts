@@ -19,8 +19,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AccordionModule } from 'primeng/accordion';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { AddShortcutComponent } from './components/add-shortcut/add-shortcut.component';
+import { BroadcastPanelComponent } from './components/broadcast-panel/broadcast-panel.component';
 
 @NgModule({
   imports: [
@@ -40,6 +42,7 @@ import { AddShortcutComponent } from './components/add-shortcut/add-shortcut.com
     ConfirmDialogModule,
     AccordionModule,
     InputTextareaModule,
+    ProgressSpinnerModule,
     MatMenuModule
   ],
   declarations: [
@@ -47,7 +50,8 @@ import { AddShortcutComponent } from './components/add-shortcut/add-shortcut.com
     MinValueValidatorDirective,
     DataGridComponent,
     DataTableFilterComponent,
-    AddShortcutComponent
+    AddShortcutComponent,
+    BroadcastPanelComponent
   ],
   exports: [
     EmptyPlaceholderComponent,
@@ -66,7 +70,9 @@ import { AddShortcutComponent } from './components/add-shortcut/add-shortcut.com
     ConfirmDialogModule,
     AccordionModule,
     InputTextareaModule,
-    MatMenuModule
+    ProgressSpinnerModule,
+    MatMenuModule,
+    BroadcastPanelComponent
   ],
   providers: [TranslateService, ConfirmationService]
 })
