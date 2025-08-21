@@ -1,12 +1,34 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {
+  Injectable
+}
+
+  from '@angular/core';
+
+import {
+  BehaviorSubject,
+  Observable
+}
+
+  from 'rxjs';
+
+import {
+  Router,
+  NavigationEnd
+}
+
+  from '@angular/router';
+
+import {
+  filter
+}
+
+  from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
-})
-export class BroadcastWidgetService {
+}
+
+) export class BroadcastWidgetService {
   // Widget state management
   private isExpandedSubject = new BehaviorSubject<boolean>(false);
   private isVisibleSubject = new BehaviorSubject<boolean>(true);
@@ -18,7 +40,9 @@ export class BroadcastWidgetService {
   public unreadCount$ = this.unreadCountSubject.asObservable();
 
   // Routes where widget should be hidden
-  private hiddenRoutes = ['/auth/login', '/auth/register', '/auth'];
+  private hiddenRoutes = ['/auth/login',
+    '/auth/register',
+    '/auth'];
 
   constructor(private router: Router) {
     this.initializeRouteListener();
@@ -29,21 +53,19 @@ export class BroadcastWidgetService {
    * Initialize router listener to control widget visibility
    */
   private initializeRouteListener(): void {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        const navigationEndEvent = event as NavigationEnd;
-        this.updateVisibilityBasedOnRoute(navigationEndEvent.url);
-      });
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event) => {
+      const navigationEndEvent = event as NavigationEnd;
+      this.updateVisibilityBasedOnRoute(navigationEndEvent.url);
+    }
+
+    );
   }
 
   /**
    * Update widget visibility based on current route
    */
   private updateVisibilityBasedOnRoute(url: string): void {
-    const shouldHide = this.hiddenRoutes.some(route =>
-      url.startsWith(route) || url === route
-    );
+    const shouldHide = this.hiddenRoutes.some(route => url.startsWith(route) || url === route);
     this.setVisibility(!shouldHide);
   }
 
@@ -52,6 +74,7 @@ export class BroadcastWidgetService {
    */
   private loadWidgetState(): void {
     const savedState = sessionStorage.getItem('broadcastWidgetExpanded');
+
     if (savedState !== null) {
       this.isExpandedSubject.next(JSON.parse(savedState));
     }
@@ -145,6 +168,7 @@ export class BroadcastWidgetService {
    */
   public removeHiddenRoute(route: string): void {
     const index = this.hiddenRoutes.indexOf(route);
+
     if (index > -1) {
       this.hiddenRoutes.splice(index, 1);
     }
