@@ -112,6 +112,17 @@ export class ClinicsListComponent implements OnInit {
       matchWith: "doctorIds",
       optionLabel: "name",
       optionValue: "_id"
+    },
+    {
+      controlName: "branches",
+      label: "الفروع",
+      type: this.filterTypes.dropdown,
+      dataApi: "branches/getBranches",
+      multiSelect: true,
+      matchMulti: true,
+      matchWith: "branchIds",
+      optionLabel: "name",
+      optionValue: "_id"
     }
   ]
 
@@ -166,7 +177,19 @@ export class ClinicsListComponent implements OnInit {
                 branches: doc?.branches || []
               }
             }),
-            doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor)
+            doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor),
+            // Extract all branch IDs from all doctors in this clinic for filtering
+            branchIds: clinic?.clinicDoctors.reduce((allBranchIds: string[], doc: any) => {
+              if (doc?.branches && doc.branches.length > 0) {
+                // Add branch IDs that aren't already in the array
+                doc.branches.forEach((branchId: string) => {
+                  if (!allBranchIds.includes(branchId)) {
+                    allBranchIds.push(branchId);
+                  }
+                });
+              }
+              return allBranchIds;
+            }, [])
           }
 
           return modifiedClinic
