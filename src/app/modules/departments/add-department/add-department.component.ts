@@ -49,7 +49,7 @@ export class AddDepartmentComponent implements OnInit {
       contactPeriods: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       phoneNumber: [null],
       allowContact: [true],
-      branchId: [null, [Validators.required]]
+      branchId: [null]
     })
   }
 
@@ -71,8 +71,13 @@ export class AddDepartmentComponent implements OnInit {
         name: this.addDepartmentFormGroup.get("name").value,
         contactPeriods: this.addDepartmentFormGroup.get("contactPeriods").value,
         allowContact: this.addDepartmentFormGroup.get("allowContact").value,
-        phoneNumbers: this.phoneNumbers,
-        branchId: this.addDepartmentFormGroup.get("branchId").value
+        phoneNumbers: this.phoneNumbers
+      }
+
+      // Only add branchId if it has a value
+      const branchId = this.addDepartmentFormGroup.get("branchId").value
+      if (branchId && branchId !== '') {
+        addDepartmentObj.branchId = branchId
       }
       if (this.selectedDepartment) {
         this.departmentsService.editDepartment(this.selectedDepartment._id, addDepartmentObj).subscribe(res => {

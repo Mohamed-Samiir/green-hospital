@@ -19,11 +19,6 @@
         <p-dropdown [options]="branches" formControlName="branchId" name="branchId"
           class="form-control form-control-dropdown" optionLabel="name" optionValue="_id" placeholder="اختر الفرع">
         </p-dropdown>
-        <div *ngIf="f['branchId'].errors && f['branchId'].touched" class="validation_msg">
-          <div *ngIf="f['branchId'].errors['required']">
-            {{"GENERIC.VALIDATION_REQUIRED" | translate}}
-          </div>
-        </div>
       </div>
 
       <div class="col-sm-12 col-md-8 form_group">
