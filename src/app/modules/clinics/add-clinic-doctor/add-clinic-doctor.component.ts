@@ -60,14 +60,14 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
 
       // Patch all form values
       this.addDoctorFormGroup.patchValue(selectedDoctor);
-
       // Set doctor field and disable it
       this.f['doctor'].setValue(selectedDoctor.doctorId);
       this.f['doctor'].disable();
 
       // Handle branches array properly for editing
+      debugger
       if (selectedDoctor.branches && Array.isArray(selectedDoctor.branches)) {
-        this.f['branches'].setValue(selectedDoctor.branches);
+        this.f['branches'].setValue(selectedDoctor.branches.map((branch: any) => branch._id));
       } else {
         this.f['branches'].setValue([]);
       }
