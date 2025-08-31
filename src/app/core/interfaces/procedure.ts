@@ -7,5 +7,8 @@ export interface Procedure {
     ageFrom: number,
     ageFromUnit: number,
     ageTo: number,
-    ageToUnit: number
+    ageToUnit: number,
+    notes?: string,
+    branchId?: string,
+    branchName?: string
 }

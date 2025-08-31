@@ -36,6 +36,11 @@ export class ProceduresListComponent implements OnInit {
       type: GridColumnTypes.text
     },
     {
+      header: "الفرع",
+      field: "branchName",
+      type: GridColumnTypes.text
+    },
+    {
       header: "سعر الإجراء",
       field: "price",
       type: GridColumnTypes.text
@@ -76,6 +81,17 @@ export class ProceduresListComponent implements OnInit {
       type: this.filterTypes.text
     },
     {
+      controlName: "branches",
+      label: "الفروع",
+      type: this.filterTypes.dropdown,
+      dataApi: "branches/getBranches",
+      multiSelect: true,
+      matchMulti: true,
+      matchWith: "branchId",
+      optionLabel: "name",
+      optionValue: "_id"
+    },
+    {
       controlName: "doctors",
       label: "الأطباء",
       type: this.filterTypes.dropdown,
@@ -113,7 +129,9 @@ export class ProceduresListComponent implements OnInit {
           let modifiedProcedure = {
             ...proc,
             doctors: proc.doctors.map((doc: any) => doc.name),
-            doctorIds: proc.doctors.map((doc: any) => doc._id)
+            doctorIds: proc.doctors.map((doc: any) => doc._id),
+            branchName: proc.branchId?.name || 'غير محدد',
+            branchId: proc.branchId?._id || null
           }
           return modifiedProcedure
         })

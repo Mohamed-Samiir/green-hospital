@@ -5,6 +5,8 @@ import { Procedure } from 'src/app/core/interfaces/procedure';
 import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { DoctorsService } from 'src/app/core/services/Doctors/doctors.service';
 import { ProceduresService } from 'src/app/core/services/procedures/procedures.service';
+import { BranchesService } from 'src/app/core/services/branches/branches.service';
+import { BranchModel } from 'src/app/core/interfaces/branch/branch-model';
 
 @Component({
   selector: 'app-add-procedure',
@@ -14,6 +16,7 @@ import { ProceduresService } from 'src/app/core/services/procedures/procedures.s
 export class AddProcedureComponent implements OnInit {
   addProcedureFormGroup: FormGroup = new FormGroup({})
   doctorsList: any[] = []
+  branches: BranchModel[] = []
   ageUnits = [
     {
       id: 1,
@@ -37,6 +40,7 @@ export class AddProcedureComponent implements OnInit {
     private fb: FormBuilder,
     private proceduresService: ProceduresService,
     private doctorsService: DoctorsService,
+    private branchesService: BranchesService,
     private alertify: AlertifyService,
     public translate: TranslateService
   ) { }
@@ -44,6 +48,7 @@ export class AddProcedureComponent implements OnInit {
   ngOnInit() {
     this.buildForm()
     this.getSpecializations()
+    this.loadBranches()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,7 +56,8 @@ export class AddProcedureComponent implements OnInit {
       let doctors = changes['selectedProcedure'].currentValue.doctors
       let procedureObj = {
         ...changes['selectedProcedure'].currentValue,
-        doctors: changes['selectedProcedure'].currentValue.doctors.map((doc: any) => doc._id)
+        doctors: changes['selectedProcedure'].currentValue.doctors.map((doc: any) => doc._id),
+        branchId: changes['selectedProcedure'].currentValue.branchId?._id || changes['selectedProcedure'].currentValue.branchId
       }
       this.addProcedureFormGroup.patchValue(procedureObj)
     }
@@ -67,7 +73,8 @@ export class AddProcedureComponent implements OnInit {
       ageFromUnit: [3, [Validators.required]],
       ageTo: [1, [Validators.required, Validators.pattern("^[1-9][0-9]*$"), Validators.min(1), Validators.max(100)]],
       ageToUnit: [3, [Validators.required]],
-      notes: [""]
+      notes: [""],
+      branchId: [null]
     })
   }
 
@@ -83,10 +90,28 @@ export class AddProcedureComponent implements OnInit {
     })
   }
 
+  loadBranches() {
+    this.branchesService.getBranches().subscribe(res => {
+      if (res.isSuccess) {
+        this.branches = res.data
+      }
+    })
+  }
+
   Submit() {
     if (this.addProcedureFormGroup.valid) {
+      let procedureObj = { ...this.addProcedureFormGroup.value }
+
+      // Only include branchId if it has a value
+      const branchId = this.addProcedureFormGroup.get("branchId")?.value
+      if (branchId && branchId !== '') {
+        procedureObj.branchId = branchId
+      } else {
+        delete procedureObj.branchId
+      }
+
       if (this.selectedProcedure) {
-        this.proceduresService.editProcedure(this.selectedProcedure._id, this.addProcedureFormGroup.value).subscribe(res => {
+        this.proceduresService.editProcedure(this.selectedProcedure._id, procedureObj).subscribe(res => {
           if (res.isSuccess) {
             this.alertify.success(this.translate.instant("GENERIC.EDIT_SUCCESS"))
             this.onAddProcedure.emit(res.data)
@@ -96,7 +121,7 @@ export class AddProcedureComponent implements OnInit {
           }
         })
       } else {
-        this.proceduresService.addProcedure(this.addProcedureFormGroup.value).subscribe(res => {
+        this.proceduresService.addProcedure(procedureObj).subscribe(res => {
           if (res.isSuccess) {
             this.alertify.success(this.translate.instant("GENERIC.ADD_SUCCESS"))
             this.onAddProcedure.emit(res.data)

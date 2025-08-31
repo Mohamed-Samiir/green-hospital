@@ -15,6 +15,13 @@
       </div>
 
       <div class="col-sm-12 col-md-4 form_group">
+        <label class="control_label" for="branchId">الفرع</label>
+        <p-dropdown [options]="branches" formControlName="branchId" name="branchId"
+          class="form-control form-control-dropdown" optionLabel="name" optionValue="_id" placeholder="اختر الفرع">
+        </p-dropdown>
+      </div>
+
+      <div class="col-sm-12 col-md-4 form_group">
         <label class="control_label" for="price">{{'PROCEDURES.PROCEDURE_PRICE' | translate}}</label>
         <input type="text" formControlName="price" name="price" class="form-control">
         <div *ngIf="f['price'].errors && f['price'].touched" class="validation_msg">
