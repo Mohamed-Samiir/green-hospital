@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Department } from 'src/app/core/interfaces/department';
 import { AlertifyService } from 'src/app/core/services/alertify-services/alertify.service';
 import { DepartmentsService } from 'src/app/core/services/departments/departments.service';
+import { BranchesService } from 'src/app/core/services/branches/branches.service';
+import { BranchModel } from 'src/app/core/interfaces/branch/branch-model';
 
 @Component({
   selector: 'app-add-department',
@@ -19,16 +21,19 @@ export class AddDepartmentComponent implements OnInit {
   addDepartmentFormGroup: FormGroup = new FormGroup({})
   isRepeated: boolean = false
   phoneNumbers: string[] = []
+  branches: BranchModel[] = []
 
   constructor(
     private fb: FormBuilder,
     private departmentsService: DepartmentsService,
+    private branchesService: BranchesService,
     private alertify: AlertifyService,
     public translate: TranslateService
   ) { }
 
   ngOnInit() {
     this.buildForm()
+    this.loadBranches()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -43,12 +48,21 @@ export class AddDepartmentComponent implements OnInit {
       name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       contactPeriods: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       phoneNumber: [null],
-      allowContact: [true]
+      allowContact: [true],
+      branchId: [null, [Validators.required]]
     })
   }
 
   get f() {
     return this.addDepartmentFormGroup.controls
+  }
+
+  loadBranches() {
+    this.branchesService.getBranches().subscribe(res => {
+      if (res.isSuccess) {
+        this.branches = res.data
+      }
+    })
   }
 
   Submit() {
@@ -57,7 +71,8 @@ export class AddDepartmentComponent implements OnInit {
         name: this.addDepartmentFormGroup.get("name").value,
         contactPeriods: this.addDepartmentFormGroup.get("contactPeriods").value,
         allowContact: this.addDepartmentFormGroup.get("allowContact").value,
-        phoneNumbers: this.phoneNumbers
+        phoneNumbers: this.phoneNumbers,
+        branchId: this.addDepartmentFormGroup.get("branchId").value
       }
       if (this.selectedDepartment) {
         this.departmentsService.editDepartment(this.selectedDepartment._id, addDepartmentObj).subscribe(res => {
@@ -114,7 +129,8 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   resetAddForm() {
-    this.addDepartmentFormGroup.reset({ isActive: true })
+    this.addDepartmentFormGroup.reset({ allowContact: true })
+    this.phoneNumbers = []
   }
 
 }

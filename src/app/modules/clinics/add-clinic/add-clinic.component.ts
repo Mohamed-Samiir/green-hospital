@@ -49,7 +49,7 @@ export class AddClinicComponent implements OnInit, OnChanges {
     if (this.addClinicFormGroup.valid) {
       if (this.clinic) {
         let editClinicObj: Clinic = {
-          name: this.f['name'].value
+          clinicName: this.f['name'].value
         }
         this.clinicService.editClinic(this.clinic._id, editClinicObj).subscribe(res => {
           if (res.isSuccess) {

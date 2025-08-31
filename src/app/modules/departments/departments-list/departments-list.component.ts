@@ -36,6 +36,11 @@ export class DepartmentsListComponent implements OnInit {
       type: GridColumnTypes.text
     },
     {
+      header: "الفرع",
+      field: "branchName",
+      type: GridColumnTypes.text
+    },
+    {
       header: "أرقام التواصل",
       field: "phoneNumbers",
       type: GridColumnTypes.array
@@ -86,7 +91,10 @@ export class DepartmentsListComponent implements OnInit {
   getDepartmentsList() {
     this.departmentsService.getDepartments().subscribe(res => {
       if (res.isSuccess) {
-        this.departmentsList = res.data
+        this.departmentsList = res.data.map((dept: any) => ({
+          ...dept,
+          branchName: dept.branchId?.name || 'غير محدد'
+        }))
         this.gridData = [...this.departmentsList]
         this.filterData = [...this.departmentsList]
       }

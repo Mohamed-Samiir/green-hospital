@@ -15,7 +15,9 @@ export class DataTableFilterComponent implements OnInit, OnChanges {
 
   @Input() data: any[] = []
   @Input() filters: DataGridFilter[] = []
+  @Input() isCustom: boolean = false
   @Output() getFilteredData: EventEmitter<any[]> = new EventEmitter<any[]>()
+  @Output() getFilterValues: EventEmitter<any> = new EventEmitter<any>()
 
   isShowSaveFilterDialog: boolean = false
   filtersToSave: any[]
@@ -39,7 +41,11 @@ export class DataTableFilterComponent implements OnInit, OnChanges {
         if (filters[entry])
           this.filtersCount++
       }
-      this.filterData()
+      if (this.isCustom) {
+        this.getFilterValues.emit(filters)
+      } else {
+        this.filterData()
+      }
     });
 
   }

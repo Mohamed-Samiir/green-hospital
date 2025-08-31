@@ -3,5 +3,7 @@ export interface Department {
     name: string,
     phoneNumbers: string[],
     allowContact?: boolean,
-    contactPeriods?: string
+    contactPeriods?: string,
+    branchId?: string,
+    branchName?: string
 }

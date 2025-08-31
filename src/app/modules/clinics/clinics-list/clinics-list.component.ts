@@ -54,7 +54,7 @@ export class ClinicsListComponent implements OnInit {
   gridColumns: DataGridColumn[] = [
     {
       header: "اسم الطبيب",
-      field: "doctor",
+      field: "name",
       type: 1
     },
     {
@@ -98,7 +98,7 @@ export class ClinicsListComponent implements OnInit {
 
   gridFilters: DataGridFilter[] = [
     {
-      controlName: "name",
+      controlName: "clinicName",
       label: "اسم العيادة",
       type: this.filterTypes.text
     },
@@ -158,38 +158,23 @@ export class ClinicsListComponent implements OnInit {
         this.gridData = res.data.map((clinic: any) => {
           let modifiedClinic = {
             ...clinic,
-            doctors: clinic?.clinicDoctors.map((doc: any) => {
+            doctors: clinic?.doctors.map((doc: any) => {
               // Handle multiple branch names
               let branchesDisplay = 'غير محدد';
-              if (doc?.branchNames && doc.branchNames.length > 0) {
-                const validBranches = doc.branchNames.filter((branch: any) => branch && branch.name);
+              if (doc?.branches && doc.branches.length > 0) {
+                const validBranches = doc.branches.filter((branch: any) => branch && branch.branchName);
                 if (validBranches.length > 0) {
-                  branchesDisplay = validBranches.map((branch: any) => branch.name).join(', ');
+                  branchesDisplay = validBranches.map((branch: any) => branch.branchName).join(', ');
                 }
               }
 
               return {
                 ...doc,
-                doctor: doc?.doctorName?.name,
-                doctorId: doc?.doctor,
                 branchesDisplay: branchesDisplay, // For display in grid
                 // Keep original branches array for editing
                 branches: doc?.branches || []
               }
             }),
-            doctorIds: clinic?.clinicDoctors.map((doc: any) => doc?.doctor),
-            // Extract all branch IDs from all doctors in this clinic for filtering
-            branchIds: clinic?.clinicDoctors.reduce((allBranchIds: string[], doc: any) => {
-              if (doc?.branches && doc.branches.length > 0) {
-                // Add branch IDs that aren't already in the array
-                doc.branches.forEach((branchId: string) => {
-                  if (!allBranchIds.includes(branchId)) {
-                    allBranchIds.push(branchId);
-                  }
-                });
-              }
-              return allBranchIds;
-            }, [])
           }
 
           return modifiedClinic
@@ -197,6 +182,46 @@ export class ClinicsListComponent implements OnInit {
         this.filterData = [...this.gridData]
       }
     })
+  }
+
+  filterClinics(filters: any) {
+    let filteredData = []
+    if (filters.clinicName) {
+      filteredData = this.filterData.filter(clinic => clinic.clinicName.includes(filters.clinicName))
+    } else {
+      filteredData = [...this.filterData]
+    }
+
+    if (filters.doctors && filters.doctors.length) {
+      filteredData = filteredData.filter(clinic => {
+        return clinic.doctors.some((doc: any) => filters.doctors.includes(doc.doctorId))
+      }).map(clinic => {
+        return {
+          ...clinic,
+          doctors: clinic.doctors.filter((doc: any) => filters.doctors.includes(doc.doctorId))
+        }
+      })
+    }
+
+    if (filters.branches && filters.branches.length) {
+      let matchedClinics: any[] = []
+      filteredData.forEach(clinic => {
+        let matchedDoctors = clinic.doctors.filter((doc: any) => {
+          return doc.branches.some((branch: any) => filters.branches.includes(branch._id))
+        })
+
+        if (matchedDoctors.length) {
+          matchedClinics.push({
+            ...clinic,
+            doctors: matchedDoctors
+          })
+        }
+      })
+
+      filteredData = matchedClinics
+    }
+
+    this.setFilteredData(filteredData)
   }
 
   setFilteredData(filteredData: any[]) {
