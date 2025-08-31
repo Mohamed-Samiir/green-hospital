@@ -39,6 +39,7 @@ export class AddDepartmentComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedDepartment'].currentValue) {
       this.addDepartmentFormGroup.patchValue(changes['selectedDepartment'].currentValue)
+      this.f['branchId'].setValue(changes['selectedDepartment'].currentValue.branchId._id)
       this.phoneNumbers = changes['selectedDepartment'].currentValue.phoneNumbers
     }
   }

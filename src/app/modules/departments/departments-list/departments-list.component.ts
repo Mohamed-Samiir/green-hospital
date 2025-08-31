@@ -65,6 +65,17 @@ export class DepartmentsListComponent implements OnInit {
       type: this.filterTypes.text
     },
     {
+      controlName: "branches",
+      label: "الفروع",
+      type: this.filterTypes.dropdown,
+      dataApi: "branches/getBranches",
+      multiSelect: true,
+      matchMulti: true,
+      matchWith: "branchId",
+      optionLabel: "name",
+      optionValue: "_id"
+    },
+    {
       controlName: "phoneNumbers",
       label: "رقم التواصل",
       type: this.filterTypes.number,
@@ -93,7 +104,8 @@ export class DepartmentsListComponent implements OnInit {
       if (res.isSuccess) {
         this.departmentsList = res.data.map((dept: any) => ({
           ...dept,
-          branchName: dept.branchId?.name || 'غير محدد'
+          branchName: dept.branchId?.name || 'غير محدد',
+          branchId: dept.branchId?._id || null // Ensure branchId is available as string for filtering
         }))
         this.gridData = [...this.departmentsList]
         this.filterData = [...this.departmentsList]
@@ -121,11 +133,11 @@ export class DepartmentsListComponent implements OnInit {
     this.getDepartmentsList()
   }
 
-  openEditPopup(doctorId: string) {
+  openEditPopup(departmentId: string) {
     this.isEdit = true
-    let selectedDoctor = this.departmentsList.find(doc => doc._id == doctorId)
-    if (selectedDoctor) {
-      this.selectedDoctorForEdit = selectedDoctor
+    let selectedDepartment = this.departmentsList.find(dep => dep._id == departmentId)
+    if (selectedDepartment) {
+      this.selectedDoctorForEdit = selectedDepartment
       this.showAddDialog()
     }
 
