@@ -5,11 +5,12 @@ import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FilterTypes } from 'src/app/core/enums/filter-types.enum';
 import { DataGridDdlsService } from 'src/app/core/services/dataGrid/data-grid-ddls.service';
 import { ActivatedRoute } from '@angular/router';
+import { AddShortcutComponent } from "../add-shortcut/add-shortcut.component";
 
 @Component({
   selector: 'app-data-table-filter',
   templateUrl: './data-table-filter.component.html',
-  styleUrls: ['./data-table-filter.component.css']
+  styleUrls: ['./data-table-filter.component.css'],
 })
 export class DataTableFilterComponent implements OnInit, OnChanges {
 
@@ -79,19 +80,19 @@ export class DataTableFilterComponent implements OnInit, OnChanges {
     for (let filter of this.filters) {
       if (this.filtersForm.get(filter.controlName)?.value) {
         if (filter.type == this.filterTypes.text || filter.type == this.filterTypes.number) {
-          this.filteredData = this.filteredData.filter(row => row[filter.controlName].includes(this.filtersForm.get(filter.controlName)?.value))
+          this.filteredData = this.filteredData.filter(row => row[filter.controlName]?.includes(this.filtersForm.get(filter.controlName)?.value))
         } else if (filter.type == this.filterTypes.dropdown) {
           //multi select & single value
           if (filter.multiSelect && !filter.matchMulti) {
             let filterValues = this.filtersForm.get(filter.controlName)?.value
-            this.filteredData = this.filteredData.filter(row => filterValues.includes(row[filter.matchWith]) || !filterValues.length)
+            this.filteredData = this.filteredData.filter(row => filterValues?.includes(row[filter.matchWith]) || !filterValues?.length)
           }
           //multi select & multiple values
           if (filter.multiSelect && filter.matchMulti) {
 
             let filterValues = this.filtersForm.get(filter.controlName)?.value
             this.filteredData = this.filteredData.filter(row => {
-              return filterValues.filter((val: any) => row[filter.matchWith].includes(val)).length || !filterValues.length
+              return filterValues.filter((val: any) => row[filter.matchWith]?.includes(val)).length || !filterValues.length
             })
           }
           //single select & single value
@@ -102,7 +103,7 @@ export class DataTableFilterComponent implements OnInit, OnChanges {
           //single select & multiple values
           if (!filter.multiSelect && !filter.matchMulti) {
             let filterValue = this.filtersForm.get(filter.controlName)?.value
-            this.filteredData = this.filteredData.filter(row => row[filter.matchWith].includes(filterValue))
+            this.filteredData = this.filteredData.filter(row => row[filter.matchWith]?.includes(filterValue))
           }
         }
       }

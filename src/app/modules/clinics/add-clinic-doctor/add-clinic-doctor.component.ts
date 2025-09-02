@@ -65,7 +65,6 @@ export class AddClinicDoctorComponent implements OnInit, OnChanges {
       this.f['doctor'].disable();
 
       // Handle branches array properly for editing
-      debugger
       if (selectedDoctor.branches && Array.isArray(selectedDoctor.branches)) {
         this.f['branches'].setValue(selectedDoctor.branches.map((branch: any) => branch._id));
       } else {
