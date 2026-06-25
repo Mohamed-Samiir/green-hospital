@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://localhost:3900/api/',
-  socketURL: 'http://localhost:3900',
-  // baseURL: 'https://green-hospital-api.onrender.com/api/',
-  // socketURL: 'https://green-hospital-api.onrender.com',
+  // baseURL: 'http://localhost:3900/api/',
+  // socketURL: 'http://localhost:3900',
+  baseURL: 'https://green-hospital-api.onrender.com/api/',
+  socketURL: 'https://green-hospital-api.onrender.com',
 };
 
 /*
